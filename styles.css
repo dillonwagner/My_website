@@ -1,0 +1,36 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  header {
+    display:flex;   
+    background-color: #ffffff;
+    color: #fff;
+    padding: 5px;
+    margin-top: 15px;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-radius: 15px;
+    border: .3px solid #26262612;
+    box-shadow: 3px 3px 15px rgba(0,0,0,0.5);
+    justify-content:space-between;
+  }
+  
+  #floating-header {
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    opacity: 0; /* Initially transparent */
+    transition: opacity 0.8s; /* Add a smooth transition effect */
+  }
+  
+  .header-element {
+    color:black;    
+    display: inline-block;
+    margin-right: 30px; 
+    padding: 0 20px;
+  }
