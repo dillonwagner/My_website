@@ -1,34 +1,78 @@
-// Define a variable to store the interval ID
-var intervalID;
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to format the time as H:M:S
+  function formatTime(time) {
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const seconds = time.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  }
 
-// Define a function that appends the character to the textContainer element
-function appendChar() {
-  // Append the character to the textContainer element
-  textContainer.innerHTML += "█";
+  // Function to format the date as M-DD-YYYY
+  function formatDate(date) {
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${month}-${day}-${year}`;
+  }
+
+  // Get the current time in the user's timezone
+  const currentTime = new Date();
+
+  // Create a new element for the current time
+  const currentTimeElement = document.getElementById('currentTime');
+
+  // Update the element with the current date and time
+  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const dayName = daysOfWeek[currentTime.getDay()];
+
+  // Format and display the current date
+  const formattedDate = `Current date is ${dayName} ${formatDate(currentTime)}`;
+  document.getElementById('currentDate').textContent = formattedDate;
+
+  // Format and display the current time
+  const formattedTime = `Current time is ${formatTime(currentTime)}`;
+  currentTimeElement.textContent = formattedTime;
+
+
+  const paragraphs = document.querySelectorAll('.typing');
+let index = 0;
+
+function type() {
+  if (index === paragraphs.length) {
+    return;
+  }
+
+  const paragraph = paragraphs[index];
+  const text = paragraph.innerHTML;
+  const typingSpeed = 100;
+
+  let i = 0;
+  paragraph.innerHTML = '';
+
+  function addLetter() {
+    paragraph.innerHTML += text.charAt(i);
+    i++;
+
+    if (i === text.length) {
+      paragraph.classList.remove('typing');
+      paragraph.classList.add('typed');
+      index++;
+      if (index < paragraphs.length) {
+        paragraphs[index].classList.add('typing');
+      }
+      setTimeout(type, 1000);
+      return;
+    }
+
+    setTimeout(addLetter, typingSpeed);
+  }
+
+  addLetter();
 }
 
-// Start appending the character every 10 seconds when the page loads
-window.onload = function() {
-  intervalID = setInterval(appendChar, 30); // 10000 milliseconds = 10 seconds
-};
+type();
 
-// Stop appending the character after 100 seconds
-setTimeout(function() {
-    clearInterval(intervalID);
-    // Make the text switch between two colors
-    let colorCount = 0;
-    let colorID = setInterval(function() {
-      // Toggle the color of the text
-      textContainer.style.color = (colorCount % 2 == 0 ? 'rgb(221, 101, 9)' : 'rgba(221, 101, 9, 0)');
-      // Increment the color count
-      colorCount++;
-      // If the color count reaches 4, stop switching and delete the element
-      if (colorCount == 8) {
-        clearInterval(colorID);
-        setTimeout(function() {
-            // Delete the textContainer element from the DOM
-            textContainer.remove();
-          }, 1000); // 1000 milliseconds = 1 second
-    }
-  }, 450); // 500 milliseconds = 0.5 seconds
-}, 4750); // 100000 milliseconds = 100 seconds
+
+
+
+});
