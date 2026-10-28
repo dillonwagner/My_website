@@ -1,25 +1,901 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Typing Effect</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dillon Wagner is a J.D. candidate at William & Mary Law School focused on technology transactions, data privacy, and cybersecurity.">
+<meta name="theme-color" content="#f2f0eb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#181614" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://dillon-wagner.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23d42f37'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%23fff7f1' stroke-width='3'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dillon-wagner.com/">
+<meta property="og:title" content="Dillon Wagner">
+<meta property="og:description" content="Dillon Wagner is a J.D. candidate at William & Mary Law School focused on technology transactions, data privacy, and cybersecurity.">
+<meta property="og:image" content="https://dillon-wagner.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Dillon Wagner, J.D. candidate at William &amp; Mary Law School, beside a bank of retro tape-drive cabinets.">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>Dillon Wagner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one centered column on a tabletop ground. Sticky header, hero name, the drive bank
+   as a full-width stage with Dymo-tape labels, then sections headed by the cabinets' red stripe. */
+:root {
+  --ground: #f2f0eb;
+  --rule: #dcd6cb;
+  --putty: #ddd5c6;
+  --putty-deep: #b8ad99;
+  --signal: #d42f37;
+  --panel: #1e1b19;
+  --panel-edge: transparent;
+  --ink: #25211d;
+  --muted: #69625a;
+  --on-signal: #fff7f1;
+  --on-panel: #f3eee6;
+  --panel-muted: #b5ac9e;
+  --tape: #1c1a19;
+  --tape-ink: #f5f1ea;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: #181614; --rule: #2f2a25; --putty: #2a2622; --putty-deep: #48413a; --signal: #ec474e;
+  --panel: #0f0e0d; --panel-edge: #36302a; --ink: #eee8dd; --muted: #a39a8c; --on-signal: #fff7f1;
+  --on-panel: #f3eee6; --panel-muted: #9d9486; --tape: #0f0e0d; --tape-ink: #f5f1ea;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --ground: #181614; --rule: #2f2a25; --putty: #2a2622; --putty-deep: #48413a; --signal: #ec474e;
+  --panel: #0f0e0d; --panel-edge: #36302a; --ink: #eee8dd; --muted: #a39a8c; --on-signal: #fff7f1;
+  --on-panel: #f3eee6; --panel-muted: #9d9486; --tape: #0f0e0d; --tape-ink: #f5f1ea;
+  color-scheme: dark }
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--ground); }
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+.mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Header */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: var(--ground);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+@supports (backdrop-filter: blur(1px)) {
+  .topbar { background: color-mix(in srgb, var(--ground) 86%, transparent); backdrop-filter: blur(12px); }
+}
+.topbar.scrolled { border-bottom-color: var(--rule); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; padding-block: 14px; }
+.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.mark .reel {
+  width: 22px; height: 22px; border-radius: 50%; background: var(--signal);
+  box-shadow: inset 0 0 0 5px var(--signal), inset 0 0 0 7px var(--on-signal);
+}
+.mark span { font-family: var(--mono); font-weight: 500; font-size: .85rem; letter-spacing: .08em; }
+.top nav { min-width: 0; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.top nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 2px 0; }
+.top nav a { text-decoration: none; color: var(--muted); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+.top nav a::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); transform: scale(0); transition: transform .2s; }
+.top nav a:hover { color: var(--ink); }
+.top nav a[aria-current="true"] { color: var(--ink); }
+.top nav a[aria-current="true"]::before { transform: scale(1); }
+.top nav .short { display: none; }
+
+/* Hero */
+.hero { padding-block: 44px 4px; display: grid; gap: 18px; }
+.eyebrow { margin: 0; color: var(--muted); }
+.eyebrow span { white-space: nowrap; }
+.hero h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 850;
+  font-size: clamp(2.7rem, 8.6vw, 6.3rem);
+  line-height: .92;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.hero h1 em { font-style: normal; color: var(--signal); }
+.lede { margin: 0; max-width: 34em; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--muted); text-wrap: pretty; }
+.lede strong { color: var(--ink); font-weight: 600; }
+.focus { margin: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--ink); }
+.focus b { color: var(--signal); font-weight: 500; }
+.focus span + span::before { content: "/"; color: var(--putty-deep); margin-right: 14px; }
+
+/* Stage */
+.stage-box { position: relative; margin-top: 12px; }
+#stage { width: 100%; height: clamp(230px, 44vw, 470px); }
+.tapes { position: absolute; inset: 0; pointer-events: none; }
+.tape {
+  position: absolute; left: 0; top: 0;
+  pointer-events: auto;
+  font-family: var(--mono); font-weight: 500; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tape-ink); background: var(--tape);
+  text-shadow: 0 1px 0 rgba(0,0,0,.55);
+  padding: 4px 8px 4px 10px; border: 0; border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 3px 6px -3px rgba(0,0,0,.5);
+  cursor: pointer; white-space: nowrap;
+  opacity: 0; transition: background-color .15s, opacity .4s;
+}
+.stage-box.ready .tape { opacity: 1; }
+.tape:hover, .tape:focus-visible, .tape.hot { background: var(--signal); color: var(--on-signal); }
+.no-gl #stage { display: none; }
+.no-gl .tapes { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding-block: 24px; }
+.no-gl .tape { position: static; opacity: 1; transform: none !important; }
+
+/* Status strip */
+.status { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.chip {
+  display: flex; gap: 14px; align-items: center;
+  background: var(--panel); color: var(--on-panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: 6px; padding: 14px 16px;
+}
+.lamp { width: 12px; height: 12px; flex: none; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 28%, transparent), 0 0 12px color-mix(in srgb, var(--signal) 55%, transparent); }
+.lamp.amber { background: #e8b44a; box-shadow: 0 0 0 3px rgba(232,180,74,.25), 0 0 12px rgba(232,180,74,.45); }
+.chip div { min-width: 0; }
+.chip b { display: block; font-weight: 600; line-height: 1.35; }
+.chip small { font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--panel-muted); }
+
+/* Sections */
+section { padding-block: 76px 0; }
+.sec-head { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px; margin-bottom: 28px; }
+.sec-head h2 {
+  margin: 0; font-family: var(--display); font-stretch: 118%; font-weight: 800;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem); line-height: 1.05; letter-spacing: -.01em; text-wrap: balance;
+}
+.stripe {
+  height: 18px;
+  background:
+    linear-gradient(var(--signal), var(--signal)) 0 0 / 100% 3px no-repeat,
+    linear-gradient(var(--signal), var(--signal)) 0 6px / 100% 6px no-repeat,
+    linear-gradient(var(--signal), var(--signal)) 0 15px / 100% 3px no-repeat;
+}
+
+.panel {
+  background: var(--putty);
+  border-radius: 7px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -3px 0 var(--putty-deep), 0 12px 26px -20px rgba(0,0,0,.55);
+  padding: 22px 24px 24px;
+}
+
+.jobs { display: grid; gap: 14px; }
+.job { display: grid; grid-template-columns: 170px 1fr; gap: 8px 28px; }
+.job .when { color: var(--muted); padding-top: 4px; }
+.job .what { min-width: 0; }
+.job h3 { margin: 0; font-size: 1.2rem; font-weight: 700; font-stretch: 108%; line-height: 1.25; }
+.role { margin: 2px 0 0; color: var(--muted); }
+.job ul { margin: 12px 0 0; padding-left: 18px; display: grid; gap: 6px; max-width: 64ch; }
+.job li::marker, .edu li::marker { color: var(--signal); }
+.tag {
+  display: inline-block; vertical-align: 3px; margin-left: 8px;
+  background: var(--signal); color: var(--on-signal);
+  font-family: var(--mono); font-size: .64rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  padding: 2px 7px; border-radius: 3px;
+}
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.edu h3 { margin: 0; font-size: 1.2rem; font-weight: 700; font-stretch: 108%; line-height: 1.25; }
+.edu .deg { margin: 4px 0 0; }
+.edu .when { color: var(--muted); margin-top: 2px; }
+.edu .list-label { margin: 16px 0 0; color: var(--muted); }
+.edu ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.card { display: grid; gap: 4px; align-content: start; }
+.card .mono { color: var(--signal); }
+.card b { font-size: 1.05rem; font-weight: 650; line-height: 1.3; }
+.card p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+.list-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+.list-cols.after { margin-top: 28px; }
+.list-cols h3 { margin: 0 0 10px; color: var(--muted); font-weight: 500; }
+.plates { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.plates li { background: var(--putty); border-radius: 4px; padding: 6px 11px; font-size: .92rem; box-shadow: inset 0 -2px 0 var(--putty-deep); }
+.plates li.pending { background: transparent; box-shadow: inset 0 0 0 1.5px var(--signal); }
+.plates li.pending span { color: var(--signal); font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; margin-left: 6px; }
+
+/* Contact */
+.contact { display: grid; gap: 18px; justify-items: start; }
+.contact p { margin: 0; max-width: 44ch; color: var(--muted); font-size: 1.1rem; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.email { font-family: var(--display); font-stretch: 112%; font-weight: 750; font-size: clamp(1.4rem, 4.5vw, 2.4rem); user-select: all; overflow-wrap: anywhere; }
+button.copy {
+  font: inherit; font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase;
+  border: 0; border-radius: 4px; padding: 10px 14px; cursor: pointer;
+  background: var(--signal); color: var(--on-signal);
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,.22);
+}
+button.copy:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgba(0,0,0,.22); }
+
+footer { margin-top: 96px; padding-block: 22px 32px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); }
+footer a { text-decoration: none; }
+footer a:hover { color: var(--signal); }
+
+@media (max-width: 640px) {
+  .job { grid-template-columns: 1fr; }
+  .job .when { padding-top: 0; }
+  .sec-head { grid-template-columns: 1fr; gap: 10px; }
+  .stripe { width: 84px; }
+  .top nav ul { gap: 14px; }
+  .top nav { width: 100%; }
+  .top nav .full { display: none; }
+  .top nav .short { display: inline; }
+  .top nav a::before { display: none; }
+  .top nav a[aria-current="true"] { text-decoration: underline; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+  .tape { font-size: .58rem; letter-spacing: .05em; padding: 2px 5px; }
+}
+@media (max-width: 400px) {
+  .top nav ul { gap: 12px; letter-spacing: .02em; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
 </head>
 <body>
 
-  <div id="container">
-    <img src="ezgif.com-resize.gif" alt="Your Image">
+<header class="topbar" id="topbar">
+  <div class="wrap top">
+    <a class="mark" href="#top" aria-label="Dillon Wagner, back to top"><i class="reel" aria-hidden="true"></i><span>D. WAGNER</span></a>
+    <nav aria-label="Sections">
+      <ul class="mono">
+        <li><a href="#experience"><span class="full">Experience</span><span class="short">Work</span></a></li>
+        <li><a href="#education"><span class="full">Education</span><span class="short">School</span></a></li>
+        <li><a href="#honors">Honors</a></li>
+        <li><a href="#leadership"><span class="full">Leadership</span><span class="short">Roles</span></a></li>
+        <li><a href="#certifications"><span class="full">Certifications</span><span class="short">Certs</span></a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero" id="top">
+  <p class="eyebrow mono"><span>J.D. Candidate ·</span> <span>William &amp; Mary Law School ·</span> <span>Class of 2028</span></p>
+  <h1>Dillon<br><em>Wagner</em></h1>
+  <p class="lede">Law student with an <strong>information technology</strong> degree, working where <strong>technology transactions, data privacy, and cybersecurity</strong> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
+  <p class="focus mono"><b>Focus</b><span>Tech transactions</span><span>Data privacy</span><span>Cybersecurity</span><span>IP</span></p>
+</div>
+
+<div class="wrap">
+  <div class="stage-box" id="stage-box">
+    <div id="stage" role="img" aria-label="A bank of five retro tape-drive cabinets with red racing stripes and spinning reels, one drive per section of the page."></div>
+    <nav class="tapes" aria-label="Drives">
+      <button class="tape" type="button" data-full="Experience" data-short="Work">Experience</button>
+      <button class="tape" type="button" data-full="Education" data-short="School">Education</button>
+      <button class="tape" type="button" data-full="Honors" data-short="Honors">Honors</button>
+      <button class="tape" type="button" data-full="Leadership" data-short="Roles">Leadership</button>
+      <button class="tape" type="button" data-full="Certifications" data-short="Certs">Certifications</button>
+    </nav>
   </div>
 
-
-  <div class="orange-rectangle">
-    <p id="loadingText" class="typing"> Initializing Boot Process</p>
-    <p id="currentDate" class="typing"></p>
-    <p id="currentTime" class="typing"></p>
+  <div class="status">
+    <div class="chip"><i class="lamp" aria-hidden="true"></i><div><small>Summer 2027</small><b>Wilson Sonsini, Technology Transactions</b></div></div>
+    <div class="chip"><i class="lamp amber" aria-hidden="true"></i><div><small>Expected Nov 2026</small><b>CIPP/US certification</b></div></div>
+    <div class="chip"><i class="lamp" aria-hidden="true"></i><div><small>Current</small><b>Chair, Student Assembly Review Board</b></div></div>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<main class="wrap">
+  <section id="experience">
+    <div class="sec-head"><h2>Experience</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="jobs">
+      <article class="panel job">
+        <div class="when mono">Summer 2027</div>
+        <div class="what">
+          <h3>Wilson Sonsini <span class="tag">Incoming</span></h3>
+          <p class="role">Summer Associate · Washington, D.C.</p>
+          <ul><li>Selected for the Technology Transactions Group in the firm's 2027 Summer Associate Program.</li></ul>
+        </div>
+      </article>
+      <article class="panel job">
+        <div class="when mono">May – Jul 2026</div>
+        <div class="what">
+          <h3>U.S. Civilian Board of Contract Appeals</h3>
+          <p class="role">Summer Law Clerk · Washington, D.C.</p>
+          <ul>
+            <li>Drafted initial decisions and orders in technology contract disputes involving server room cooling, data protection software, and medical information systems.</li>
+            <li>Analyzed appeals under the Contract Disputes Act and Stafford Act, including contract interpretation and damages.</li>
+            <li>Led a project assessing how AI could streamline low-complexity, time-intensive legal and administrative work.</li>
+            <li>Evaluated federal debt collection and employee travel reimbursement claims and drafted recommended dispositions.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="panel job">
+        <div class="when mono">Jun – Aug 2025</div>
+        <div class="what">
+          <h3>Virginia Information Technologies Agency</h3>
+          <p class="role">Legal &amp; Legislative Services Intern · Richmond, Virginia</p>
+          <ul>
+            <li>Researched compliance, procurement, and state regulatory questions, and took part in government contract review and negotiation.</li>
+            <li>Drafted a legislative and regulatory proposal on Social Security number protections, with briefing memos and policy summaries.</li>
+            <li>Prepared data breach notifications and transition-of-service notices for executive leadership.</li>
+            <li>Handled Virginia FOIA requests and advised on public records obligations.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="panel job">
+        <div class="when mono">2017 – 2023</div>
+        <div class="what">
+          <h3>Nassau County Teen Court</h3>
+          <p class="role">Lead Prosecutor · Yulee, Florida</p>
+          <ul>
+            <li>Advanced from juror to public defender to lead prosecutor, arguing sanctions before a judge and peer jury in more than 100 cases.</li>
+            <li>Built case strategy, delivered oral advocacy, and mentored new volunteer attorneys.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head"><h2>Education</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="two">
+      <article class="panel edu">
+        <h3>William &amp; Mary Law School</h3>
+        <p class="deg">Juris Doctor</p>
+        <div class="when mono">Expected May 2028 · Williamsburg, VA</div>
+        <p class="list-label mono">Relevant coursework</p>
+        <ul>
+          <li>AI: Intro for Non-Experts</li>
+          <li>Copyright Law</li>
+          <li>Trademark Law</li>
+          <li>Cybersecurity Incident Response</li>
+        </ul>
+      </article>
+      <article class="panel edu">
+        <h3>Florida State University</h3>
+        <p class="deg">B.S., Information Technology, <i>summa cum laude</i></p>
+        <div class="when mono">May 2025 · Tallahassee, FL</div>
+        <p class="list-label mono">Minor and honors</p>
+        <ul>
+          <li>Minor in U.S. National Intelligence Studies</li>
+          <li>President's List, all semesters</li>
+          <li>Florida Academic Scholar Award (full tuition award)</li>
+          <li>Honors Program</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="honors">
+    <div class="sec-head"><h2>Honors</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="cards">
+      <div class="panel card"><span class="mono">Best Negotiation</span><b>Transactional Law Team Internal Competition</b><p>2026</p></div>
+      <div class="panel card"><span class="mono">Staff Member</span><b>William &amp; Mary Business Law Review</b><p>Law journal</p></div>
+      <div class="panel card"><span class="mono">Member</span><b>Phi Delta Phi</b><p>Legal honor society</p></div>
+      <div class="panel card"><span class="mono">Competition Member</span><b>Transactional Law Team</b><p>William &amp; Mary Law School</p></div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="sec-head"><h2>Leadership &amp; Activities</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="cards">
+      <div class="panel card"><span class="mono">Chair</span><b>Student Assembly Review Board</b><p>The supreme court of W&amp;M's student government.</p></div>
+      <div class="panel card"><span class="mono">Board Member</span><b>Student Conduct Council</b><p>William &amp; Mary</p></div>
+      <div class="panel card"><span class="mono">Board Member</span><b>Honor Council Appeals Committee</b><p>William &amp; Mary</p></div>
+    </div>
+    <div class="list-cols after">
+      <div>
+        <h3 class="mono">Activities</h3>
+        <ul class="plates">
+          <li>Data Privacy &amp; Cybersecurity Legal Society</li>
+          <li>Student Intellectual Property Society</li>
+          <li>Blockchain Legal Society</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="sec-head"><h2>Certifications &amp; Affiliations</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="list-cols">
+      <div>
+        <h3 class="mono">Certifications</h3>
+        <ul class="plates">
+          <li class="pending">CIPP/US<span>Expected Nov 2026</span></li>
+          <li>CompTIA Security+</li>
+          <li>CompTIA A+</li>
+          <li>Certified Internet Web Professional</li>
+          <li>Harvey Level 1 Legal Engineer</li>
+          <li>Harvey Level 1 Foundations</li>
+          <li>Harvey Preparing for Legal Work</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="mono">Professional memberships</h3>
+        <ul class="plates">
+          <li>International Association of Privacy Professionals</li>
+          <li>Federal Communications Bar Association</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sec-head"><h2>Contact</h2><div class="stripe" aria-hidden="true"></div></div>
+    <div class="contact">
+      <p>Happy to talk about technology transactions, privacy, or anything on this page.</p>
+      <div class="email-row">
+        <span class="email" id="email">dtwagner@wm.edu</span>
+        <button class="copy" id="copy" type="button">Copy email</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mono"><span>Dillon Wagner · Williamsburg, Virginia</span><a href="#top">Back to top ↑</a></footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>/* DriveBank: the bank of tape-drive cabinets, shared by every version of the portfolio.
+   Needs three.js r128 loaded first. Returns a small API: setActive(i), setHover(i), project(i). */
+window.DriveBank = function DriveBank(container, opts) {
+  const THREE = window.THREE;
+  const o = Object.assign({
+    count: 5,
+    yaw: -0.3,          // turned so the right-hand sides show, like the Spline scene
+    elevation: 0.3,      // camera height angle, radians
+    target: 0.7,         // look-at height
+    margin: 28,          // px of breathing room around the bank when fitting the camera
+    nudgeY: 0,
+    zoom: 1,
+    platformLight: '#e4e1db',
+    platformDark: '#35312c',
+    onPick: null, onHover: null, onFrame: null
+  }, opts || {});
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lowPower = Math.min(screen.width, screen.height) < 700;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setClearColor(0x000000, 0);
+  const canvas = renderer.domElement;
+  Object.assign(canvas.style, { display: 'block', width: '100%', height: '100%', touchAction: 'pan-y' });
+  container.appendChild(canvas);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(16, 2, 0.1, 200);
+
+  // Colors are written in sRGB and converted to linear, so the output encoding
+  // doesn't wash them out (the cause of the pale red in the first version).
+  const lin = hex => new THREE.Color(hex).convertSRGBToLinear();
+  const std = (hex, extra) => new THREE.MeshStandardMaterial(Object.assign({ color: lin(hex), roughness: 0.7, metalness: 0 }, extra || {}));
+
+  const hemi = new THREE.HemisphereLight(0xffffff, 0xa59c8d, 0.58);
+  scene.add(hemi);
+  const key = new THREE.DirectionalLight(0xfff6ea, 0.84);
+  key.position.set(-3.4, 7.2, 5.4);
+  key.castShadow = true;
+  const sm = lowPower ? 1024 : 2048;
+  key.shadow.mapSize.set(sm, sm);
+  Object.assign(key.shadow.camera, { left: -4.6, right: 4.6, top: 3.6, bottom: -3.6, near: 1, far: 24 });
+  key.shadow.bias = -0.0005;
+  key.shadow.normalBias = 0.015;
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xe6edf7, 0.15);
+  fill.position.set(5, 2.4, 3);
+  scene.add(fill);
+
+  const M = {
+    body: std('#d4ccbd', { roughness: 0.66 }),
+    red: std('#d4232c', { roughness: 0.46 }),
+    bezel: std('#ebe5d8', { roughness: 0.55 }),
+    well: std('#191716', { roughness: 0.4 }),
+    reel: std('#e3dccc', { roughness: 0.5 }),
+    redReel: std('#d4232c', { roughness: 0.42 }),
+    plate: std('#b3a996', { roughness: 0.5 }),
+    platform: std(o.platformLight, { roughness: 0.92 })
+  };
+
+  // ---------- geometry helpers ----------
+  function roundedBox(w, h, d, r, segs) {
+    const s = segs * 2 + 1;
+    const g = new THREE.BoxGeometry(1, 1, 1, s, s, s);
+    const p = g.attributes.position, n = g.attributes.normal;
+    const half = 0.5 / s, bx = w / 2 - r, by = h / 2 - r, bz = d / 2 - r;
+    const v = new THREE.Vector3(), nn = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i);
+      nn.set(v.x - Math.sign(v.x) * half, v.y - Math.sign(v.y) * half, v.z - Math.sign(v.z) * half).normalize();
+      p.setXYZ(i, bx * Math.sign(v.x) + nn.x * r, by * Math.sign(v.y) + nn.y * r, bz * Math.sign(v.z) + nn.z * r);
+      n.setXYZ(i, nn.x, nn.y, nn.z);
+    }
+    return g;
+  }
+  function rr(path, w, h, r) {
+    const x = -w / 2, y = -h / 2;
+    path.moveTo(x + r, y);
+    path.lineTo(x + w - r, y); path.quadraticCurveTo(x + w, y, x + w, y + r);
+    path.lineTo(x + w, y + h - r); path.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    path.lineTo(x + r, y + h); path.quadraticCurveTo(x, y + h, x, y + h - r);
+    path.lineTo(x, y + r); path.quadraticCurveTo(x, y, x + r, y);
+    return path;
+  }
+  const extrude = (shape, depth, bevel) => new THREE.ExtrudeGeometry(shape, {
+    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 2, curveSegments: 24
+  });
+
+  // ---------- cabinet parts (shared geometry) ----------
+  const W = 0.86, H = 1.62, D = 0.64, R = 0.05, T = 0.006, GAP = 0.14;
+  const WIN_Y = H * 0.715;
+  const frontLen = H - R - 0.012;
+  // A wide center band flanked by two pinstripes, running up the front and over the top.
+  const STRIPES = [[0, 0.13], [-0.112, 0.042], [0.112, 0.042]];
+  const stripeGeos = sw => ({
+    front: new THREE.BoxGeometry(sw, frontLen, T),
+    top: new THREE.BoxGeometry(sw, T, D - 2 * R),
+    edge: new THREE.CylinderGeometry(R + T - 0.001, R + T - 0.001, sw, 10, 1, false, 0, Math.PI / 2).rotateZ(Math.PI / 2)
+  });
+
+  const G = {
+    body: roundedBox(W, H, D, R, 3),
+    well: new THREE.BoxGeometry(0.66, 0.23, 0.012),
+    plate: roundedBox(0.15, 0.045, 0.014, 0.006, 1),
+    lamp: new THREE.CylinderGeometry(0.022, 0.022, 0.016, 20).rotateX(Math.PI / 2)
+  };
+  const frameShape = rr(new THREE.Shape(), 0.74, 0.3, 0.06);
+  frameShape.holes.push(rr(new THREE.Path(), 0.64, 0.21, 0.035));
+  G.frame = extrude(frameShape, 0.02, 0.007);
+
+  // Cream supply reel with three windows, red take-up reel with drive holes.
+  (function () {
+    const s = new THREE.Shape(); s.absarc(0, 0, 0.09, 0, Math.PI * 2, false);
+    for (let k = 0; k < 3; k++) {
+      const a = Math.PI / 2 + k * 2 * Math.PI / 3, sp = 0.52, ri = 0.03, ro = 0.072;
+      const h = new THREE.Path();
+      h.moveTo(Math.cos(a - sp) * ri, Math.sin(a - sp) * ri);
+      h.absarc(0, 0, ro, a - sp, a + sp, false);
+      h.absarc(0, 0, ri, a + sp, a - sp, true);
+      s.holes.push(h);
+    }
+    const hub = new THREE.Path(); hub.absarc(0, 0, 0.012, 0, Math.PI * 2, true); s.holes.push(hub);
+    G.cream = extrude(s, 0.008, 0.003);
+
+    const t = new THREE.Shape(); t.absarc(0, 0, 0.08, 0, Math.PI * 2, false);
+    const th = new THREE.Path(); th.absarc(0, 0, 0.017, 0, Math.PI * 2, true); t.holes.push(th);
+    for (let k = 0; k < 3; k++) {
+      const a = k * 2 * Math.PI / 3, h = new THREE.Path();
+      h.absarc(Math.cos(a) * 0.046, Math.sin(a) * 0.046, 0.0115, 0, Math.PI * 2, true);
+      t.holes.push(h);
+    }
+    G.take = extrude(t, 0.008, 0.003);
+  })();
+
+  // Soft contact shadow under each cabinet (a blurred rectangle painted to a canvas).
+  const shadowTex = (function () {
+    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const g = c.getContext('2d');
+    g.shadowColor = 'rgba(0,0,0,1)'; g.shadowBlur = 20; g.shadowOffsetX = 400;
+    g.fillStyle = '#000';
+    g.fillRect(30 - 400, 30, 68, 68);
+    return new THREE.CanvasTexture(c);
+  })();
+  const shadowMat = new THREE.MeshBasicMaterial({ map: shadowTex, color: 0x000000, transparent: true, opacity: 0.4, depthWrite: false });
+  const shadowGeo = new THREE.PlaneGeometry(W * 1.5, D * 1.75).rotateX(-Math.PI / 2);
+
+  // ---------- assemble the bank ----------
+  const bank = new THREE.Group();
+  scene.add(bank);
+  const n = o.count, span = n * W + (n - 1) * GAP;
+  const PW = span + 1.0, PD = D + 1.3;
+  const platform = new THREE.Mesh(roundedBox(PW, 0.16, PD, 0.075, 4), M.platform);
+  platform.position.set(0, -0.08, 0.16);
+  platform.receiveShadow = true;
+  bank.add(platform);
+
+  const stripeSet = STRIPES.map(([x, w]) => ({ x, g: stripeGeos(w) }));
+  const cabs = [];
+  for (let i = 0; i < n; i++) {
+    const group = new THREE.Group();
+    group.position.set((i - (n - 1) / 2) * (W + GAP), 0, -0.1);
+    const lift = new THREE.Group();
+    group.add(lift);
+    const add = (geo, mat, x, y, z, cast) => {
+      const m = new THREE.Mesh(geo, mat);
+      m.position.set(x, y, z);
+      m.castShadow = cast !== false; m.receiveShadow = true;
+      lift.add(m);
+      return m;
+    };
+    add(G.body, M.body, 0, H / 2, 0);
+    stripeSet.forEach(({ x, g }) => {
+      add(g.front, M.red, x, 0.012 + frontLen / 2, D / 2 + T / 2 - 0.0008, false);
+      add(g.top, M.red, x, H + T / 2 - 0.0008, 0, false);
+      add(g.edge, M.red, x, H - R, D / 2 - R, false);
+    });
+    add(G.well, M.well, 0, WIN_Y, D / 2 + 0.006, false);
+    add(G.frame, M.bezel, 0, WIN_Y, D / 2 + 0.005);
+    const r1 = add(G.cream, M.reel, -0.15, WIN_Y, D / 2 + 0.016, false);
+    const r2 = add(G.take, M.redReel, 0.15, WIN_Y, D / 2 + 0.016, false);
+    r1.rotation.z = Math.random() * 6; r2.rotation.z = Math.random() * 6;
+    add(G.plate, M.plate, 0.27, H - 0.12, D / 2 + 0.007, false);
+    const lampMat = std('#4a2522', { emissive: lin('#ff3a2e'), emissiveIntensity: 0, roughness: 0.35 });
+    add(G.lamp, lampMat, -0.29, H - 0.12, D / 2 + 0.008, false);
+
+    const sh = new THREE.Mesh(shadowGeo, shadowMat);
+    sh.position.set(group.position.x + 0.03, 0.003, group.position.z + 0.03);
+    sh.renderOrder = 1;
+    bank.add(sh);
+    bank.add(group);
+    cabs.push({ group, lift, reels: [r1, r2], lampMat, hover: 0, active: 0, v: 0, vt: 0, timer: Math.random() * 1.6 });
+  }
+
+  // ---------- theme ----------
+  function isDark() {
+    const t = document.documentElement.getAttribute('data-theme');
+    return t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+  function applyTheme() {
+    const d = isDark();
+    M.platform.color.copy(lin(d ? o.platformDark : o.platformLight));
+    hemi.intensity = d ? 0.4 : 0.58;
+    hemi.groundColor.set(d ? 0x5b554d : 0xa59c8d);
+    key.intensity = d ? 0.72 : 0.84;
+    shadowMat.opacity = d ? 0.55 : 0.4;
+    kick();
+  }
+
+  // ---------- camera fit ----------
+  // Project the bank's outer points, scale the distance until they fit inside the margins,
+  // then shift the view so the bank sits centered despite the perspective.
+  let dist = 12;
+  const fitPts = [];
+  [-PW / 2, PW / 2].forEach(x => [-0.16, 0].forEach(y => [0.16 - PD / 2, 0.16 + PD / 2].forEach(z => fitPts.push(new THREE.Vector3(x, y, z)))));
+  [-span / 2, span / 2].forEach(x => [-0.1 - D / 2, -0.1 + D / 2 + 0.12].forEach(z => fitPts.push(new THREE.Vector3(x, H + 0.16, z))));
+  const fp = new THREE.Vector3();
+  function placeCamera(d, el) {
+    // Look level and let the view offset frame the bank (a shift lens), so verticals stay vertical.
+    camera.position.set(0, o.target + Math.sin(el) * d, 0.1 + Math.cos(el) * d);
+    camera.lookAt(0, camera.position.y, 0.1 - d);
+    camera.updateMatrixWorld();
+  }
+  function bounds() {
+    const b = { x0: 9, x1: -9, y0: 9, y1: -9 };
+    bank.rotation.y = o.yaw;
+    bank.updateMatrixWorld(true);
+    fitPts.forEach(p => {
+      fp.copy(p).applyMatrix4(bank.matrixWorld).project(camera);
+      b.x0 = Math.min(b.x0, fp.x); b.x1 = Math.max(b.x1, fp.x);
+      b.y0 = Math.min(b.y0, fp.y); b.y1 = Math.max(b.y1, fp.y);
+    });
+    return b;
+  }
+  function fit() {
+    const w = container.clientWidth || 1, h = container.clientHeight || 1;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.clearViewOffset();
+    camera.updateProjectionMatrix();
+    const mx = Math.min(0.4, 2 * o.margin / w), my = Math.min(0.4, 2 * o.margin / h);
+    let d = 14, b;
+    for (let k = 0; k < 6; k++) {
+      placeCamera(d, o.elevation);
+      b = bounds();
+      const need = Math.max((b.x1 - b.x0) / 2 / (1 - mx), (b.y1 - b.y0) / 2 / (1 - my));
+      d *= need;
+    }
+    dist = d / o.zoom;
+    placeCamera(dist, o.elevation);
+    b = bounds();
+    camera.setViewOffset(w, h, ((b.x0 + b.x1) / 2) * w / 2, -((b.y0 + b.y1) / 2) * h / 2 + (o.nudgeY || 0), w, h);
+    renderOnce();
+  }
+
+  // ---------- picking ----------
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const groups = cabs.map(c => c.group);
+  function pick(e) {
+    const r = canvas.getBoundingClientRect();
+    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(groups, true)[0];
+    if (!hit) return -1;
+    let obj = hit.object;
+    while (obj && groups.indexOf(obj) < 0) obj = obj.parent;
+    return obj ? groups.indexOf(obj) : -1;
+  }
+  let tx = 0, px = 0, hoverPointer = -1, hoverExt = -1, activeIdx = -1;
+  function clearPointerHover() {
+    if (hoverPointer !== -1) { hoverPointer = -1; if (o.onHover) o.onHover(-1); }
+    canvas.style.cursor = '';
+  }
+  canvas.addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    if (e.pointerType === 'mouse') {
+      const i = pick(e);
+      if (i !== hoverPointer) {
+        hoverPointer = i;
+        canvas.style.cursor = i >= 0 ? 'pointer' : '';
+        if (o.onHover) o.onHover(i);
+      }
+    }
+    kick();
+  });
+  canvas.addEventListener('pointerleave', () => { tx = 0; clearPointerHover(); });
+  canvas.addEventListener('click', e => {
+    const i = pick(e);
+    clearPointerHover();
+    if (i >= 0 && o.onPick) o.onPick(i);
+  });
+  // The page can scroll out from under a still mouse without a pointerleave; drop the hover then.
+  addEventListener('scroll', () => { tx = 0; clearPointerHover(); kick(); }, { passive: true });
+
+  // ---------- loop (pauses when offscreen or the tab is hidden) ----------
+  const clock = new THREE.Clock();
+  let running = false, visible = true;
+  const tmp = new THREE.Vector3();
+
+  function project(i, y, zOff) {
+    tmp.set(0, y || 0, D / 2 + (zOff == null ? 0.42 : zOff));
+    cabs[i].group.localToWorld(tmp);
+    tmp.project(camera);
+    return { x: (tmp.x + 1) / 2 * container.clientWidth, y: (1 - tmp.y) / 2 * container.clientHeight };
+  }
+  const api = {
+    count: n,
+    setActive(i) { activeIdx = i; kick(); },
+    setHover(i) { hoverExt = i; kick(); },
+    project
+  };
+
+  function step(dt) {
+    px += (tx - px) * Math.min(1, dt * 2.5);
+    bank.rotation.y = o.yaw + (reduce ? 0 : px * 0.04);
+    const hov = hoverPointer >= 0 ? hoverPointer : hoverExt;
+    cabs.forEach((c, i) => {
+      c.hover += ((hov === i ? 1 : 0) - c.hover) * Math.min(1, dt * 7);
+      c.active += ((activeIdx === i ? 1 : 0) - c.active) * Math.min(1, dt * 6);
+      c.lift.position.y = c.hover * 0.035;
+      c.lift.position.z = c.active * 0.12;
+      if (!reduce) {
+        if (activeIdx === i || hov === i) {
+          c.vt = hov === i ? 9 : 5.5;
+          c.timer = 0.6;
+        } else {
+          c.timer -= dt;
+          if (c.timer <= 0) {
+            // Real tape drives move in bursts: read a block, stop, sometimes rewind.
+            if (c.vt === 0) { c.vt = (Math.random() < 0.8 ? 1 : -1) * (3 + Math.random() * 7); c.timer = 0.25 + Math.random() * 1.1; }
+            else { c.vt = 0; c.timer = 0.6 + Math.random() * 2.2; }
+          }
+        }
+        c.v += (c.vt - c.v) * Math.min(1, dt * 7);
+        c.reels[0].rotation.z -= c.v * dt;
+        c.reels[1].rotation.z -= c.v * 1.3 * dt;
+      }
+      const busy = Math.min(1, Math.abs(c.v) / 6) * 0.35;
+      c.lampMat.emissiveIntensity = Math.max(c.active * 1.9, c.hover * 1.2, busy);
+    });
+    placeCamera(dist, o.elevation);
+  }
+  function renderOnce() {
+    step(0);
+    renderer.render(scene, camera);
+    if (o.onFrame) o.onFrame(api);
+  }
+  function tick() {
+    if (!visible || document.hidden) { running = false; return; }
+    step(Math.min(clock.getDelta(), 0.05));
+    renderer.render(scene, camera);
+    if (o.onFrame) o.onFrame(api);
+    requestAnimationFrame(tick);
+  }
+  function kick() {
+    if (running || !visible || document.hidden) return;
+    running = true;
+    clock.getDelta();
+    requestAnimationFrame(tick);
+  }
+  new IntersectionObserver(es => { visible = es[es.length - 1].isIntersecting; kick(); }).observe(container);
+  document.addEventListener('visibilitychange', kick);
+  new ResizeObserver(fit).observe(container);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  applyTheme();
+  fit();
+  return api;
+};
+</script>
+<script>
+(() => {
+  const drives = ['experience', 'education', 'honors', 'leadership', 'certifications'];
+  const navIds = drives.concat('contact');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const links = [...document.querySelectorAll('.top nav a')];
+  const tapes = [...document.querySelectorAll('.tape')];
+  const box = document.getElementById('stage-box');
+  let bank = null;
+
+  const go = i => document.getElementById(drives[i]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  const keyboardFocus = el => { try { return el.matches(':focus-visible'); } catch (e) { return false; } };
+  tapes.forEach((t, i) => {
+    t.addEventListener('click', () => { if (bank) bank.setHover(-1); go(i); });
+    t.addEventListener('pointerenter', () => bank && bank.setHover(i));
+    t.addEventListener('pointerleave', () => bank && bank.setHover(-1));
+    t.addEventListener('focus', () => { if (bank && keyboardFocus(t)) bank.setHover(i); });
+    t.addEventListener('blur', () => bank && bank.setHover(-1));
+  });
+
+  // Short labels when the drives are too close together for the full words
+  new ResizeObserver(() => {
+    const narrow = box.clientWidth < 900;
+    tapes.forEach(t => { t.textContent = narrow ? t.dataset.short : t.dataset.full; });
+  }).observe(box);
+
+  try {
+    if (!window.THREE) throw new Error('no three');
+    bank = DriveBank(document.getElementById('stage'), {
+      onPick: go,
+      onHover: i => tapes.forEach((t, k) => t.classList.toggle('hot', k === i)),
+      onFrame: api => {
+        tapes.forEach((t, i) => {
+          const p = api.project(i, 0, 0.36);
+          t.style.transform = `translate(${p.x.toFixed(1)}px, ${p.y.toFixed(1)}px) translate(-50%, 0)`;
+        });
+        box.classList.add('ready');
+      }
+    });
+  } catch (e) {
+    box.classList.add('no-gl');
+  }
+
+  // Header state and the section you're reading
+  const bar = document.getElementById('topbar');
+  const onScroll = () => bar.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const inView = new Set();
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? inView.add(e.target.id) : inView.delete(e.target.id));
+    const idx = navIds.findIndex(id => inView.has(id));
+    links.forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  navIds.forEach(id => spy.observe(document.getElementById(id)));
+
+  // Copy email
+  const copyBtn = document.getElementById('copy');
+  copyBtn.addEventListener('click', () => {
+    const el = document.getElementById('email');
+    const done = () => { copyBtn.textContent = 'Copied'; setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 1600); };
+    const fallback = () => {
+      const r = document.createRange(); r.selectNodeContents(el);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      copyBtn.textContent = 'Press Ctrl+C';
+    };
+    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (err) { fallback(); }
+  });
+})();
+</script>
 </body>
 </html>
