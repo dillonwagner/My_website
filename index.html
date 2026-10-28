@@ -900,7 +900,7 @@ window.DriveBank = function DriveBank(container, opts) {
   const box = document.getElementById('stage-box');
   let bank = null;
 
-  const go = i => document.getElementById(drives[i]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  const go = i => { pin(i); document.getElementById(drives[i]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
   const keyboardFocus = el => { try { return el.matches(':focus-visible'); } catch (e) { return false; } };
   tapes.forEach((t, i) => {
     t.addEventListener('click', () => { if (bank) bank.setHover(-1); go(i); });
@@ -939,13 +939,32 @@ window.DriveBank = function DriveBank(container, opts) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  const inView = new Set();
-  const spy = new IntersectionObserver(entries => {
-    entries.forEach(e => e.isIntersecting ? inView.add(e.target.id) : inView.delete(e.target.id));
-    const idx = navIds.findIndex(id => inView.has(id));
-    links.forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  navIds.forEach(id => spy.observe(document.getElementById(id)));
+  // Highlight the section you're reading: the last one whose top has passed a line just under the
+  // header. Over the last part of the page the line slides down to the bottom of the screen, so the
+  // short final sections (Certifications, then Contact) each get their turn. A clicked link stays
+  // highlighted until the visitor scrolls again.
+  const sections = navIds.map(id => document.getElementById(id));
+  let spyQueued = false, pinned = -1;
+  const setActive = idx => links.forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  const updateActive = () => {
+    spyQueued = false;
+    if (pinned >= 0) { setActive(pinned); return; }
+    const topLine = 120;
+    const remaining = Math.max(0, document.documentElement.scrollHeight - innerHeight - scrollY);
+    const zone = innerHeight * 0.6;
+    const line = remaining < zone ? topLine + (innerHeight - 40 - topLine) * (1 - remaining / zone) : topLine;
+    let idx = -1;
+    sections.forEach((sec, i) => { if (sec.getBoundingClientRect().top <= line) idx = i; });
+    setActive(idx);
+  };
+  const queueActive = () => { if (!spyQueued) { spyQueued = true; requestAnimationFrame(updateActive); } };
+  const pin = i => { pinned = i; setActive(i); };
+  const unpin = () => { if (pinned >= 0) { pinned = -1; queueActive(); } };
+  links.forEach((a, i) => a.addEventListener('click', () => pin(i)));
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(type => addEventListener(type, unpin, { passive: true, capture: true }));
+  addEventListener('scroll', queueActive, { passive: true });
+  addEventListener('resize', queueActive);
+  updateActive();
 
   // Light/dark switch: follows the device until the visitor picks, then remembers the pick
   const sw = document.getElementById('theme-switch');
