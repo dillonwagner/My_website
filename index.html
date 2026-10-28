@@ -40,8 +40,8 @@ img { max-width: 100%; }
 :root {
   --ground: #f2f0eb;
   --rule: #dcd6cb;
-  --putty: #ddd5c6;
-  --putty-deep: #b8ad99;
+  --putty: #e7e1d5;
+  --putty-deep: #cac0ae;
   --signal: #d42f37;
   --panel: #1e1b19;
   --panel-edge: transparent;
@@ -929,7 +929,37 @@ window.DriveBank = function DriveBank(container, opts) {
   const box = document.getElementById('stage-box');
   let bank = null;
 
-  const go = i => { pin(i); document.getElementById(drives[i]).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); };
+  // A deliberate eased scroll (the browser's built-in smooth scroll is so quick over long
+  // distances that it reads as a jump). Any wheel, touch or key press stops it.
+  let glideFrame = 0;
+  function stopGlide() {
+    if (!glideFrame) return;
+    cancelAnimationFrame(glideFrame); glideFrame = 0;
+    document.documentElement.style.scrollBehavior = '';
+  }
+  function glide(el) {
+    const html = document.documentElement;
+    const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 0;
+    const max = html.scrollHeight - innerHeight;
+    const target = Math.max(0, Math.min(max, el ? el.getBoundingClientRect().top + scrollY - pad : 0));
+    const start = scrollY, dist = target - start;
+    stopGlide();
+    if (Math.abs(dist) < 2) return;
+    if (reduce) { scrollTo(0, target); return; }
+    const dur = Math.min(1100, Math.max(520, 420 + Math.abs(dist) * 0.2));
+    const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const t0 = performance.now();
+    html.style.scrollBehavior = 'auto';
+    const frame = now => {
+      const k = Math.min(1, (now - t0) / dur);
+      scrollTo(0, start + dist * ease(k));
+      if (k < 1) glideFrame = requestAnimationFrame(frame);
+      else { glideFrame = 0; html.style.scrollBehavior = ''; }
+    };
+    glideFrame = requestAnimationFrame(frame);
+  }
+  ['wheel', 'touchstart', 'keydown'].forEach(type => addEventListener(type, stopGlide, { passive: true }));
+  const go = i => { pin(i); glide(document.getElementById(drives[i])); };
   const keyboardFocus = el => { try { return el.matches(':focus-visible'); } catch (e) { return false; } };
   tapes.forEach((t, i) => {
     t.addEventListener('click', () => { if (bank) bank.setHover(-1); go(i); });
@@ -989,7 +1019,17 @@ window.DriveBank = function DriveBank(container, opts) {
   const queueActive = () => { if (!spyQueued) { spyQueued = true; requestAnimationFrame(updateActive); } };
   const pin = i => { pinned = i; setActive(i); };
   const unpin = () => { if (pinned >= 0) { pinned = -1; queueActive(); } };
-  links.forEach((a, i) => a.addEventListener('click', () => pin(i)));
+  links.forEach((a, i) => a.addEventListener('click', e => {
+    e.preventDefault();
+    pin(i);
+    glide(document.getElementById(navIds[i]));
+    try { history.replaceState(null, '', '#' + navIds[i]); } catch (err) {}
+  }));
+  document.querySelectorAll('a[href="#top"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    unpin();
+    glide(null);
+  }));
   ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(type => addEventListener(type, unpin, { passive: true, capture: true }));
   addEventListener('scroll', queueActive, { passive: true });
   addEventListener('resize', queueActive);
