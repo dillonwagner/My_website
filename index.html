@@ -30,7 +30,7 @@ img { max-width: 100%; }
 [hidden] { display: none !important; }
 </style>
 <title>Dillon Wagner</title>
-<script>try { var t = localStorage.getItem('dw-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<script>try { var t = localStorage.getItem('dw-theme'), phone = matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').matches; if (!phone && (t === 'light' || t === 'dark')) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -134,6 +134,7 @@ a { color: inherit; }
 .theme-switch:hover .ts-track { box-shadow: inset 0 -2px 0 var(--putty-deep), 0 0 0 1.5px var(--putty-deep); }
 /* Theme change: the new theme is revealed in a circle growing from the switch (no cross-fade) */
 ::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+@media (max-width: 640px), (pointer: coarse) and (max-height: 500px) { .theme-switch { display: none !important; } }
 @media (max-width: 980px) {
   .theme-switch { order: 2; margin-left: auto; }
   .top nav { order: 3; width: 100%; margin-left: 0; }
@@ -145,9 +146,6 @@ a { color: inherit; }
 
 /* Hero */
 .hero { padding-block: 44px 4px; display: grid; gap: 18px; }
-.name-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-.switch-slot { flex: none; padding-top: 4px; }
-.switch-slot:empty { display: none; }
 .eyebrow { margin: 0; color: var(--muted); }
 .eyebrow span { white-space: nowrap; }
 .hero h1 {
@@ -342,7 +340,7 @@ footer a:hover { color: var(--signal); }
 
 <div class="wrap hero" id="top">
   <p class="eyebrow mono"><span>J.D. Candidate ·</span> <span>William &amp; Mary Law School ·</span> <span>Class of 2028</span></p>
-  <div class="name-row"><h1>Dillon<br><em>Wagner</em></h1><div class="switch-slot" id="switch-slot"></div></div>
+  <h1>Dillon<br><em>Wagner</em></h1>
   <p class="lede">Law student with an <strong>information technology</strong> degree, working where <strong>technology transactions, data privacy, and cybersecurity</strong> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
   <p class="focus mono"><b>Focus</b><span>Tech transactions</span><span>Data privacy</span><span>Cybersecurity</span><span>IP</span></p>
 </div>
@@ -998,15 +996,6 @@ window.DriveBank = function DriveBank(container, opts) {
       );
     }).catch(() => {});
   });
-  const phone = matchMedia('(max-width: 640px)');
-  const headerRow = document.querySelector('.top');
-  const slot = document.getElementById('switch-slot');
-  const seatSwitch = () => {
-    const home = phone.matches ? slot : headerRow;
-    if (sw.parentElement !== home) home.appendChild(sw);
-  };
-  phone.addEventListener('change', seatSwitch);
-  seatSwitch();
   sysDark.addEventListener('change', syncSwitch);
   new MutationObserver(syncSwitch).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   syncSwitch();
