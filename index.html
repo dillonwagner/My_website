@@ -210,6 +210,19 @@ section { padding-block: 76px 0; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
 .card { display: grid; gap: 4px; align-content: start; }
+/* Share the role / title / detail rows across every card in a row, so the grey detail
+   lines start at the same height even when one title wraps. */
+@supports (grid-template-rows: subgrid) {
+  .cards { row-gap: 0; }
+  .card { grid-row: span 3; grid-template-rows: subgrid; row-gap: 4px; margin-bottom: 14px; }
+  .card p { align-self: end; }   /* the grey line always sits on the card's bottom line */
+}
+/* Fixed column counts so no card is ever left alone in a row */
+.cards.quad { grid-template-columns: minmax(0, 1fr); }
+.cards.trio { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 560px) { .cards.quad { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 720px) { .cards.trio { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 960px) { .cards.quad { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .card .mono { color: var(--signal); }
 .card b { font-size: 1.05rem; font-weight: 650; line-height: 1.3; }
 .card p { margin: 0; color: var(--muted); font-size: .94rem; }
@@ -256,6 +269,17 @@ footer a:hover { color: var(--signal); }
   .top nav ul { gap: 12px; letter-spacing: .02em; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* Version A: roster rows. Same 170px role column and 28px gap as the Experience panels. */
+.roster { list-style: none; margin: 0; padding: 4px 24px; }
+.roster li { display: grid; grid-template-columns: 170px minmax(0, 1.15fr) minmax(0, 1fr); gap: 2px 28px; align-items: baseline; padding-block: 15px; }
+.roster li + li { border-top: 1px solid var(--putty-deep); border-top-color: color-mix(in srgb, var(--putty-deep) 55%, transparent); }
+.r-role { color: var(--signal); }
+.r-title { font-size: 1.05rem; font-weight: 650; line-height: 1.35; }
+.r-detail { color: var(--muted); font-size: .94rem; line-height: 1.45; }
+@media (max-width: 760px) {
+  .roster li { grid-template-columns: 1fr; padding-block: 14px; }
+}
 </style>
 </head>
 <body>
@@ -386,21 +410,21 @@ footer a:hover { color: var(--signal); }
 
   <section id="honors">
     <div class="sec-head"><h2>Honors</h2><div class="stripe" aria-hidden="true"></div></div>
-    <div class="cards">
-      <div class="panel card"><span class="mono">Best Negotiation</span><b>Transactional Law Team Internal Competition</b><p>2026</p></div>
-      <div class="panel card"><span class="mono">Staff Member</span><b>William &amp; Mary Business Law Review</b><p>Law journal</p></div>
-      <div class="panel card"><span class="mono">Member</span><b>Phi Delta Phi</b><p>Legal honor society</p></div>
-      <div class="panel card"><span class="mono">Competition Member</span><b>Transactional Law Team</b><p>William &amp; Mary Law School</p></div>
-    </div>
+    <ul class="panel roster" aria-label="Honors">
+      <li><span class="r-role mono">Best Negotiation</span><b class="r-title">Transactional Law Team Internal Competition</b><span class="r-detail">2026</span></li>
+      <li><span class="r-role mono">Staff Member</span><b class="r-title">William &amp; Mary Business Law Review</b><span class="r-detail">Law journal</span></li>
+      <li><span class="r-role mono">Member</span><b class="r-title">Phi Delta Phi</b><span class="r-detail">Legal honor society</span></li>
+      <li><span class="r-role mono">Competition Member</span><b class="r-title">Transactional Law Team</b><span class="r-detail">William &amp; Mary Law School</span></li>
+    </ul>
   </section>
 
   <section id="leadership">
     <div class="sec-head"><h2>Leadership &amp; Activities</h2><div class="stripe" aria-hidden="true"></div></div>
-    <div class="cards">
-      <div class="panel card"><span class="mono">Chair</span><b>Student Assembly Review Board</b><p>The supreme court of W&amp;M's student government.</p></div>
-      <div class="panel card"><span class="mono">Board Member</span><b>Student Conduct Council</b><p>William &amp; Mary</p></div>
-      <div class="panel card"><span class="mono">Board Member</span><b>Honor Council Appeals Committee</b><p>William &amp; Mary</p></div>
-    </div>
+    <ul class="panel roster" aria-label="Leadership">
+      <li><span class="r-role mono">Chair</span><b class="r-title">Student Assembly Review Board</b><span class="r-detail">The supreme court of W&amp;M&#x27;s student government.</span></li>
+      <li><span class="r-role mono">Board Member</span><b class="r-title">Student Conduct Council</b><span class="r-detail">William &amp; Mary</span></li>
+      <li><span class="r-role mono">Board Member</span><b class="r-title">Honor Council Appeals Committee</b><span class="r-detail">William &amp; Mary</span></li>
+    </ul>
     <div class="list-cols after">
       <div>
         <h3 class="mono">Activities</h3>
