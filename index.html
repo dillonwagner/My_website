@@ -341,7 +341,7 @@ footer a:hover { color: var(--signal); }
 <div class="wrap hero" id="top">
   <p class="eyebrow mono"><span>J.D. Candidate ·</span> <span>William &amp; Mary Law School ·</span> <span>Class of 2028</span></p>
   <h1>Dillon<br><em>Wagner</em></h1>
-  <p class="lede">Law student with an <strong>IT</strong> background, focused on <strong>technology transactions, data privacy, and cybersecurity</strong> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
+  <p class="lede">Law student with an <strong>information technology</strong> degree, working where <strong>technology transactions, data privacy, and cybersecurity</strong> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
   <p class="focus mono"><b>Focus</b><span>Tech transactions</span><span>Data privacy</span><span>Cybersecurity</span><span>IP</span></p>
 </div>
 
@@ -435,12 +435,12 @@ footer a:hover { color: var(--signal); }
         <h3>Florida State University</h3>
         <p class="deg">B.S., Information Technology, <i>summa cum laude</i></p>
         <div class="when mono">May 2025 · Tallahassee, FL</div>
-        <p class="list-label mono">honors</p>
+        <p class="list-label mono">Minor and honors</p>
         <ul>
-          <li>Florida Academic Scholar Award, full tuition award</li>
+          <li>Minor in U.S. National Intelligence Studies</li>
           <li>President's List, all semesters</li>
-          <li>University Honors Program, member</li>
-          <li>Vires Scholarship, merit-based award</li>
+          <li>Florida Academic Scholar Award (full tuition award)</li>
+          <li>Honors Program</li>
         </ul>
       </article>
     </div>
@@ -448,7 +448,7 @@ footer a:hover { color: var(--signal); }
 
   <section id="honors">
     <div class="sec-head"><h2>Honors</h2><div class="stripe" aria-hidden="true"></div></div>
-    <ul class="panel roster" aria-label="Law School Honors">
+    <ul class="panel roster" aria-label="Honors">
       <li><span class="r-role mono">Best Negotiation</span><b class="r-title">Transactional Law Team Internal Competition</b><span class="r-detail">2026</span></li>
       <li><span class="r-role mono">Staff Member</span><b class="r-title">William &amp; Mary Business Law Review</b><span class="r-detail">Law journal</span></li>
       <li><span class="r-role mono">Member</span><b class="r-title">Phi Delta Phi</b><span class="r-detail">Legal honor society</span></li>
@@ -522,12 +522,12 @@ window.DriveBank = function DriveBank(container, opts) {
   const o = Object.assign({
     count: 5,
     yaw: -0.3,          // turned so the right-hand sides show, like the Spline scene
-    elevation: 0.3,      // camera height angle, radians
+    elevation: 0.36,     // camera height angle, radians
     target: 0.7,         // look-at height
     margin: 28,          // px of breathing room around the bank when fitting the camera
     nudgeY: 0,
     zoom: 1,
-    platformLight: '#e4e1db',
+    platformLight: '#d9d5cd',
     platformDark: '#35312c',
     onPick: null, onHover: null, onFrame: null
   }, opts || {});
@@ -652,17 +652,35 @@ window.DriveBank = function DriveBank(container, opts) {
     G.take = extrude(t, 0.008, 0.003);
   })();
 
-  // Soft contact shadow under each cabinet (a blurred rectangle painted to a canvas).
+  // Contact shadow under each cabinet: a tight dark line where the base meets the platform plus a
+  // wider soft spread, so the platform darkens right up to every edge instead of glowing white.
+  const SHX = 0.42, SHZ = 0.6;                       // how far the shadow reaches past the footprint
+  const SHW = W + 2 * SHX, SHD = D + 2 * SHZ;
   const shadowTex = (function () {
-    const c = document.createElement('canvas'); c.width = c.height = 128;
+    const S = 256, c = document.createElement('canvas'); c.width = c.height = S;
     const g = c.getContext('2d');
-    g.shadowColor = 'rgba(0,0,0,1)'; g.shadowBlur = 20; g.shadowOffsetX = 400;
-    g.fillStyle = '#000';
-    g.fillRect(30 - 400, 30, 68, 68);
-    return new THREE.CanvasTexture(c);
+    const kx = S / SHW, kz = S / SHD, off = S * 2;
+    const layer = (blur, alpha, grow) => {
+      const x = SHX * kx - grow, z = SHZ * kz - grow, w = W * kx + 2 * grow, d = D * kz + 2 * grow, r = 9;
+      g.save();
+      g.shadowColor = 'rgba(0,0,0,' + alpha + ')'; g.shadowBlur = blur; g.shadowOffsetX = off;
+      g.fillStyle = '#000';
+      g.beginPath();
+      g.moveTo(x - off + r, z);
+      g.arcTo(x - off + w, z, x - off + w, z + d, r); g.arcTo(x - off + w, z + d, x - off, z + d, r);
+      g.arcTo(x - off, z + d, x - off, z, r); g.arcTo(x - off, z, x - off + w, z, r);
+      g.closePath(); g.fill();
+      g.restore();
+    };
+    layer(84, 0.5, 6);    // wide, soft spread around the cabinet and into the gaps
+    layer(36, 0.45, 0);   // mid falloff so the shadow reads in front of the base
+    layer(14, 0.75, 0);   // tight contact line along the base
+    const t = new THREE.CanvasTexture(c);
+    t.anisotropy = 4;
+    return t;
   })();
-  const shadowMat = new THREE.MeshBasicMaterial({ map: shadowTex, color: 0x000000, transparent: true, opacity: 0.4, depthWrite: false });
-  const shadowGeo = new THREE.PlaneGeometry(W * 1.5, D * 1.75).rotateX(-Math.PI / 2);
+  let shadowOpacity = 0.7;
+  const shadowGeo = new THREE.PlaneGeometry(SHW, SHD).rotateX(-Math.PI / 2);
 
   // ---------- assemble the bank ----------
   const bank = new THREE.Group();
@@ -703,12 +721,13 @@ window.DriveBank = function DriveBank(container, opts) {
     const lampMat = std('#4a2522', { emissive: lin('#ff3a2e'), emissiveIntensity: 0, roughness: 0.35 });
     add(G.lamp, lampMat, -0.29, H - 0.12, D / 2 + 0.008, false);
 
-    const sh = new THREE.Mesh(shadowGeo, shadowMat);
-    sh.position.set(group.position.x + 0.03, 0.003, group.position.z + 0.03);
+    const shMat = new THREE.MeshBasicMaterial({ map: shadowTex, color: 0x000000, transparent: true, opacity: shadowOpacity, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 });
+    const sh = new THREE.Mesh(shadowGeo, shMat);
+    sh.position.set(group.position.x + 0.015, 0.003, group.position.z);
     sh.renderOrder = 1;
     bank.add(sh);
     bank.add(group);
-    cabs.push({ group, lift, reels: [r1, r2], lampMat, hover: 0, active: 0, v: 0, vt: 0, timer: Math.random() * 1.6 });
+    cabs.push({ group, lift, reels: [r1, r2], lampMat, sh, shMat, hover: 0, active: 0, v: 0, vt: 0, timer: Math.random() * 1.6 });
   }
 
   // ---------- theme ----------
@@ -722,7 +741,7 @@ window.DriveBank = function DriveBank(container, opts) {
     hemi.intensity = d ? 0.4 : 0.58;
     hemi.groundColor.set(d ? 0x5b554d : 0xa59c8d);
     key.intensity = d ? 0.72 : 0.84;
-    shadowMat.opacity = d ? 0.55 : 0.4;
+    shadowOpacity = d ? 0.85 : 0.72;
     kick();
   }
 
@@ -766,6 +785,9 @@ window.DriveBank = function DriveBank(container, opts) {
       d *= need;
     }
     dist = d / o.zoom;
+    // A tight depth range keeps the contact shadows from flickering into the platform at this distance.
+    camera.near = Math.max(0.5, dist * 0.6);
+    camera.far = dist * 1.6 + 10;
     placeCamera(dist, o.elevation);
     b = bounds();
     camera.setViewOffset(w, h, ((b.x0 + b.x1) / 2) * w / 2, -((b.y0 + b.y1) / 2) * h / 2 + (o.nudgeY || 0), w, h);
@@ -790,9 +812,16 @@ window.DriveBank = function DriveBank(container, opts) {
     if (hoverPointer !== -1) { hoverPointer = -1; if (o.onHover) o.onHover(-1); }
     canvas.style.cursor = '';
   }
-  canvas.addEventListener('pointermove', e => {
+  // The tilt follows the mouse anywhere on the page, measured from the bank's center, so there is
+  // no jump when the cursor crosses the edge of the drive area.
+  addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
     const r = canvas.getBoundingClientRect();
-    tx = ((e.clientX - r.left) / r.width) * 2 - 1;
+    tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / Math.max(innerWidth / 2, 1)));
+    kick();
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', () => { tx = 0; kick(); });
+  canvas.addEventListener('pointermove', e => {
     if (e.pointerType === 'mouse') {
       const i = pick(e);
       if (i !== hoverPointer) {
@@ -803,14 +832,14 @@ window.DriveBank = function DriveBank(container, opts) {
     }
     kick();
   });
-  canvas.addEventListener('pointerleave', () => { tx = 0; clearPointerHover(); });
+  canvas.addEventListener('pointerleave', clearPointerHover);
   canvas.addEventListener('click', e => {
     const i = pick(e);
     clearPointerHover();
     if (i >= 0 && o.onPick) o.onPick(i);
   });
   // The page can scroll out from under a still mouse without a pointerleave; drop the hover then.
-  addEventListener('scroll', () => { tx = 0; clearPointerHover(); kick(); }, { passive: true });
+  addEventListener('scroll', () => { clearPointerHover(); kick(); }, { passive: true });
 
   // ---------- loop (pauses when offscreen or the tab is hidden) ----------
   const clock = new THREE.Clock();
@@ -831,13 +860,15 @@ window.DriveBank = function DriveBank(container, opts) {
   };
 
   function step(dt) {
-    px += (tx - px) * Math.min(1, dt * 2.5);
+    px += (tx - px) * Math.min(1, dt * 2.2);
     bank.rotation.y = o.yaw + (reduce ? 0 : px * 0.04);
     const hov = hoverPointer >= 0 ? hoverPointer : hoverExt;
     cabs.forEach((c, i) => {
       c.hover += ((hov === i ? 1 : 0) - c.hover) * Math.min(1, dt * 7);
       c.active += ((activeIdx === i ? 1 : 0) - c.active) * Math.min(1, dt * 6);
       c.lift.position.y = c.hover * 0.035;
+      c.shMat.opacity = shadowOpacity * (1 - c.hover * 0.3);
+      c.sh.scale.set(1 + c.hover * 0.05, 1, 1 + c.hover * 0.05);
       c.lift.position.z = c.active * 0.12;
       if (!reduce) {
         if (activeIdx === i || hov === i) {
