@@ -4,10 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Dillon Wagner is a J.D. candidate at William & Mary Law School focused on technology transactions, data privacy, and cybersecurity.">
-<meta name="theme-color" content="#f2f0eb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#181614" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#071c17">
 <link rel="canonical" href="https://www.dillon-wagner.com/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23d42f37'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%23fff7f1' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071c17'/%3E%3Cg fill='none' stroke='%234cf0cf' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='16' cy='16' r='10.4'/%3E%3Ccircle cx='16' cy='16' r='2.6'/%3E%3Cpath d='M16 13.4V7.2M18.25 17.3l5.4 3.1M13.75 17.3l-5.4 3.1'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="https://www.dillon-wagner.com/apple-touch-icon.png">
 <meta property="og:site_name" content="Dillon Wagner">
 <meta property="og:type" content="website">
@@ -18,371 +17,464 @@
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Dillon Wagner, J.D. candidate at William &amp; Mary Law School, beside a bank of retro tape-drive cabinets.">
+<meta property="og:image:alt" content="Dillon Wagner, J.D. candidate at William &amp; Mary Law School, beside a vector drawing of a bank of tape drives on a green phosphor screen.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dillon Wagner">
 <meta name="twitter:description" content="Dillon Wagner is a J.D. candidate at William & Mary Law School focused on technology transactions, data privacy, and cybersecurity.">
 <meta name="twitter:image" content="https://www.dillon-wagner.com/og.png">
 <style>
-:root { color-scheme: light; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body { margin: 0; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
 </style>
 <title>Dillon Wagner</title>
-<script>try { var t = localStorage.getItem('dw-theme'), phone = matchMedia('(max-width: 640px), (pointer: coarse) and (max-height: 500px)').matches; if (!phone && (t === 'light' || t === 'dark')) document.documentElement.setAttribute('data-theme', t); } catch (e) {}</script>
+<script>try { if (localStorage.getItem('dw-phosphor') === 'amber') document.documentElement.setAttribute('data-phosphor', 'amber'); } catch (e) {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,100..800&family=Share+Tech+Mono&display=swap">
 <style>
-/* Layout: a full-screen landing that matches the link-preview card (name left, drive bank right,
-   triple stripe along the bottom). The stripe curls down into a left rail and becomes one
-   continuous ribbon that snakes and loops beside the content column, then ends as a stripe
-   under Contact. */
+/* Layout: a 1988 vector terminal. The window is the tube: a brown bezel and scanlines sit fixed over
+   the page, and every section is a readout with a header line, a curved rule and a vector diagram.
+   The hero is a schematic of the tape-drive bank, and each drive is numbered for the section it opens.
+   One look on purpose: the screen is dark in light and dark mode alike; the switch changes phosphor. */
 :root {
-  --ground: #f2f0eb;
-  --rule: #dcd6cb;
-  --putty: #e7e1d5;
-  --putty-deep: #cac0ae;
-  --signal: #d42f37;
-  --ink: #25211d;
-  --muted: #69625a;
-  --on-signal: #fff7f1;
-  --tape: #1c1a19;
-  --tape-ink: #f5f1ea;
-  --rail: 280px;
-  --rail-gap: 48px;
-  --gutter: max(24px, env(safe-area-inset-left, 0px));
-  --gutter-r: max(24px, env(safe-area-inset-right, 0px));
-  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --screen: #071c17;                       /* tube glass, sampled from the reference frames */
+  --phos: #4cf0cf;                         /* lit phosphor: titles, lines, the active item */
+  --phos-text: #3ed5b4;                    /* running text */
+  --phos-mid: #2ba88d;                     /* labels and secondary text */
+  --phos-dim: #1b6f5d;                     /* rules, dashes, quiet strokes */
+  --glow: rgba(64, 242, 210, .5);
+  --glow-soft: rgba(64, 242, 210, .15);
+  --bezel: #2a2016;                        /* the set's brown plastic casing */
+  --bezel-lip: #3d2f20;
+  --display: "Martian Mono", "Share Tech Mono", ui-monospace, Menlo, monospace;
+  --mono: "Share Tech Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --bez: clamp(7px, 1.2vw, 16px);
+  --bar-h: 56px;
+  color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --ground: #181614; --rule: #2f2a25; --putty: #2a2622; --putty-deep: #48413a; --signal: #ec474e;
-  --ink: #eee8dd; --muted: #a39a8c; --on-signal: #fff7f1; --tape: #0f0e0d; --tape-ink: #f5f1ea;
-  color-scheme: dark } }
-:root[data-theme="dark"] {
-  --ground: #181614; --rule: #2f2a25; --putty: #2a2622; --putty-deep: #48413a; --signal: #ec474e;
-  --ink: #eee8dd; --muted: #a39a8c; --on-signal: #fff7f1; --tape: #0f0e0d; --tape-ink: #f5f1ea;
-  color-scheme: dark }
-@media (max-width: 999px) { :root { --rail: 190px; --rail-gap: 30px; } }
-@media (max-width: 760px) { :root { --rail: 30px; --rail-gap: 16px; --gutter: max(16px, env(safe-area-inset-left, 0px)); --gutter-r: max(16px, env(safe-area-inset-right, 0px)); } }
+:root[data-phosphor="amber"] {
+  --screen: #160d04;
+  --phos: #ffb84d;
+  --phos-text: #eea640;
+  --phos-mid: #c4842f;
+  --phos-dim: #7a4f1b;
+  --glow: rgba(255, 170, 60, .5);
+  --glow-soft: rgba(255, 170, 60, .15);
+}
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+html { background: var(--screen); scroll-behavior: smooth; scroll-padding-top: calc(var(--bez) + var(--bar-h) + 24px); scrollbar-color: var(--phos-dim) var(--screen); }
 body {
-  background: var(--ground); color: var(--ink);
-  font-family: var(--body); font-size: 16px; line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  margin: 0; background: var(--screen); color: var(--phos-text);
+  font-family: var(--mono); font-size: 17px; line-height: 1.6; letter-spacing: .01em;
+  -webkit-font-smoothing: antialiased; text-shadow: 0 0 6px var(--glow-soft);
 }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--ground); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 70; background: var(--bezel); }
+::selection { background: var(--phos); color: var(--screen); text-shadow: none; }
 a { color: inherit; }
-:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
-.mono { font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
-.wrapx { max-width: 1180px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter-r); }
+:focus-visible { outline: 2px solid var(--phos); outline-offset: 3px; }
+.caps { text-transform: uppercase; letter-spacing: .1em; }
 
-/* Header */
-.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--ground); border-bottom: 1px solid transparent; transition: border-color .2s; }
-@supports (backdrop-filter: blur(1px)) { .topbar { background: color-mix(in srgb, var(--ground) 86%, transparent); backdrop-filter: blur(12px); } }
-.topbar.scrolled { border-bottom-color: var(--rule); }
-.top { display: flex; align-items: center; gap: 10px 24px; flex-wrap: wrap; padding-block: 14px; }
-.mark { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.mark .reel { width: 22px; height: 22px; border-radius: 50%; background: var(--signal); box-shadow: inset 0 0 0 5px var(--signal), inset 0 0 0 7px var(--on-signal); }
-.mark span { font-family: var(--mono); font-weight: 500; font-size: .85rem; letter-spacing: .08em; }
-.top nav { min-width: 0; max-width: 100%; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
-.top nav ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 2px 0; }
-.top nav a { text-decoration: none; color: var(--muted); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
-.top nav a::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); transform: scale(0); transition: transform .2s; }
-.top nav a:hover, .top nav a[aria-current="true"] { color: var(--ink); }
-.top nav a[aria-current="true"]::before { transform: scale(1); }
-.top nav .short { display: none; }
-.theme-switch { flex: none; border: 0; background: none; padding: 4px; margin: -4px; cursor: pointer; border-radius: 999px; color: var(--muted); }
-.ts-track { position: relative; display: block; width: 52px; height: 28px; border-radius: 999px; background: var(--putty); box-shadow: inset 0 -2px 0 var(--putty-deep); }
-.ts-track svg { position: absolute; top: 7px; width: 14px; height: 14px; }
-.ts-sun { left: 7px; } .ts-moon { right: 7px; }
-.ts-knob { position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--signal); box-shadow: inset 0 0 0 5px var(--signal), inset 0 0 0 7px var(--on-signal), 0 1px 3px rgba(0,0,0,.35); transition: transform .22s cubic-bezier(.3,.7,.3,1); }
-.theme-switch[aria-checked="true"] .ts-knob { transform: translateX(24px); }
-.theme-switch:hover .ts-track { box-shadow: inset 0 -2px 0 var(--putty-deep), 0 0 0 1.5px var(--putty-deep); }
-::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
-@media (max-width: 640px), (pointer: coarse) and (max-height: 500px) { .theme-switch { display: none !important; } }
-@media (max-width: 980px) { .theme-switch { order: 2; margin-left: auto; } .top nav { order: 3; width: 100%; margin-left: 0; } }
-@media (max-width: 760px) { .top nav .full { display: none; } .top nav .short { display: inline; } }
-
-/* Page flow: the ribbon SVG lies under everything from the landing down to the footer */
-.flow { position: relative; }
-.ribbon { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
-.ribbon .rb-halo { stroke: var(--ground); }
-.ribbon .rb-red { stroke: var(--signal); }
-.ribbon .rb-gap { stroke: var(--ground); }
-.ribbon use { fill: none; stroke-linejoin: round; stroke-linecap: butt; }
-.flow > *:not(.ribbon) { position: relative; z-index: 1; }
-
-/* Landing: the link-preview card at full screen */
-.landing { min-height: min(calc(100vh - 58px), calc(48vw + 90px)); min-height: min(calc(100svh - 58px), calc(48vw + 90px)); display: flex; container-type: inline-size; }
-/* The name column is only as wide as the name; the drives get everything else, and on wide
-   screens their stage runs on past the column toward the right edge of the window. */
-.landing-grid {
-  flex: 1; width: 100%;
-  display: grid; grid-template-columns: fit-content(600px) minmax(0, 1fr); grid-template-rows: 1fr auto;
-  align-items: center; column-gap: clamp(24px, 3vw, 48px);
-  padding-block: 12px 92px;
+/* The set: bezel, curved glass, scanlines and a slow rolling refresh band */
+.crt { position: fixed; inset: 0; z-index: 60; pointer-events: none; }
+.crt::before {
+  content: ""; position: absolute; inset: var(--bez); border-radius: calc(var(--bez) * 2 + 8px);
+  box-shadow:
+    0 0 0 2px var(--bezel-lip),
+    0 0 0 calc(var(--bez) + 6px) var(--bezel),
+    inset 0 0 0 1px rgba(0, 0, 0, .75),
+    inset 0 0 50px rgba(0, 0, 0, .55),
+    inset 0 0 180px rgba(0, 0, 0, .3);
 }
+.crt::after {
+  content: ""; position: absolute; inset: var(--bez); border-radius: calc(var(--bez) * 2 + 8px);
+  background:
+    radial-gradient(120% 70% at 16% -6%, rgba(255, 255, 255, .045), transparent 55%),
+    repeating-linear-gradient(180deg, rgba(0, 0, 0, .2) 0 1px, transparent 1px 3px);
+}
+.roll { position: absolute; inset: var(--bez); overflow: hidden; border-radius: calc(var(--bez) * 2 + 8px); }
+.roll::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 26vh;
+  background: linear-gradient(180deg, transparent, var(--glow-soft) 55%, transparent);
+  opacity: .32; animation: roll 12s linear infinite;
+}
+@keyframes roll { from { transform: translateY(-30vh); } to { transform: translateY(105vh); } }
+
+.tube { margin-inline: var(--bez); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: clamp(4px, 2vw, 24px); }
+
+/* Header: a terminal menu line; the current section shows inverted */
+.bar { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bez)); z-index: 30; background: var(--screen); border-bottom: 1px solid transparent; transition: border-color .2s; }
+.bar.scrolled { border-bottom-color: var(--phos-dim); }
+.bar-row { display: flex; align-items: center; gap: 8px 22px; flex-wrap: wrap; min-height: var(--bar-h); padding-block: 10px; }
+.mark { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--phos); font-size: .92rem; letter-spacing: .14em; }
+.mark svg { width: 22px; height: 22px; fill: none; stroke: var(--phos); stroke-width: 1.6; filter: drop-shadow(0 0 3px var(--glow)); }
+.nav { margin-left: auto; min-width: 0; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav ul { display: flex; gap: 2px; list-style: none; margin: 0; padding: 0; }
+.nav a { display: block; padding: 3px 8px; text-decoration: none; color: var(--phos-mid); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.nav a:hover { color: var(--phos); }
+.nav a[aria-current="true"] { background: var(--phos); color: var(--screen); text-shadow: none; }
+.nav .short { display: none; }
+.phos { flex: none; display: inline-flex; border: 1px solid var(--phos-dim); background: none; padding: 0; cursor: pointer; font: inherit; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--phos-mid); text-shadow: none; }
+.phos span { padding: 4px 8px; }
+.phos:hover { border-color: var(--phos-mid); }
+:root:not([data-phosphor="amber"]) .phos .g, :root[data-phosphor="amber"] .phos .a { background: var(--phos); color: var(--screen); }
+
+/* Readout heads: title left, code right, a rule bowed like the glass, then a subtitle */
+.rd-head { display: flex; justify-content: space-between; align-items: baseline; gap: 4px 24px; flex-wrap: wrap; }
+.rd-head .k { color: var(--phos); text-transform: uppercase; letter-spacing: .12em; font-size: .92rem; text-shadow: 0 0 8px var(--glow-soft); }
+.rd-head .code { margin-left: auto; color: var(--phos-mid); text-transform: uppercase; letter-spacing: .12em; font-size: .86rem; font-variant-numeric: tabular-nums; }
+.rule { display: block; width: 100%; height: 12px; margin-top: 6px; overflow: visible; }
+.rule path { fill: none; stroke: var(--phos); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.rule .beam { stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: .1 3; stroke-dashoffset: .1; opacity: 0; }
+.live .rule .beam { animation: sweep 1.3s cubic-bezier(.35, .55, .4, 1) .1s 1 both; }
+/* the bright dash runs off the far end and keeps going, so it never parks on the line */
+@keyframes sweep { from { stroke-dashoffset: .1; opacity: 1; } to { stroke-dashoffset: -1.5; opacity: 1; } }
+.rd-sub { margin: 10px 0 0; color: var(--phos-mid); text-transform: uppercase; letter-spacing: .12em; font-size: .84rem; }
+
+/* Hero */
+.hero { padding-block: clamp(22px, 4vw, 44px) 8px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 28px clamp(24px, 4vw, 56px); align-items: center; margin-top: clamp(22px, 4vw, 40px); }
 .name {
-  margin: 0;
-  font-family: var(--display); font-stretch: 125%; font-weight: 850;
-  font-size: clamp(3.2rem, 7.6vw, 6.8rem); line-height: .9; letter-spacing: -.02em;
+  margin: 0; font-family: var(--display); font-weight: 160; font-stretch: 75%;
+  font-size: clamp(3.4rem, 8.4vw, 7.3rem); line-height: .9; letter-spacing: .03em; text-transform: uppercase;
+  color: var(--phos); text-shadow: 0 0 1px var(--phos), 0 0 12px var(--glow), 0 0 36px var(--glow-soft);
 }
-.name em { font-style: normal; color: var(--signal); }
-.sub { margin: 28px 0 0; color: var(--muted); font-size: .9rem; line-height: 1.75; letter-spacing: .05em; }
-.cue { grid-column: 1; grid-row: 2; align-self: end; justify-self: start; display: inline-flex; align-items: center; gap: 10px; color: var(--signal); text-decoration: none; font-size: .88rem; }
-.cue i { font-style: normal; display: inline-block; animation: nudge 2.4s ease-in-out infinite; }
-@keyframes nudge { 0%, 70%, 100% { transform: translateY(0); } 80% { transform: translateY(4px); } 90% { transform: translateY(0); } }
-.stage-box { position: relative; grid-column: 2; grid-row: 1 / span 2; align-self: center;
-  margin-right: calc(-1 * clamp(0px, calc((100cqw - min(100cqw, 1180px)) / 2 + var(--gutter-r) - 32px), 200px)); }
-#stage { width: 100%; height: clamp(300px, 54vh, 540px); }
-.drive-hint {
-  grid-column: 2; grid-row: 2; align-self: end; justify-self: end; position: relative; z-index: 2;
-  margin: 0; display: inline-flex; align-items: center; gap: 10px;
-  color: var(--muted); font-size: .88rem; pointer-events: none; transition: color .15s;
+.lede { margin: 26px 0 0; max-width: 34em; font-size: 1.02rem; text-wrap: pretty; }
+.lede b { font-weight: 400; color: var(--phos); }
+/* Status strip: three readout cells under the hero */
+.status { list-style: none; margin: clamp(26px, 4vw, 40px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 28px; }
+.status li { min-width: 0; padding-top: 12px; border-top: 1px dashed var(--phos-dim); }
+.status .h { display: flex; align-items: baseline; gap: 8px; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+.status .s { color: var(--phos); white-space: nowrap; }
+.status .s::before { content: "["; color: var(--phos-dim); margin-right: 4px; }
+.status .s::after { content: "]"; color: var(--phos-dim); margin-left: 4px; }
+.status .fill { flex: 1 1 10px; min-width: 10px; border-bottom: 1px dotted var(--phos-dim); transform: translateY(-4px); }
+.status .t { color: var(--phos-mid); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.status .v { display: block; margin-top: 6px; }
+
+/* The drive bank schematic */
+.rig { margin: 0; min-width: 0; }
+.rig-stage { position: relative; width: 100%; height: 360px; }
+.rig-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 1.4px var(--glow)) drop-shadow(0 0 9px var(--glow-soft)); }
+.rig-svg path { fill: none; stroke: var(--phos); stroke-width: 1.25; stroke-linejoin: round; stroke-linecap: round; }
+.rig-svg .face, .rig-svg .win, .rig-svg .ring { fill: var(--screen); }
+.rig-svg .stripe { fill: color-mix(in srgb, var(--phos) 34%, transparent); stroke-width: 1; }
+.rig-svg .thin { stroke: var(--phos-mid); stroke-width: 1; }
+.rig-svg .hub, .rig-svg .lamp { fill: var(--screen); }
+.rig-svg .dot { fill: var(--phos); stroke: none; }
+.rig-svg .cab { cursor: pointer; }
+.rig-svg .cab path { transition: stroke .2s, fill .2s; }
+.rig-svg .cab.hot path { stroke-width: 1.8; }
+.rig-svg .cab.hot .lamp { fill: var(--phos); }
+.rig-svg .bank.focus .cab:not(.hot) path { stroke: var(--phos-dim); }
+.rig-svg .bank.focus .cab:not(.hot) .stripe { fill: color-mix(in srgb, var(--phos) 12%, transparent); }
+.rig-svg .lead { stroke: var(--phos-mid); stroke-width: 1; stroke-dasharray: 2 4; }
+.rig-svg .lead.hot { stroke: var(--phos); stroke-dasharray: none; }
+.drive {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  font: inherit; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap;
+  color: var(--phos); background: var(--screen); border: 1px solid var(--phos-dim); padding: 3px 8px; cursor: pointer;
+  opacity: 0; transition: opacity .5s, background-color .12s, color .12s;
 }
-.drive-hint .led { width: 8px; height: 8px; flex: none; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 24%, transparent); animation: ready 2.4s ease-in-out infinite; }
-.drive-hint.on { color: var(--ink); }
-.drive-hint.on .led { animation: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 30%, transparent), 0 0 10px color-mix(in srgb, var(--signal) 60%, transparent); }
-@keyframes ready { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
-.stage-box.no-gl ~ .drive-hint { display: none; }
-.tapes { position: absolute; inset: 0; pointer-events: none; }
-.tape {
-  position: absolute; left: 0; top: 0; pointer-events: auto;
-  font-family: var(--mono); font-weight: 500; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--tape-ink); background: var(--tape); text-shadow: 0 1px 0 rgba(0,0,0,.55);
-  padding: 4px 8px 4px 10px; border: 0; border-radius: 2px;
-  box-shadow: 0 3px 6px -3px rgba(0,0,0,.5);
-  cursor: pointer; white-space: nowrap; opacity: 0; transition: background-color .15s, opacity .4s;
+.drive b { font-weight: 400; color: var(--phos-mid); }
+.drive .nm:not(:empty) { margin-left: 7px; }
+.rig.ready .drive { opacity: 1; }
+.drive:hover, .drive.hot, .drive:focus-visible { background: var(--phos); color: var(--screen); text-shadow: none; }
+.drive:hover b, .drive.hot b, .drive:focus-visible b { color: var(--screen); }
+.cap { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; margin-top: 6px; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--phos-mid); }
+.cap b { font-weight: 400; color: var(--phos); }
+.cursor { display: inline-block; width: .62em; height: 1.05em; margin-left: 5px; vertical-align: -3px; background: var(--phos); box-shadow: 0 0 6px var(--glow); animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Section readouts */
+.readout { padding-top: clamp(78px, 10vw, 128px); }
+.readout h2 {
+  margin: 0; font-family: var(--display); font-weight: 190; font-stretch: 75%;
+  font-size: clamp(2.2rem, 5vw, 3.7rem); line-height: 1; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--phos); text-shadow: 0 0 1px var(--phos), 0 0 10px var(--glow), 0 0 30px var(--glow-soft); text-wrap: balance;
 }
-.stage-box.ready .tape { opacity: 1; }
-.tape:hover, .tape:focus-visible, .tape.hot { background: var(--signal); color: var(--on-signal); }
-.no-gl #stage { display: none; }
-.no-gl .tapes { position: static; display: flex; flex-wrap: wrap; gap: 8px; padding-block: 24px; }
-.no-gl .tape { position: static; opacity: 1; transform: none !important; }
-@media (max-width: 899px) {
-  .landing { min-height: calc(100svh - 86px); }
-  .landing-grid { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto; row-gap: 8px; padding-block: 40px 76px; align-items: start; }
-  .stage-box { grid-column: 1; grid-row: 2; align-self: center; margin-right: 0; }
-  #stage { height: clamp(230px, 60vw, 380px); }
-  .cue { grid-row: 3; margin-top: 8px; }
-  .drive-hint { grid-column: 1; grid-row: 3; margin-top: 8px; }
+.body { margin-top: clamp(26px, 4vw, 42px); }
+.bracket {
+  --c: var(--phos-dim);
+  background:
+    linear-gradient(var(--c), var(--c)) top left / 14px 1px no-repeat, linear-gradient(var(--c), var(--c)) top left / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) top right / 14px 1px no-repeat, linear-gradient(var(--c), var(--c)) top right / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom left / 14px 1px no-repeat, linear-gradient(var(--c), var(--c)) bottom left / 1px 14px no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / 14px 1px no-repeat, linear-gradient(var(--c), var(--c)) bottom right / 1px 14px no-repeat;
 }
+
+/* Experience */
+.timeline { display: block; width: 100%; height: 116px; overflow: visible; margin-bottom: 14px; }
+.timeline path { fill: none; stroke: var(--phos); stroke-width: 1.3; }
+.timeline .axis { stroke: var(--phos-mid); }
+.timeline .tick { stroke: var(--phos-mid); }
+.timeline .bar { stroke-width: 6; stroke-linecap: butt; }
+.timeline .bar.future { stroke-dasharray: 3 2; }
+.timeline .lead { stroke: var(--phos-mid); stroke-width: 1; }
+.timeline .now { stroke: var(--phos); stroke-width: 1; stroke-dasharray: 3 4; }
+.timeline .beam { stroke-width: 3; stroke-linecap: round; stroke-dasharray: .08 3; stroke-dashoffset: .08; opacity: 0; }
+.live .timeline .beam { animation: sweep 1.5s cubic-bezier(.35, .55, .4, 1) .45s 1 both; }
+.timeline text { fill: var(--phos); font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.timeline .yr { fill: var(--phos-mid); font-size: 11px; }
+.timeline .now-t { font-size: 11px; }
+.records { display: grid; }
+.record { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 6px 32px; padding-block: 26px; border-top: 1px dashed var(--phos-dim); }
+.record:first-child { border-top: 0; }
+.record.bracket { margin-inline: -16px; padding-inline: 16px; border-top: 0; }
+.record.bracket + .record { border-top: 0; }
+.when { color: var(--phos-mid); text-transform: uppercase; letter-spacing: .1em; font-size: .84rem; padding-top: 3px; font-variant-numeric: tabular-nums; }
+.record h3, .module h3 { margin: 0; font-weight: 400; font-size: 1.24rem; line-height: 1.3; color: var(--phos); text-shadow: 0 0 8px var(--glow-soft); }
+.role { margin: 3px 0 0; color: var(--phos-mid); }
+.ticks { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; max-width: 64ch; }
+.ticks li { position: relative; padding-left: 22px; }
+.ticks li::before { content: "▸"; position: absolute; left: 0; color: var(--phos-mid); }
+.tag { display: inline-block; vertical-align: 3px; margin-left: 10px; padding: 1px 7px 0; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; background: var(--phos); color: var(--screen); text-shadow: none; }
+
+/* Education */
+.modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px; }
+.module { padding: 24px 26px 26px; min-width: 0; }
+.module .deg { margin: 6px 0 0; }
+.module .when { margin-top: 4px; padding: 0; }
+.module .label { margin: 18px 0 0; color: var(--phos-mid); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+.module .ticks { margin-top: 8px; gap: 4px; }
+
+/* Honors and leadership: a readout table */
+.table { list-style: none; margin: 0; padding: 0; border-bottom: 1px dashed var(--phos-dim); }
+.table li { display: grid; grid-template-columns: 200px minmax(0, 1.2fr) minmax(0, 1fr); gap: 4px 28px; align-items: baseline; padding-block: 16px; border-top: 1px dashed var(--phos-dim); }
+.t-role { color: var(--phos-mid); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+.t-title { color: var(--phos); }
+.t-detail { font-size: .95rem; }
+.sub-h { margin: 34px 0 12px; font-weight: 400; color: var(--phos-mid); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+.plates { display: flex; flex-wrap: wrap; gap: 8px 10px; list-style: none; margin: 0; padding: 0; }
+.plates li { border: 1px solid var(--phos-dim); padding: 4px 11px; font-size: .92rem; }
+
+/* Certifications */
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 30px 56px; }
+.cols .sub-h { margin-top: 0; }
+.checks { list-style: none; margin: 0; padding: 0; }
+.checks li { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; padding: 9px 0 9px 22px; position: relative; border-top: 1px dashed var(--phos-dim); }
+.checks li:last-child { border-bottom: 1px dashed var(--phos-dim); }
+.checks li::before { content: "▸"; position: absolute; left: 0; color: var(--phos-mid); }
+.state { display: inline-flex; align-items: center; gap: 8px; color: var(--phos); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+.state i { width: 7px; height: 7px; border-radius: 50%; background: var(--phos); box-shadow: 0 0 6px var(--glow); animation: blink 1.2s steps(1) infinite; }
+
+/* Contact */
+.contact { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 28px 48px; align-items: center; }
+.contact p { margin: 0; max-width: 40ch; }
+.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 22px; }
+.email { font-family: var(--display); font-weight: 220; font-stretch: 75%; font-size: clamp(1.8rem, 4.6vw, 3rem); line-height: 1.1; color: var(--phos); text-shadow: 0 0 1px var(--phos), 0 0 10px var(--glow); user-select: all; overflow-wrap: anywhere; }
+.copy { font: inherit; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--screen); background: var(--phos); border: 0; padding: 9px 14px; cursor: pointer; text-shadow: none; box-shadow: 0 0 12px var(--glow-soft); }
+.copy:hover { box-shadow: 0 0 16px var(--glow); }
+.scope { margin: 0; min-width: 0; }
+.scope svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 0 1.2px var(--glow)) drop-shadow(0 0 8px var(--glow-soft)); }
+.scope path { fill: none; }
+.scope .g-frame { fill: none; stroke: var(--phos-dim); stroke-width: 1.2; }
+.scope .g-div { stroke: var(--phos-dim); stroke-width: 1; stroke-dasharray: 1 4; }
+.scope .g-tick { stroke: var(--phos-dim); stroke-width: 1; }
+.scope .t-flat { stroke: var(--phos); stroke-width: 1.6; stroke-linecap: round; }
+.scope .t-edge { stroke: var(--phos); stroke-width: 1; opacity: .35; }   /* fast edges draw faint, as on a real tube */
+.scope .lit-t path { stroke: var(--phos); stroke-width: 3.2; stroke-linejoin: round; stroke-linecap: round; }
+.scope .d-br { stroke: var(--phos-dim); stroke-width: 1; }
+.scope text { font-family: var(--mono); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.scope .d-ch, .scope .lit-d text { text-anchor: middle; }
+.scope .d-ch { fill: var(--phos-mid); }
+.scope .lit-d text { fill: var(--phos); }
+.scope .gnd { fill: var(--phos-mid); stroke: none; }
+.scope .gnd-t { fill: var(--phos-mid); font-size: 11px; text-anchor: end; }
+.scope .ro { fill: var(--phos-mid); font-size: 11.5px; letter-spacing: .1em; text-transform: none; }
 @media (max-width: 640px) {
-  .name { font-size: clamp(2.9rem, 15vw, 4.2rem); }
-  .sub { margin-top: 18px; font-size: .78rem; letter-spacing: .03em; }
-  .tape { font-size: .62rem; letter-spacing: .05em; padding: 3px 6px; }
-  .cue, .drive-hint { font-size: .8rem; }
+  .scope text { font-size: 21px; }
+  .scope .gnd-t { font-size: 18px; }
+  .scope .ro { display: none; }
 }
+/* the scan: a bright band with a fading tail sweeps the screen and lights the signal as it passes */
+.scope .scan { animation: scan 3.6s linear infinite; }
+.scope.tx .scan { animation-duration: .9s; }
+@keyframes scan { from { transform: translateX(0); } to { transform: translateX(820px); } }
+.scope figcaption { margin-top: 8px; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--phos-mid); text-align: right; }
 
-/* Rail + content */
-.tape-grid { display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); column-gap: var(--rail-gap); }
-.rail { min-height: 1px; }
-.content { min-width: 0; max-width: 820px; container-type: inline-size; padding-bottom: 8px; }
-.intro { padding-top: 64px; display: grid; gap: 26px; }
-.lede { margin: 0; max-width: 33em; font-size: clamp(1.1rem, 1.8vw, 1.32rem); line-height: 1.55; color: var(--muted); text-wrap: pretty; }
-.lede strong { color: var(--ink); font-weight: 600; }
-.status { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
-@container (min-width: 760px) { .status { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.chip { display: flex; gap: 14px; align-items: center; background: var(--putty); color: var(--ink); border-radius: 7px; padding: 14px 16px 16px; box-shadow: inset 0 -3px 0 var(--putty-deep), 0 12px 26px -20px rgba(0,0,0,.55); }
-.lamp { width: 12px; height: 12px; flex: none; border-radius: 50%; background: var(--signal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 28%, transparent), 0 0 12px color-mix(in srgb, var(--signal) 55%, transparent); }
-.lamp.amber { background: #e8b44a; box-shadow: 0 0 0 3px rgba(232,180,74,.25), 0 0 12px rgba(232,180,74,.45); }
-.chip div { min-width: 0; }
-.chip small { display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-.chip b { display: block; font-weight: 600; line-height: 1.35; white-space: nowrap; }
-
-section.part { padding-top: 104px; }
-.part h2 {
-  margin: 0 0 30px;
-  font-family: var(--display); font-stretch: 118%; font-weight: 800;
-  font-size: clamp(1.9rem, 3.8vw, 2.8rem); line-height: 1.02; letter-spacing: -.01em; text-wrap: balance;
-}
-.panel { background: var(--putty); border-radius: 7px; box-shadow: inset 0 -3px 0 var(--putty-deep), 0 12px 26px -20px rgba(0,0,0,.55); padding: 22px 24px 24px; }
-.jobs { display: grid; gap: 14px; }
-.job { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 26px; }
-@container (max-width: 560px) { .job { grid-template-columns: 1fr; } .job .when { padding-top: 0 !important; } }
-.job .when { color: var(--muted); padding-top: 4px; }
-.job h3 { margin: 0; font-size: 1.2rem; font-weight: 700; font-stretch: 108%; line-height: 1.25; }
-.role { margin: 2px 0 0; color: var(--muted); }
-.job ul { margin: 12px 0 0; padding-left: 18px; display: grid; gap: 6px; max-width: 64ch; }
-.job li::marker, .edu li::marker { color: var(--signal); }
-.tag { display: inline-block; vertical-align: 3px; margin-left: 8px; background: var(--signal); color: var(--on-signal); font-family: var(--mono); font-size: .64rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
-.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-.edu h3 { margin: 0; font-size: 1.2rem; font-weight: 700; font-stretch: 108%; line-height: 1.25; }
-.edu .deg { margin: 4px 0 0; }
-.edu .when { color: var(--muted); margin-top: 2px; }
-.edu .list-label { margin: 16px 0 0; color: var(--muted); }
-.edu ul { margin: 8px 0 0; padding-left: 18px; display: grid; gap: 4px; }
-.roster { list-style: none; margin: 0; padding: 4px 24px; }
-.roster li { display: grid; grid-template-columns: 150px minmax(0, 1.15fr) minmax(0, 1fr); gap: 2px 26px; align-items: baseline; padding-block: 15px; }
-.roster li + li { border-top: 1px solid var(--putty-deep); border-top-color: color-mix(in srgb, var(--putty-deep) 55%, transparent); }
-@container (max-width: 640px) { .roster li { grid-template-columns: 1fr; padding-block: 14px; } }
-.r-role { color: var(--signal); }
-.r-title { font-size: 1.05rem; font-weight: 650; line-height: 1.35; }
-.r-detail { color: var(--muted); font-size: .94rem; line-height: 1.45; }
-.list-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
-.list-cols.after { margin-top: 28px; }
-.list-cols h3 { margin: 0 0 10px; color: var(--muted); font-weight: 500; }
-.plates { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.plates li { background: var(--putty); border-radius: 4px; padding: 6px 11px; font-size: .92rem; box-shadow: inset 0 -2px 0 var(--putty-deep); }
-.plates li.pending { background: transparent; box-shadow: inset 0 0 0 1.5px var(--signal); }
-.plates li.pending span { color: var(--signal); font-family: var(--mono); font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; margin-left: 6px; }
-.contact { display: grid; gap: 18px; justify-items: start; }
-.contact p { margin: 0; max-width: 44ch; color: var(--muted); font-size: 1.1rem; }
-.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.email { font-family: var(--display); font-stretch: 112%; font-weight: 750; font-size: clamp(1.4rem, 4.5vw, 2.4rem); user-select: all; overflow-wrap: anywhere; }
-button.copy { font: inherit; font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; border: 0; border-radius: 4px; padding: 10px 14px; cursor: pointer; background: var(--signal); color: var(--on-signal); box-shadow: inset 0 -3px 0 rgba(0,0,0,.22); }
-button.copy:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgba(0,0,0,.22); }
-.foot { padding-block: 132px 32px; }
-.foot-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--muted); }
+.foot { padding-block: clamp(90px, 12vw, 150px) calc(var(--bez) + 26px); }
+.foot-row { display: flex; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap; padding-top: 14px; border-top: 1px solid var(--phos-dim); color: var(--phos-mid); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
 .foot-row a { text-decoration: none; }
-.foot-row a:hover { color: var(--signal); }
-@media (max-width: 760px) {
-  section.part { padding-top: 84px; }
-  .intro { padding-top: 48px; }
-  .foot { padding-block: 96px 28px; }
-  .top nav ul { gap: 14px; }
-  .top nav a::before { display: none; }
-  .top nav a[aria-current="true"] { text-decoration: underline; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.foot-row a:hover { color: var(--phos); }
+
+/* Switching phosphor: the tube flares and settles */
+.degauss .tube { animation: degauss .5s ease-out; }
+@keyframes degauss { 0% { filter: brightness(1.9) blur(1px); } 40% { filter: brightness(1.25) blur(.3px); } 100% { filter: none; } }
+
+@media (max-width: 980px) {
+  :root { --bar-h: 84px; }
+  .phos { order: 2; margin-left: auto; }
+  .nav { order: 3; width: 100%; margin-left: 0; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .contact { grid-template-columns: minmax(0, 1fr); }
 }
-@media (max-width: 400px) { .top nav ul { gap: 12px; letter-spacing: .02em; } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } .cue i, .drive-hint .led { animation: none; } }
+@media (max-width: 760px) {
+  .nav .full { display: none; }
+  .nav .short { display: inline; }
+  .record { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .table li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .status { grid-template-columns: minmax(0, 1fr); }
+  .nav ul { gap: 0; }
+  .nav a { padding: 3px 6px; letter-spacing: .06em; }
+  .nav li:first-child a { padding-left: 0; }
+  .rd-head .k { letter-spacing: .06em; font-size: .8rem; }
+  .rd-head .code { font-size: .78rem; letter-spacing: .08em; }
+  body { font-size: 16px; }
+}
+@media (max-width: 640px), (pointer: coarse) and (max-height: 500px) { .phos { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .roll, .cursor, .state i { animation: none; }
+  .roll::before { display: none; }
+  .scope .scan { animation: none; }
+  .live .rule .beam, .live .timeline .beam, .degauss .tube { animation: none; }
+  * { transition: none !important; }
+}
 </style>
 </head>
 <body>
 
-<header class="topbar" id="topbar">
-  <div class="wrapx top">
-    <a class="mark" href="#top" aria-label="Dillon Wagner, back to top"><i class="reel" aria-hidden="true"></i><span>D. WAGNER</span></a>
-    <nav aria-label="Sections">
-      <ul class="mono">
-        <li><a href="#experience"><span class="full">Experience</span><span class="short">Work</span></a></li>
-        <li><a href="#education"><span class="full">Education</span><span class="short">School</span></a></li>
-        <li><a href="#honors">Honors</a></li>
-        <li><a href="#leadership"><span class="full">Leadership</span><span class="short">Roles</span></a></li>
-        <li><a href="#certifications"><span class="full">Certifications</span><span class="short">Certs</span></a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-    <button class="theme-switch" id="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Switch to dark mode">
-      <span class="ts-track" aria-hidden="true"><svg class="ts-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4 7 7M17 17l1.6 1.6M5.4 18.6 7 17M17 7l1.6-1.6"/></svg><svg class="ts-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M20 14.6A8.4 8.4 0 1 1 9.4 4a6.8 6.8 0 0 0 10.6 10.6z"/></svg><span class="ts-knob"></span></span>
-    </button>
-  </div>
-</header>
+<div class="crt" aria-hidden="true"><div class="roll"></div></div>
 
-<div class="flow" id="flow">
-  <svg class="ribbon" id="ribbon" aria-hidden="true" focusable="false"></svg>
-
-  <section class="landing" id="top">
-    <div class="wrapx landing-grid" id="landing">
-      <div>
-        <h1 class="name">Dillon<br><em>Wagner</em></h1>
-        <p class="sub mono">J.D. Candidate, William &amp; Mary Law School<br>Tech transactions · Privacy · Cybersecurity</p>
-      </div>
-      <div class="stage-box" id="stage-box">
-        <div id="stage" role="img" aria-label="A bank of five retro tape-drive cabinets with red racing stripes and spinning reels, one drive per section of the page."></div>
-        <nav class="tapes" aria-label="Drives">
-          <button class="tape" type="button" data-full="Experience" data-short="Work">Experience</button>
-          <button class="tape" type="button" data-full="Education" data-short="School">Education</button>
-          <button class="tape" type="button" data-full="Honors" data-short="Honors">Honors</button>
-          <button class="tape" type="button" data-full="Leadership" data-short="Roles">Leadership</button>
-          <button class="tape" type="button" data-full="Certifications" data-short="Certs">Certifications</button>
-        </nav>
-      </div>
-      <a class="cue mono" href="#about" id="cue">Scroll <i aria-hidden="true">↓</i></a>
-      <p class="drive-hint mono" id="drive-hint" aria-hidden="true"><i class="led"></i><span>Select a drive</span></p>
+<div class="tube">
+  <header class="bar" id="bar">
+    <div class="wrap bar-row">
+      <a class="mark" href="#top" aria-label="Dillon Wagner, back to top">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.4"/><circle cx="12" cy="12" r="2.6"/><path d="M12 9.4V3.2M14.25 13.3l5.4 3.1M9.75 13.3l-5.4 3.1"/></svg>
+        <span>D. WAGNER</span>
+      </a>
+      <nav class="nav" aria-label="Sections">
+        <ul>
+          <li><a href="#experience"><span class="full">Experience</span><span class="short">Work</span></a></li>
+          <li><a href="#education"><span class="full">Education</span><span class="short">School</span></a></li>
+          <li><a href="#honors">Honors</a></li>
+          <li><a href="#leadership"><span class="full">Leadership</span><span class="short">Roles</span></a></li>
+          <li><a href="#certifications"><span class="full">Certifications</span><span class="short">Certs</span></a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="phos" id="phos" type="button" aria-pressed="false" title="Switch to amber phosphor"><span class="g">Green</span><span class="a">Amber</span></button>
     </div>
-  </section>
+  </header>
 
-  <div class="wrapx tape-grid">
-    <div class="rail" id="rail" aria-hidden="true"></div>
-    <main class="content" id="content">
-      <section class="intro" id="about" aria-label="About">
-        <p class="lede">Law student with an <strong>information technology</strong> degree, working where <strong>technology transactions, data privacy, and cybersecurity</strong> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
-        <div class="status">
-          <div class="chip"><i class="lamp" aria-hidden="true"></i><div><small>Incoming · Summer 2027</small><b>Wilson Sonsini</b></div></div>
-          <div class="chip"><i class="lamp amber" aria-hidden="true"></i><div><small>Expected · Nov 2026</small><b>CIPP/US certification</b></div></div>
-          <div class="chip"><i class="lamp" aria-hidden="true"></i><div><small>Current · Student Assembly</small><b>Chair, Review Board</b></div></div>
+  <main>
+    <section class="hero" id="top" aria-label="Introduction">
+      <div class="wrap">
+        <div class="rd-head"><span class="k">J.D. Candidate · Class of 2028</span><span class="code" id="today">10/30/26</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">William &amp; Mary Law School</p>
+        <div class="hero-grid">
+          <div class="hero-text">
+            <h1 class="name">Dillon<br>Wagner</h1>
+            <p class="lede">Law student with an <b>information technology</b> degree, working where <b>technology transactions, data privacy, and cybersecurity</b> meet. Incoming summer associate in Wilson Sonsini's Technology Transactions Group.</p>
+          </div>
+          <figure class="rig" id="rig">
+            <div class="rig-stage" id="rig-stage">
+              <svg class="rig-svg" id="rig-svg" aria-hidden="true"></svg>
+              <button class="drive" type="button" data-full="Experience" data-short="Work"><b>01</b><span class="nm">Experience</span></button>
+              <button class="drive" type="button" data-full="Education" data-short="School"><b>02</b><span class="nm">Education</span></button>
+              <button class="drive" type="button" data-full="Honors" data-short="Honors"><b>03</b><span class="nm">Honors</span></button>
+              <button class="drive" type="button" data-full="Leadership" data-short="Roles"><b>04</b><span class="nm">Leadership</span></button>
+              <button class="drive" type="button" data-full="Certifications" data-short="Certs"><b>05</b><span class="nm">Certifications</span></button>
+            </div>
+            <figcaption class="cap"><span>Fig. 1 · Tape drive bank</span><span><b id="rig-cap">Select a drive</b><i class="cursor" aria-hidden="true"></i></span></figcaption>
+          </figure>
         </div>
-      </section>
+        <ul class="status" aria-label="Status">
+          <li><div class="h"><span class="s">Incoming</span><i class="fill" aria-hidden="true"></i><span class="t">Summer 2027</span></div><span class="v">Summer associate, Wilson Sonsini</span></li>
+          <li><div class="h"><span class="s">Expected</span><i class="fill" aria-hidden="true"></i><span class="t">Nov 2026</span></div><span class="v">CIPP/US certification</span></li>
+          <li><div class="h"><span class="s">Current</span><i class="fill" aria-hidden="true"></i><span class="t">Now</span></div><span class="v">Chair, Student Assembly Review Board</span></li>
+        </ul>
+      </div>
+    </section>
 
-      <section class="part" id="experience">
-        <h2>Experience</h2>
-        <div class="jobs">
-          <article class="panel job">
-            <div class="when mono">Summer 2027</div>
-            <div class="what">
-              <h3>Wilson Sonsini <span class="tag">Incoming</span></h3>
-              <p class="role">Summer Associate · Washington, D.C.</p>
-              <ul><li>Selected for the Technology Transactions Group in the firm's 2027 Summer Associate Program.</li></ul>
-            </div>
-          </article>
-          <article class="panel job">
-            <div class="when mono">May – Jul 2026</div>
-            <div class="what">
-              <h3>U.S. Civilian Board of Contract Appeals</h3>
-              <p class="role">Summer Law Clerk · Washington, D.C.</p>
-              <ul>
-                <li>Drafted initial decisions and orders in technology contract disputes involving server room cooling, data protection software, and medical information systems.</li>
-                <li>Analyzed appeals under the Contract Disputes Act and Stafford Act, including contract interpretation and damages.</li>
-                <li>Led a project assessing how AI could streamline low-complexity, time-intensive legal and administrative work.</li>
-                <li>Evaluated federal debt collection and employee travel reimbursement claims and drafted recommended dispositions.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="panel job">
-            <div class="when mono">Jun – Aug 2025</div>
-            <div class="what">
-              <h3>Virginia Information Technologies Agency</h3>
-              <p class="role">Legal &amp; Legislative Services Intern · Richmond, Virginia</p>
-              <ul>
-                <li>Researched compliance, procurement, and state regulatory questions, and took part in government contract review and negotiation.</li>
-                <li>Drafted a legislative and regulatory proposal on Social Security number protections, with briefing memos and policy summaries.</li>
-                <li>Prepared data breach notifications and transition-of-service notices for executive leadership.</li>
-                <li>Handled Virginia FOIA requests and advised on public records obligations.</li>
-              </ul>
-            </div>
-          </article>
-          <article class="panel job">
-            <div class="when mono">2017 – 2023</div>
-            <div class="what">
-              <h3>Nassau County Teen Court</h3>
-              <p class="role">Lead Prosecutor · Yulee, Florida</p>
-              <ul>
-                <li>Advanced from juror to public defender to lead prosecutor, arguing sanctions before a judge and peer jury in more than 100 cases.</li>
-                <li>Built case strategy, delivered oral advocacy, and mentored new volunteer attorneys.</li>
-              </ul>
-            </div>
-          </article>
+    <section class="readout" id="experience" aria-labelledby="h-experience">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-experience">Experience</h2><span class="code">Drive 01</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Positions · 2017 – 2027</p>
+        <div class="body">
+          <svg class="timeline" id="timeline" role="img" aria-label="Timeline: Nassau County Teen Court 2017 to 2023, Virginia Information Technologies Agency summer 2025, U.S. Civilian Board of Contract Appeals summer 2026, Wilson Sonsini summer 2027."></svg>
+          <div class="records">
+            <article class="record bracket">
+              <div class="when">Summer 2027</div>
+              <div>
+                <h3>Wilson Sonsini<span class="tag">Incoming</span></h3>
+                <p class="role">Summer Associate · Washington, D.C.</p>
+                <ul class="ticks"><li>Selected for the Technology Transactions Group in the firm's 2027 Summer Associate Program.</li></ul>
+              </div>
+            </article>
+            <article class="record">
+              <div class="when">May – Jul 2026</div>
+              <div>
+                <h3>U.S. Civilian Board of Contract Appeals</h3>
+                <p class="role">Summer Law Clerk · Washington, D.C.</p>
+                <ul class="ticks">
+                  <li>Drafted initial decisions and orders in technology contract disputes involving server room cooling, data protection software, and medical information systems.</li>
+                  <li>Analyzed appeals under the Contract Disputes Act and Stafford Act, including contract interpretation and damages.</li>
+                  <li>Led a project assessing how AI could streamline low-complexity, time-intensive legal and administrative work.</li>
+                  <li>Evaluated federal debt collection and employee travel reimbursement claims and drafted recommended dispositions.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="record">
+              <div class="when">Jun – Aug 2025</div>
+              <div>
+                <h3>Virginia Information Technologies Agency</h3>
+                <p class="role">Legal &amp; Legislative Services Intern · Richmond, Virginia</p>
+                <ul class="ticks">
+                  <li>Researched compliance, procurement, and state regulatory questions, and took part in government contract review and negotiation.</li>
+                  <li>Drafted a legislative and regulatory proposal on Social Security number protections, with briefing memos and policy summaries.</li>
+                  <li>Prepared data breach notifications and transition-of-service notices for executive leadership.</li>
+                  <li>Handled Virginia FOIA requests and advised on public records obligations.</li>
+                </ul>
+              </div>
+            </article>
+            <article class="record">
+              <div class="when">2017 – 2023</div>
+              <div>
+                <h3>Nassau County Teen Court</h3>
+                <p class="role">Lead Prosecutor · Yulee, Florida</p>
+                <ul class="ticks">
+                  <li>Advanced from juror to public defender to lead prosecutor, arguing sanctions before a judge and peer jury in more than 100 cases.</li>
+                  <li>Built case strategy, delivered oral advocacy, and mentored new volunteer attorneys.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="part" id="education">
-        <h2>Education</h2>
-        <div class="two">
-          <article class="panel edu">
+    <section class="readout" id="education" aria-labelledby="h-education">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-education">Education</h2><span class="code">Drive 02</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Degrees · 2025 – 2028</p>
+        <div class="body modules">
+          <article class="module bracket">
             <h3>William &amp; Mary Law School</h3>
             <p class="deg">Juris Doctor</p>
-            <div class="when mono">Expected May 2028 · Williamsburg, VA</div>
-            <p class="list-label mono">Relevant coursework</p>
-            <ul>
+            <div class="when">Expected May 2028 · Williamsburg, VA</div>
+            <p class="label">Relevant coursework</p>
+            <ul class="ticks">
               <li>AI: Intro for Non-Experts</li>
               <li>Copyright Law</li>
               <li>Trademark Law</li>
               <li>Cybersecurity Incident Response</li>
             </ul>
           </article>
-          <article class="panel edu">
+          <article class="module bracket">
             <h3>Florida State University</h3>
             <p class="deg">B.S., Information Technology, <i>summa cum laude</i></p>
-            <div class="when mono">May 2025 · Tallahassee, FL</div>
-            <p class="list-label mono">Minor and honors</p>
-            <ul>
+            <div class="when">May 2025 · Tallahassee, FL</div>
+            <p class="label">Minor and honors</p>
+            <ul class="ticks">
               <li>Minor in U.S. National Intelligence Studies</li>
               <li>President's List, all semesters</li>
               <li>Florida Academic Scholar Award (full tuition award)</li>
@@ -390,506 +482,135 @@ button.copy:active { transform: translateY(1px); box-shadow: inset 0 -1px 0 rgba
             </ul>
           </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="part" id="honors">
-        <h2>Honors</h2>
-        <ul class="panel roster" aria-label="Honors">
-          <li><span class="r-role mono">Best Negotiation</span><b class="r-title">Transactional Law Team Internal Competition</b><span class="r-detail">2026</span></li>
-          <li><span class="r-role mono">Staff Member</span><b class="r-title">William &amp; Mary Business Law Review</b><span class="r-detail">Law journal</span></li>
-          <li><span class="r-role mono">Member</span><b class="r-title">Phi Delta Phi</b><span class="r-detail">Legal honor society</span></li>
-          <li><span class="r-role mono">Competition Member</span><b class="r-title">Transactional Law Team</b><span class="r-detail">William &amp; Mary Law School</span></li>
-        </ul>
-      </section>
+    <section class="readout" id="honors" aria-labelledby="h-honors">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-honors">Honors</h2><span class="code">Drive 03</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Awards and societies</p>
+        <div class="body">
+          <ul class="table" aria-label="Honors">
+            <li><span class="t-role">Best Negotiation</span><span class="t-title">Transactional Law Team Internal Competition</span><span class="t-detail">2026</span></li>
+            <li><span class="t-role">Staff Member</span><span class="t-title">William &amp; Mary Business Law Review</span><span class="t-detail">Law journal</span></li>
+            <li><span class="t-role">Member</span><span class="t-title">Phi Delta Phi</span><span class="t-detail">Legal honor society</span></li>
+            <li><span class="t-role">Competition Member</span><span class="t-title">Transactional Law Team</span><span class="t-detail">William &amp; Mary Law School</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-      <section class="part" id="leadership">
-        <h2>Leadership &amp; Activities</h2>
-        <ul class="panel roster" aria-label="Leadership">
-          <li><span class="r-role mono">Chair</span><b class="r-title">Student Assembly Review Board</b><span class="r-detail">The supreme court of W&amp;M's student government.</span></li>
-          <li><span class="r-role mono">Board Member</span><b class="r-title">Student Conduct Council</b><span class="r-detail">William &amp; Mary</span></li>
-          <li><span class="r-role mono">Board Member</span><b class="r-title">Honor Council Appeals Committee</b><span class="r-detail">William &amp; Mary</span></li>
-        </ul>
-        <div class="list-cols after">
+    <section class="readout" id="leadership" aria-labelledby="h-leadership">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-leadership">Leadership &amp; Activities</h2><span class="code">Drive 04</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Boards and student organizations</p>
+        <div class="body">
+          <ul class="table" aria-label="Leadership">
+            <li><span class="t-role">Chair</span><span class="t-title">Student Assembly Review Board</span><span class="t-detail">The supreme court of W&amp;M's student government.</span></li>
+            <li><span class="t-role">Board Member</span><span class="t-title">Student Conduct Council</span><span class="t-detail">William &amp; Mary</span></li>
+            <li><span class="t-role">Board Member</span><span class="t-title">Honor Council Appeals Committee</span><span class="t-detail">William &amp; Mary</span></li>
+          </ul>
+          <h3 class="sub-h">Activities</h3>
+          <ul class="plates">
+            <li>Data Privacy &amp; Cybersecurity Legal Society</li>
+            <li>Student Intellectual Property Society</li>
+            <li>Blockchain Legal Society</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="readout" id="certifications" aria-labelledby="h-certifications">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-certifications">Certifications &amp; Affiliations</h2><span class="code">Drive 05</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Credentials and memberships</p>
+        <div class="body cols">
           <div>
-            <h3 class="mono">Activities</h3>
-            <ul class="plates">
-              <li>Data Privacy &amp; Cybersecurity Legal Society</li>
-              <li>Student Intellectual Property Society</li>
-              <li>Blockchain Legal Society</li>
+            <h3 class="sub-h">Certifications</h3>
+            <ul class="checks">
+              <li><span>CIPP/US</span><span class="state"><i aria-hidden="true"></i>Expected Nov 2026</span></li>
+              <li><span>CompTIA Security+</span></li>
+              <li><span>CompTIA A+</span></li>
+              <li><span>Certified Internet Web Professional</span></li>
+              <li><span>Harvey Level 1 Legal Engineer</span></li>
+              <li><span>Harvey Level 1 Foundations</span></li>
+              <li><span>Harvey Preparing for Legal Work</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="sub-h">Professional memberships</h3>
+            <ul class="checks">
+              <li><span>International Association of Privacy Professionals</span></li>
+              <li><span>Federal Communications Bar Association</span></li>
             </ul>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="part" id="certifications">
-        <h2>Certifications &amp; Affiliations</h2>
-        <div class="list-cols">
+    <section class="readout" id="contact" aria-labelledby="h-contact">
+      <div class="wrap">
+        <div class="rd-head"><h2 id="h-contact">Contact</h2><span class="code">Open channel</span></div>
+        <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
+        <p class="rd-sub">Email</p>
+        <div class="body contact">
           <div>
-            <h3 class="mono">Certifications</h3>
-            <ul class="plates">
-              <li class="pending">CIPP/US<span>Expected Nov 2026</span></li>
-              <li>CompTIA Security+</li>
-              <li>CompTIA A+</li>
-              <li>Certified Internet Web Professional</li>
-              <li>Harvey Level 1 Legal Engineer</li>
-              <li>Harvey Level 1 Foundations</li>
-              <li>Harvey Preparing for Legal Work</li>
-            </ul>
+            <p>Happy to talk about technology transactions, privacy, or anything on this page.</p>
+            <div class="email-row">
+              <span class="email" id="email">dtwagner@wm.edu</span>
+              <button class="copy" id="copy" type="button">Copy email</button>
+            </div>
           </div>
-          <div>
-            <h3 class="mono">Professional memberships</h3>
-            <ul class="plates">
-              <li>International Association of Privacy Professionals</li>
-              <li>Federal Communications Bar Association</li>
-            </ul>
-          </div>
+          <figure class="scope" id="scope">
+            <svg viewBox="0 0 612 374" role="img" aria-label="Oscilloscope showing dtwagner@wm.edu in Morse code at 20 words per minute: the name on channel 1, the domain on channel 2.">
+              <defs>
+                <linearGradient id="scanG" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff"/></linearGradient>
+                <mask id="scanM" maskUnits="userSpaceOnUse" x="0" y="0" width="612" height="374"><rect class="scan" x="-180" y="0" width="180" height="374" fill="url(#scanG)"/></mask>
+              </defs>
+              <g class="grat"><rect class="g-frame" x="36" y="14" width="560" height="320" rx="4"/><path class="g-div" d="M92 14V334M148 14V334M204 14V334M260 14V334M316 14V334M372 14V334M428 14V334M484 14V334M540 14V334M36 54H596M36 94H596M36 134H596M36 174H596M36 214H596M36 254H596M36 294H596"/><path class="g-tick" d="M47.2 171v6M58.4 171v6M69.6 171v6M80.8 171v6M103.2 171v6M114.4 171v6M125.6 171v6M136.8 171v6M159.2 171v6M170.4 171v6M181.6 171v6M192.8 171v6M215.2 171v6M226.4 171v6M237.6 171v6M248.8 171v6M271.2 171v6M282.4 171v6M293.6 171v6M304.8 171v6M327.2 171v6M338.4 171v6M349.6 171v6M360.8 171v6M383.2 171v6M394.4 171v6M405.6 171v6M416.8 171v6M439.2 171v6M450.4 171v6M461.6 171v6M472.8 171v6M495.2 171v6M506.4 171v6M517.6 171v6M528.8 171v6M551.2 171v6M562.4 171v6M573.6 171v6M584.8 171v6M313 22h6M313 30h6M313 38h6M313 46h6M313 62h6M313 70h6M313 78h6M313 86h6M313 102h6M313 110h6M313 118h6M313 126h6M313 142h6M313 150h6M313 158h6M313 166h6M313 182h6M313 190h6M313 198h6M313 206h6M313 222h6M313 230h6M313 238h6M313 246h6M313 262h6M313 270h6M313 278h6M313 286h6M313 302h6M313 310h6M313 318h6M313 326h6"/></g>
+              <g class="marks"><path class="gnd" d="M20 109l8 5l-8 5z"/><text class="gnd-t" x="12" y="118">1</text><path class="gnd" d="M20 269l8 5l-8 5z"/><text class="gnd-t" x="12" y="278">2</text></g>
+              <g class="dec"><path class="d-br" d="M37 123v4H84v-4"/><text class="d-ch" x="60.5" y="143">D</text><path class="d-br" d="M104.2 123v4H124.4v-4"/><text class="d-ch" x="114.3" y="143">T</text><path class="d-br" d="M144.5 123v4H205v-4"/><text class="d-ch" x="174.8" y="143">W</text><path class="d-br" d="M225.2 123v4H258.8v-4"/><text class="d-ch" x="242" y="143">A</text><path class="d-br" d="M278.9 123v4H339.4v-4"/><text class="d-ch" x="309.2" y="143">G</text><path class="d-br" d="M359.6 123v4H393.2v-4"/><text class="d-ch" x="376.4" y="143">N</text><path class="d-br" d="M413.3 123v4H420v-4"/><text class="d-ch" x="416.7" y="143">E</text><path class="d-br" d="M440.2 123v4H487.2v-4"/><text class="d-ch" x="463.7" y="143">R</text><path class="d-br" d="M37 283v4H151.2v-4"/><text class="d-ch" x="94.1" y="303">&#64;</text><path class="d-br" d="M171.4 283v4H231.9v-4"/><text class="d-ch" x="201.6" y="303">W</text><path class="d-br" d="M252 283v4H299.1v-4"/><text class="d-ch" x="275.6" y="303">M</text><path class="d-br" d="M319.2 283v4H433.5v-4"/><text class="d-ch" x="376.4" y="303">.</text><path class="d-br" d="M453.6 283v4H460.4v-4"/><text class="d-ch" x="457" y="303">E</text><path class="d-br" d="M480.5 283v4H527.6v-4"/><text class="d-ch" x="504" y="303">D</text><path class="d-br" d="M547.7 283v4H594.8v-4"/><text class="d-ch" x="571.2" y="303">U</text></g>
+              <g class="traces"><path class="t-edge" d="M37 114V70M57.2 70V114M63.9 114V70M70.6 70V114M77.3 114V70M84 70V114M104.2 114V70M124.4 70V114M144.5 114V70M151.2 70V114M158 114V70M178.1 70V114M184.8 114V70M205 70V114M225.2 114V70M231.9 70V114M238.6 114V70M258.8 70V114M278.9 114V70M299.1 70V114M305.8 114V70M326 70V114M332.7 114V70M339.4 70V114M359.6 114V70M379.7 70V114M386.4 114V70M393.2 70V114M413.3 114V70M420 70V114M440.2 114V70M446.9 70V114M453.6 114V70M473.8 70V114M480.5 114V70M487.2 70V114"/><path class="t-flat" d="M36 114H37M37 70H57.2M57.2 114H63.9M63.9 70H70.6M70.6 114H77.3M77.3 70H84M84 114H104.2M104.2 70H124.4M124.4 114H144.5M144.5 70H151.2M151.2 114H158M158 70H178.1M178.1 114H184.8M184.8 70H205M205 114H225.2M225.2 70H231.9M231.9 114H238.6M238.6 70H258.8M258.8 114H278.9M278.9 70H299.1M299.1 114H305.8M305.8 70H326M326 114H332.7M332.7 70H339.4M339.4 114H359.6M359.6 70H379.7M379.7 114H386.4M386.4 70H393.2M393.2 114H413.3M413.3 70H420M420 114H440.2M440.2 70H446.9M446.9 114H453.6M453.6 70H473.8M473.8 114H480.5M480.5 70H487.2M487.2 114H596"/><path class="t-edge" d="M37 274V230M43.7 230V274M50.4 274V230M70.6 230V274M77.3 274V230M97.5 230V274M104.2 274V230M110.9 230V274M117.6 274V230M137.8 230V274M144.5 274V230M151.2 230V274M171.4 274V230M178.1 230V274M184.8 274V230M205 230V274M211.7 274V230M231.9 230V274M252 274V230M272.2 230V274M278.9 274V230M299.1 230V274M319.2 274V230M326 230V274M332.7 274V230M352.8 230V274M359.6 274V230M366.3 230V274M373 274V230M393.2 230V274M399.9 274V230M406.6 230V274M413.3 274V230M433.5 230V274M453.6 274V230M460.4 230V274M480.5 274V230M500.7 230V274M507.4 274V230M514.1 230V274M520.8 274V230M527.6 230V274M547.7 274V230M554.4 230V274M561.2 274V230M567.9 230V274M574.6 274V230M594.8 230V274"/><path class="t-flat" d="M36 274H37M37 230H43.7M43.7 274H50.4M50.4 230H70.6M70.6 274H77.3M77.3 230H97.5M97.5 274H104.2M104.2 230H110.9M110.9 274H117.6M117.6 230H137.8M137.8 274H144.5M144.5 230H151.2M151.2 274H171.4M171.4 230H178.1M178.1 274H184.8M184.8 230H205M205 274H211.7M211.7 230H231.9M231.9 274H252M252 230H272.2M272.2 274H278.9M278.9 230H299.1M299.1 274H319.2M319.2 230H326M326 274H332.7M332.7 230H352.8M352.8 274H359.6M359.6 230H366.3M366.3 274H373M373 230H393.2M393.2 274H399.9M399.9 230H406.6M406.6 274H413.3M413.3 230H433.5M433.5 274H453.6M453.6 230H460.4M460.4 274H480.5M480.5 230H500.7M500.7 274H507.4M507.4 230H514.1M514.1 274H520.8M520.8 230H527.6M527.6 274H547.7M547.7 230H554.4M554.4 274H561.2M561.2 230H567.9M567.9 274H574.6M574.6 230H594.8M594.8 274H596"/></g>
+              <g class="lit" mask="url(#scanM)"><g class="lit-t"><path d="M36 114H37V70H57.2V114H63.9V70H70.6V114H77.3V70H84V114H104.2V70H124.4V114H144.5V70H151.2V114H158V70H178.1V114H184.8V70H205V114H225.2V70H231.9V114H238.6V70H258.8V114H278.9V70H299.1V114H305.8V70H326V114H332.7V70H339.4V114H359.6V70H379.7V114H386.4V70H393.2V114H413.3V70H420V114H440.2V70H446.9V114H453.6V70H473.8V114H480.5V70H487.2V114H596"/><path d="M36 274H37V230H43.7V274H50.4V230H70.6V274H77.3V230H97.5V274H104.2V230H110.9V274H117.6V230H137.8V274H144.5V230H151.2V274H171.4V230H178.1V274H184.8V230H205V274H211.7V230H231.9V274H252V230H272.2V274H278.9V230H299.1V274H319.2V230H326V274H332.7V230H352.8V274H359.6V230H366.3V274H373V230H393.2V274H399.9V230H406.6V274H413.3V230H433.5V274H453.6V230H460.4V274H480.5V230H500.7V274H507.4V230H514.1V274H520.8V230H527.6V274H547.7V230H554.4V274H561.2V230H567.9V274H574.6V230H594.8V274H596"/></g><g class="lit-d"><text x="60.5" y="143">D</text><text x="114.3" y="143">T</text><text x="174.8" y="143">W</text><text x="242" y="143">A</text><text x="309.2" y="143">G</text><text x="376.4" y="143">N</text><text x="416.7" y="143">E</text><text x="463.7" y="143">R</text><text x="94.1" y="303">&#64;</text><text x="201.6" y="303">W</text><text x="275.6" y="303">M</text><text x="376.4" y="303">.</text><text x="457" y="303">E</text><text x="504" y="303">D</text><text x="571.2" y="303">U</text></g></g>
+              <text class="ro" x="36" y="360">CH1 dtwagner · CH2 @wm.edu</text><text class="ro" x="596" y="360" text-anchor="end">500 ms/div · 20 wpm</text>
+            </svg>
+            <figcaption>Fig. 2 · The address above in Morse code, 20 wpm</figcaption>
+          </figure>
         </div>
-      </section>
+      </div>
+    </section>
+  </main>
 
-      <section class="part" id="contact">
-        <h2>Contact</h2>
-        <div class="contact">
-          <p>Happy to talk about technology transactions, privacy, or anything on this page.</p>
-          <div class="email-row">
-            <span class="email" id="email">dtwagner@wm.edu</span>
-            <button class="copy" id="copy" type="button">Copy email</button>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <footer class="wrapx foot">
-    <div class="foot-row mono"><span>Dillon Wagner · Williamsburg, Virginia</span><a href="#top">Back to top ↑</a></div>
+  <footer class="wrap foot">
+    <div class="foot-row"><span>End of record · Dillon Wagner · Williamsburg, Virginia</span><a href="#top">Return to top ↑</a></div>
   </footer>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>/* DriveBank: the bank of tape-drive cabinets, shared by every version of the portfolio.
-   Needs three.js r128 loaded first. Returns a small API: setActive(i), setHover(i), project(i). */
-window.DriveBank = function DriveBank(container, opts) {
-  const THREE = window.THREE;
-  const o = Object.assign({
-    count: 5,
-    yaw: -0.3,          // turned so the right-hand sides show, like the Spline scene
-    elevation: 0.36,     // camera height angle, radians
-    target: 0.7,         // look-at height
-    margin: 28,          // px of breathing room around the bank when fitting the camera
-    nudgeY: 0,
-    zoom: 1,
-    platformLight: '#d9d5cd',
-    platformDark: '#35312c',
-    onPick: null, onHover: null, onFrame: null
-  }, opts || {});
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const lowPower = Math.min(screen.width, screen.height) < 700;
-
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.setClearColor(0x000000, 0);
-  const canvas = renderer.domElement;
-  Object.assign(canvas.style, { display: 'block', width: '100%', height: '100%', touchAction: 'pan-y' });
-  container.appendChild(canvas);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(16, 2, 0.1, 200);
-
-  // Colors are written in sRGB and converted to linear, so the output encoding
-  // doesn't wash them out (the cause of the pale red in the first version).
-  const lin = hex => new THREE.Color(hex).convertSRGBToLinear();
-  const std = (hex, extra) => new THREE.MeshStandardMaterial(Object.assign({ color: lin(hex), roughness: 0.7, metalness: 0 }, extra || {}));
-
-  const hemi = new THREE.HemisphereLight(0xffffff, 0xa59c8d, 0.58);
-  scene.add(hemi);
-  const key = new THREE.DirectionalLight(0xfff6ea, 0.84);
-  key.position.set(-3.4, 7.2, 5.4);
-  key.castShadow = true;
-  const sm = lowPower ? 1024 : 2048;
-  key.shadow.mapSize.set(sm, sm);
-  Object.assign(key.shadow.camera, { left: -4.6, right: 4.6, top: 3.6, bottom: -3.6, near: 1, far: 24 });
-  key.shadow.bias = -0.0005;
-  key.shadow.normalBias = 0.015;
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xe6edf7, 0.15);
-  fill.position.set(5, 2.4, 3);
-  scene.add(fill);
-
-  const M = {
-    body: std('#d4ccbd', { roughness: 0.66 }),
-    red: std('#d4232c', { roughness: 0.46 }),
-    bezel: std('#ebe5d8', { roughness: 0.55 }),
-    well: std('#191716', { roughness: 0.4 }),
-    reel: std('#e3dccc', { roughness: 0.5 }),
-    redReel: std('#d4232c', { roughness: 0.42 }),
-    plate: std('#b3a996', { roughness: 0.5 }),
-    platform: std(o.platformLight, { roughness: 0.92 })
-  };
-
-  // ---------- geometry helpers ----------
-  function roundedBox(w, h, d, r, segs) {
-    const s = segs * 2 + 1;
-    const g = new THREE.BoxGeometry(1, 1, 1, s, s, s);
-    const p = g.attributes.position, n = g.attributes.normal;
-    const half = 0.5 / s, bx = w / 2 - r, by = h / 2 - r, bz = d / 2 - r;
-    const v = new THREE.Vector3(), nn = new THREE.Vector3();
-    for (let i = 0; i < p.count; i++) {
-      v.fromBufferAttribute(p, i);
-      nn.set(v.x - Math.sign(v.x) * half, v.y - Math.sign(v.y) * half, v.z - Math.sign(v.z) * half).normalize();
-      p.setXYZ(i, bx * Math.sign(v.x) + nn.x * r, by * Math.sign(v.y) + nn.y * r, bz * Math.sign(v.z) + nn.z * r);
-      n.setXYZ(i, nn.x, nn.y, nn.z);
-    }
-    return g;
-  }
-  function rr(path, w, h, r) {
-    const x = -w / 2, y = -h / 2;
-    path.moveTo(x + r, y);
-    path.lineTo(x + w - r, y); path.quadraticCurveTo(x + w, y, x + w, y + r);
-    path.lineTo(x + w, y + h - r); path.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    path.lineTo(x + r, y + h); path.quadraticCurveTo(x, y + h, x, y + h - r);
-    path.lineTo(x, y + r); path.quadraticCurveTo(x, y, x + r, y);
-    return path;
-  }
-  const extrude = (shape, depth, bevel) => new THREE.ExtrudeGeometry(shape, {
-    depth, bevelEnabled: true, bevelThickness: bevel, bevelSize: bevel, bevelSegments: 2, curveSegments: 24
-  });
-
-  // ---------- cabinet parts (shared geometry) ----------
-  const W = 0.86, H = 1.62, D = 0.64, R = 0.05, T = 0.006, GAP = 0.14;
-  const WIN_Y = H * 0.715;
-  const frontLen = H - R - 0.012;
-  // A wide center band flanked by two pinstripes, running up the front and over the top.
-  const STRIPES = [[0, 0.13], [-0.112, 0.042], [0.112, 0.042]];
-  const stripeGeos = sw => ({
-    front: new THREE.BoxGeometry(sw, frontLen, T),
-    top: new THREE.BoxGeometry(sw, T, D - 2 * R),
-    edge: new THREE.CylinderGeometry(R + T - 0.001, R + T - 0.001, sw, 10, 1, false, 0, Math.PI / 2).rotateZ(Math.PI / 2)
-  });
-
-  const G = {
-    body: roundedBox(W, H, D, R, 3),
-    well: new THREE.BoxGeometry(0.66, 0.23, 0.012),
-    plate: roundedBox(0.15, 0.045, 0.014, 0.006, 1),
-    lamp: new THREE.CylinderGeometry(0.022, 0.022, 0.016, 20).rotateX(Math.PI / 2)
-  };
-  const frameShape = rr(new THREE.Shape(), 0.74, 0.3, 0.06);
-  frameShape.holes.push(rr(new THREE.Path(), 0.64, 0.21, 0.035));
-  G.frame = extrude(frameShape, 0.02, 0.007);
-
-  // Cream supply reel with three windows, red take-up reel with drive holes.
-  (function () {
-    const s = new THREE.Shape(); s.absarc(0, 0, 0.09, 0, Math.PI * 2, false);
-    for (let k = 0; k < 3; k++) {
-      const a = Math.PI / 2 + k * 2 * Math.PI / 3, sp = 0.52, ri = 0.03, ro = 0.072;
-      const h = new THREE.Path();
-      h.moveTo(Math.cos(a - sp) * ri, Math.sin(a - sp) * ri);
-      h.absarc(0, 0, ro, a - sp, a + sp, false);
-      h.absarc(0, 0, ri, a + sp, a - sp, true);
-      s.holes.push(h);
-    }
-    const hub = new THREE.Path(); hub.absarc(0, 0, 0.012, 0, Math.PI * 2, true); s.holes.push(hub);
-    G.cream = extrude(s, 0.008, 0.003);
-
-    const t = new THREE.Shape(); t.absarc(0, 0, 0.08, 0, Math.PI * 2, false);
-    const th = new THREE.Path(); th.absarc(0, 0, 0.017, 0, Math.PI * 2, true); t.holes.push(th);
-    for (let k = 0; k < 3; k++) {
-      const a = k * 2 * Math.PI / 3, h = new THREE.Path();
-      h.absarc(Math.cos(a) * 0.046, Math.sin(a) * 0.046, 0.0115, 0, Math.PI * 2, true);
-      t.holes.push(h);
-    }
-    G.take = extrude(t, 0.008, 0.003);
-  })();
-
-  // Contact shadow under each cabinet: a tight dark line where the base meets the platform plus a
-  // wider soft spread, so the platform darkens right up to every edge instead of glowing white.
-  const SHX = 0.42, SHZ = 0.6;                       // how far the shadow reaches past the footprint
-  const SHW = W + 2 * SHX, SHD = D + 2 * SHZ;
-  const shadowTex = (function () {
-    const S = 256, c = document.createElement('canvas'); c.width = c.height = S;
-    const g = c.getContext('2d');
-    const kx = S / SHW, kz = S / SHD, off = S * 2;
-    const layer = (blur, alpha, grow) => {
-      const x = SHX * kx - grow, z = SHZ * kz - grow, w = W * kx + 2 * grow, d = D * kz + 2 * grow, r = 9;
-      g.save();
-      g.shadowColor = 'rgba(0,0,0,' + alpha + ')'; g.shadowBlur = blur; g.shadowOffsetX = off;
-      g.fillStyle = '#000';
-      g.beginPath();
-      g.moveTo(x - off + r, z);
-      g.arcTo(x - off + w, z, x - off + w, z + d, r); g.arcTo(x - off + w, z + d, x - off, z + d, r);
-      g.arcTo(x - off, z + d, x - off, z, r); g.arcTo(x - off, z, x - off + w, z, r);
-      g.closePath(); g.fill();
-      g.restore();
-    };
-    layer(84, 0.5, 6);    // wide, soft spread around the cabinet and into the gaps
-    layer(36, 0.45, 0);   // mid falloff so the shadow reads in front of the base
-    layer(14, 0.75, 0);   // tight contact line along the base
-    const t = new THREE.CanvasTexture(c);
-    t.anisotropy = 4;
-    return t;
-  })();
-  let shadowOpacity = 0.7;
-  const shadowGeo = new THREE.PlaneGeometry(SHW, SHD).rotateX(-Math.PI / 2);
-
-  // ---------- assemble the bank ----------
-  const bank = new THREE.Group();
-  scene.add(bank);
-  const n = o.count, span = n * W + (n - 1) * GAP;
-  const PW = span + 1.0, PD = D + 1.3;
-  const platform = new THREE.Mesh(roundedBox(PW, 0.16, PD, 0.075, 4), M.platform);
-  platform.position.set(0, -0.08, 0.16);
-  platform.receiveShadow = true;
-  bank.add(platform);
-
-  const stripeSet = STRIPES.map(([x, w]) => ({ x, g: stripeGeos(w) }));
-  const cabs = [];
-  for (let i = 0; i < n; i++) {
-    const group = new THREE.Group();
-    group.position.set((i - (n - 1) / 2) * (W + GAP), 0, -0.1);
-    const lift = new THREE.Group();
-    group.add(lift);
-    const add = (geo, mat, x, y, z, cast) => {
-      const m = new THREE.Mesh(geo, mat);
-      m.position.set(x, y, z);
-      m.castShadow = cast !== false; m.receiveShadow = true;
-      lift.add(m);
-      return m;
-    };
-    add(G.body, M.body, 0, H / 2, 0);
-    stripeSet.forEach(({ x, g }) => {
-      add(g.front, M.red, x, 0.012 + frontLen / 2, D / 2 + T / 2 - 0.0008, false);
-      add(g.top, M.red, x, H + T / 2 - 0.0008, 0, false);
-      add(g.edge, M.red, x, H - R, D / 2 - R, false);
-    });
-    add(G.well, M.well, 0, WIN_Y, D / 2 + 0.006, false);
-    add(G.frame, M.bezel, 0, WIN_Y, D / 2 + 0.005);
-    const r1 = add(G.cream, M.reel, -0.15, WIN_Y, D / 2 + 0.016, false);
-    const r2 = add(G.take, M.redReel, 0.15, WIN_Y, D / 2 + 0.016, false);
-    r1.rotation.z = Math.random() * 6; r2.rotation.z = Math.random() * 6;
-    add(G.plate, M.plate, 0.27, H - 0.12, D / 2 + 0.007, false);
-    const lampMat = std('#4a2522', { emissive: lin('#ff3a2e'), emissiveIntensity: 0, roughness: 0.35 });
-    add(G.lamp, lampMat, -0.29, H - 0.12, D / 2 + 0.008, false);
-
-    const shMat = new THREE.MeshBasicMaterial({ map: shadowTex, color: 0x000000, transparent: true, opacity: shadowOpacity, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4 });
-    const sh = new THREE.Mesh(shadowGeo, shMat);
-    sh.position.set(group.position.x + 0.015, 0.003, group.position.z);
-    sh.renderOrder = 1;
-    bank.add(sh);
-    bank.add(group);
-    cabs.push({ group, lift, reels: [r1, r2], lampMat, sh, shMat, hover: 0, active: 0, v: 0, vt: 0, timer: Math.random() * 1.6 });
-  }
-
-  // ---------- theme ----------
-  function isDark() {
-    const t = document.documentElement.getAttribute('data-theme');
-    return t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
-  }
-  function applyTheme() {
-    const d = isDark();
-    M.platform.color.copy(lin(d ? o.platformDark : o.platformLight));
-    hemi.intensity = d ? 0.4 : 0.58;
-    hemi.groundColor.set(d ? 0x5b554d : 0xa59c8d);
-    key.intensity = d ? 0.72 : 0.84;
-    shadowOpacity = d ? 0.85 : 0.72;
-    kick();
-  }
-
-  // ---------- camera fit ----------
-  // Project the bank's outer points, scale the distance until they fit inside the margins,
-  // then shift the view so the bank sits centered despite the perspective.
-  let dist = 12;
-  const fitPts = [];
-  [-PW / 2, PW / 2].forEach(x => [-0.16, 0].forEach(y => [0.16 - PD / 2, 0.16 + PD / 2].forEach(z => fitPts.push(new THREE.Vector3(x, y, z)))));
-  [-span / 2, span / 2].forEach(x => [-0.1 - D / 2, -0.1 + D / 2 + 0.12].forEach(z => fitPts.push(new THREE.Vector3(x, H + 0.16, z))));
-  const fp = new THREE.Vector3();
-  function placeCamera(d, el) {
-    // Look level and let the view offset frame the bank (a shift lens), so verticals stay vertical.
-    camera.position.set(0, o.target + Math.sin(el) * d, 0.1 + Math.cos(el) * d);
-    camera.lookAt(0, camera.position.y, 0.1 - d);
-    camera.updateMatrixWorld();
-  }
-  function bounds() {
-    const b = { x0: 9, x1: -9, y0: 9, y1: -9 };
-    bank.rotation.y = o.yaw;
-    bank.updateMatrixWorld(true);
-    fitPts.forEach(p => {
-      fp.copy(p).applyMatrix4(bank.matrixWorld).project(camera);
-      b.x0 = Math.min(b.x0, fp.x); b.x1 = Math.max(b.x1, fp.x);
-      b.y0 = Math.min(b.y0, fp.y); b.y1 = Math.max(b.y1, fp.y);
-    });
-    return b;
-  }
-  function fit() {
-    const w = container.clientWidth || 1, h = container.clientHeight || 1;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.clearViewOffset();
-    camera.updateProjectionMatrix();
-    const mx = Math.min(0.4, 2 * o.margin / w), my = Math.min(0.4, 2 * o.margin / h);
-    let d = 14, b;
-    for (let k = 0; k < 6; k++) {
-      placeCamera(d, o.elevation);
-      b = bounds();
-      const need = Math.max((b.x1 - b.x0) / 2 / (1 - mx), (b.y1 - b.y0) / 2 / (1 - my));
-      d *= need;
-    }
-    dist = d / o.zoom;
-    // A tight depth range keeps the contact shadows from flickering into the platform at this distance.
-    camera.near = Math.max(0.5, dist * 0.6);
-    camera.far = dist * 1.6 + 10;
-    placeCamera(dist, o.elevation);
-    b = bounds();
-    camera.setViewOffset(w, h, ((b.x0 + b.x1) / 2) * w / 2, -((b.y0 + b.y1) / 2) * h / 2 + (o.nudgeY || 0), w, h);
-    renderOnce();
-  }
-
-  // ---------- picking ----------
-  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
-  const groups = cabs.map(c => c.group);
-  function pick(e) {
-    const r = canvas.getBoundingClientRect();
-    ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
-    ray.setFromCamera(ndc, camera);
-    const hit = ray.intersectObjects(groups, true)[0];
-    if (!hit) return -1;
-    let obj = hit.object;
-    while (obj && groups.indexOf(obj) < 0) obj = obj.parent;
-    return obj ? groups.indexOf(obj) : -1;
-  }
-  let tx = 0, px = 0, hoverPointer = -1, hoverExt = -1, activeIdx = -1;
-  function clearPointerHover() {
-    if (hoverPointer !== -1) { hoverPointer = -1; if (o.onHover) o.onHover(-1); }
-    canvas.style.cursor = '';
-  }
-  // The tilt follows the mouse anywhere on the page, measured from the bank's center, so there is
-  // no jump when the cursor crosses the edge of the drive area.
-  addEventListener('pointermove', e => {
-    if (e.pointerType !== 'mouse') return;
-    const r = canvas.getBoundingClientRect();
-    tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / Math.max(innerWidth / 2, 1)));
-    kick();
-  }, { passive: true });
-  document.documentElement.addEventListener('mouseleave', () => { tx = 0; kick(); });
-  canvas.addEventListener('pointermove', e => {
-    if (e.pointerType === 'mouse') {
-      const i = pick(e);
-      if (i !== hoverPointer) {
-        hoverPointer = i;
-        canvas.style.cursor = i >= 0 ? 'pointer' : '';
-        if (o.onHover) o.onHover(i);
-      }
-    }
-    kick();
-  });
-  canvas.addEventListener('pointerleave', clearPointerHover);
-  canvas.addEventListener('click', e => {
-    const i = pick(e);
-    clearPointerHover();
-    if (i >= 0 && o.onPick) o.onPick(i);
-  });
-  // The page can scroll out from under a still mouse without a pointerleave; drop the hover then.
-  addEventListener('scroll', () => { clearPointerHover(); kick(); }, { passive: true });
-
-  // ---------- loop (pauses when offscreen or the tab is hidden) ----------
-  const clock = new THREE.Clock();
-  let running = false, visible = true;
-  const tmp = new THREE.Vector3();
-
-  function project(i, y, zOff) {
-    tmp.set(0, y || 0, D / 2 + (zOff == null ? 0.42 : zOff));
-    cabs[i].group.localToWorld(tmp);
-    tmp.project(camera);
-    return { x: (tmp.x + 1) / 2 * container.clientWidth, y: (1 - tmp.y) / 2 * container.clientHeight };
-  }
-  const api = {
-    count: n,
-    setActive(i) { activeIdx = i; kick(); },
-    setHover(i) { hoverExt = i; kick(); },
-    project
-  };
-
-  function step(dt) {
-    px += (tx - px) * Math.min(1, dt * 2.2);
-    bank.rotation.y = o.yaw + (reduce ? 0 : px * 0.04);
-    const hov = hoverPointer >= 0 ? hoverPointer : hoverExt;
-    cabs.forEach((c, i) => {
-      c.hover += ((hov === i ? 1 : 0) - c.hover) * Math.min(1, dt * 7);
-      c.active += ((activeIdx === i ? 1 : 0) - c.active) * Math.min(1, dt * 6);
-      c.lift.position.y = c.hover * 0.035;
-      c.shMat.opacity = shadowOpacity * (1 - c.hover * 0.3);
-      c.sh.scale.set(1 + c.hover * 0.05, 1, 1 + c.hover * 0.05);
-      c.lift.position.z = c.active * 0.12;
-      if (!reduce) {
-        if (activeIdx === i || hov === i) {
-          c.vt = hov === i ? 9 : 5.5;
-          c.timer = 0.6;
-        } else {
-          c.timer -= dt;
-          if (c.timer <= 0) {
-            // Real tape drives move in bursts: read a block, stop, sometimes rewind.
-            if (c.vt === 0) { c.vt = (Math.random() < 0.8 ? 1 : -1) * (3 + Math.random() * 7); c.timer = 0.25 + Math.random() * 1.1; }
-            else { c.vt = 0; c.timer = 0.6 + Math.random() * 2.2; }
-          }
-        }
-        c.v += (c.vt - c.v) * Math.min(1, dt * 7);
-        c.reels[0].rotation.z -= c.v * dt;
-        c.reels[1].rotation.z -= c.v * 1.3 * dt;
-      }
-      const busy = Math.min(1, Math.abs(c.v) / 6) * 0.35;
-      c.lampMat.emissiveIntensity = Math.max(c.active * 1.9, c.hover * 1.2, busy);
-    });
-    placeCamera(dist, o.elevation);
-  }
-  function renderOnce() {
-    step(0);
-    renderer.render(scene, camera);
-    if (o.onFrame) o.onFrame(api);
-  }
-  function tick() {
-    if (!visible || document.hidden) { running = false; return; }
-    step(Math.min(clock.getDelta(), 0.05));
-    renderer.render(scene, camera);
-    if (o.onFrame) o.onFrame(api);
-    requestAnimationFrame(tick);
-  }
-  function kick() {
-    if (running || !visible || document.hidden) return;
-    running = true;
-    clock.getDelta();
-    requestAnimationFrame(tick);
-  }
-  new IntersectionObserver(es => { visible = es[es.length - 1].isIntersecting; kick(); }).observe(container);
-  document.addEventListener('visibilitychange', kick);
-  new ResizeObserver(fit).observe(container);
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
-  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  applyTheme();
-  fit();
-  return api;
-};
-</script>
 <script>
 (() => {
+  const root = document.documentElement;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const drives = ['experience', 'education', 'honors', 'leadership', 'certifications'];
   const navIds = drives.concat('contact');
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const links = [...document.querySelectorAll('.top nav a')];
-  const tapes = [...document.querySelectorAll('.tape')];
-  const box = document.getElementById('stage-box');
-  let bank = null;
+  const links = [...document.querySelectorAll('.nav a')];
+
+  // ---------- today's date, as the reference screens print it ----------
+  const d = new Date();
+  document.getElementById('today').textContent = [d.getMonth() + 1, d.getDate(), d.getFullYear() % 100].map(n => String(n).padStart(2, '0')).join('/');
 
   // ---------- eased scrolling ----------
   let glideFrame = 0;
   function stopGlide() {
     if (!glideFrame) return;
     cancelAnimationFrame(glideFrame); glideFrame = 0;
-    document.documentElement.style.scrollBehavior = '';
+    root.style.scrollBehavior = '';
   }
   function glide(el) {
-    const html = document.documentElement;
-    const pad = parseFloat(getComputedStyle(html).scrollPaddingTop) || 0;
-    const max = html.scrollHeight - innerHeight;
+    const pad = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+    const max = root.scrollHeight - innerHeight;
     const target = Math.max(0, Math.min(max, el ? el.getBoundingClientRect().top + scrollY - pad : 0));
     const start = scrollY, dist = target - start;
     stopGlide();
@@ -898,89 +619,19 @@ window.DriveBank = function DriveBank(container, opts) {
     const dur = Math.min(1100, Math.max(520, 420 + Math.abs(dist) * 0.2));
     const ease = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
     const t0 = performance.now();
-    html.style.scrollBehavior = 'auto';
+    root.style.scrollBehavior = 'auto';
     const frame = now => {
       const k = Math.min(1, (now - t0) / dur);
       scrollTo(0, start + dist * ease(k));
       if (k < 1) glideFrame = requestAnimationFrame(frame);
-      else { glideFrame = 0; html.style.scrollBehavior = ''; }
+      else { glideFrame = 0; root.style.scrollBehavior = ''; }
     };
     glideFrame = requestAnimationFrame(frame);
   }
   ['wheel', 'touchstart', 'keydown'].forEach(type => addEventListener(type, stopGlide, { passive: true }));
 
-  // ---------- drives ----------
-  const go = i => { pin(i); glide(document.getElementById(drives[i])); };
-  const keyboardFocus = el => { try { return el.matches(':focus-visible'); } catch (e) { return false; } };
-  // The caption under the bank says what a drive does, and names the section under the pointer.
-  const hint = document.getElementById('drive-hint');
-  const hintText = hint.querySelector('span');
-  const idleHint = matchMedia('(hover: none)').matches ? 'Tap a drive' : 'Select a drive';
-  const showHint = i => { hint.classList.toggle('on', i >= 0); hintText.textContent = i >= 0 ? 'Open ' + tapes[i].dataset.full : idleHint; };
-  const lightTape = i => tapes.forEach((t, k) => t.classList.toggle('hot', k === i));
-  showHint(-1);
-
-  // Once the bank has loaded, a lamp runs across the drives (and once more a little later if
-  // nobody has touched them), so they read as something to press.
-  let engaged = false, sweeping = false, sweepTimers = [], swept = false;
-  const stopSweep = () => {
-    sweepTimers.forEach(clearTimeout); sweepTimers = [];
-    if (sweeping) { sweeping = false; if (bank) bank.setHover(-1); lightTape(-1); }
-  };
-  const engage = () => { engaged = true; stopSweep(); };
-  const sweep = () => {
-    if (engaged || !bank || reduce || document.hidden || scrollY > innerHeight * 0.4) return;
-    sweeping = true;
-    tapes.forEach((t, i) => sweepTimers.push(setTimeout(() => { bank.setHover(i); lightTape(i); }, i * 230)));
-    sweepTimers.push(setTimeout(() => { sweeping = false; bank.setHover(-1); lightTape(-1); }, tapes.length * 230 + 90));
-  };
-  box.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') engage(); });
-
-  tapes.forEach((t, i) => {
-    t.addEventListener('click', () => { engage(); if (bank) bank.setHover(-1); showHint(-1); go(i); });
-    t.addEventListener('pointerenter', () => { engage(); if (bank) bank.setHover(i); showHint(i); });
-    t.addEventListener('pointerleave', () => { if (bank) bank.setHover(-1); showHint(-1); });
-    t.addEventListener('focus', () => { if (keyboardFocus(t)) { engage(); if (bank) bank.setHover(i); showHint(i); } });
-    t.addEventListener('blur', () => { if (bank) bank.setHover(-1); showHint(-1); });
-  });
-  // Full labels ("Experience") when they fit between the drives, short ones ("Work") when they would collide.
-  // Re-checked on the next frame after any resize or font load.
-  let labelCheck = true;
-  const fitLabels = pts => {
-    tapes.forEach(t => { t.textContent = t.dataset.full; });
-    const w = tapes.map(t => t.offsetWidth), h = tapes[0].offsetHeight;
-    let clash = false;
-    for (let i = 0; i + 1 < tapes.length; i++) {
-      const apart = Math.abs(pts[i + 1].x - pts[i].x) - (w[i] + w[i + 1]) / 2;
-      if (apart < 8 && Math.abs(pts[i + 1].y - pts[i].y) < h + 4) clash = true;
-    }
-    if (clash) tapes.forEach(t => { t.textContent = t.dataset.short; });
-  };
-  new ResizeObserver(() => { labelCheck = true; }).observe(box);
-  if (document.fonts) document.fonts.ready.then(() => { labelCheck = true; });
-  try {
-    if (!window.THREE) throw new Error('no three');
-    bank = DriveBank(document.getElementById('stage'), {
-      yaw: -0.42, elevation: 0.34, margin: innerWidth <= 640 ? 6 : 10,
-      onPick: i => { engage(); showHint(-1); go(i); },
-      onHover: i => { if (i >= 0) engage(); lightTape(i); showHint(i); },
-      onFrame: api => {
-        const pts = tapes.map((t, i) => api.project(i, 0, 0.36));
-        if (labelCheck) { labelCheck = false; fitLabels(pts); }
-        tapes.forEach((t, i) => {
-          t.style.transform = `translate(${pts[i].x.toFixed(1)}px, ${pts[i].y.toFixed(1)}px) translate(-50%, 0)`;
-        });
-        box.classList.add('ready');
-        if (!swept) { swept = true; setTimeout(sweep, 900); setTimeout(sweep, 9000); }
-      }
-    });
-  } catch (e) {
-    box.classList.add('no-gl');
-  }
-  document.getElementById('cue').addEventListener('click', e => { e.preventDefault(); glide(document.getElementById('about')); });
-
   // ---------- header and section highlight ----------
-  const bar = document.getElementById('topbar');
+  const bar = document.getElementById('bar');
   const onScroll = () => bar.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -990,8 +641,8 @@ window.DriveBank = function DriveBank(container, opts) {
   const updateActive = () => {
     spyQueued = false;
     if (pinned >= 0) { setActive(pinned); return; }
-    const topLine = 120;
-    const remaining = Math.max(0, document.documentElement.scrollHeight - innerHeight - scrollY);
+    const topLine = bar.getBoundingClientRect().bottom + 60;
+    const remaining = Math.max(0, root.scrollHeight - innerHeight - scrollY);
     const zone = innerHeight * 0.6;
     const line = remaining < zone ? topLine + (innerHeight - 40 - topLine) * (1 - remaining / zone) : topLine;
     let idx = -1;
@@ -1013,335 +664,345 @@ window.DriveBank = function DriveBank(container, opts) {
   addEventListener('resize', queueActive);
   updateActive();
 
-  // ---------- the ribbon ----------
-  // One continuous triple stripe (pin, gap, band, gap, pin), drawn as overlapping chunks so a
-  // later stretch passes cleanly over an earlier one where a loop crosses itself. Its shape is a
-  // vertical trochoid: a point on a wheel rolling down the rail. A small wheel gives a gentle
-  // snake; a wheel larger than its roll per turn throws a loop, which we place beside headings.
-  const ribbon = (() => {
-    const svg = document.getElementById('ribbon');
-    const flow = document.getElementById('flow');
-    const NS = 'http://www.w3.org/2000/svg';
-    const TAU = Math.PI * 2;
-    let L = [], T = null, overlays = [], mainG = null, total = 0, Lmin = 0, Lend = 0, q = 0, iEnd = 0, flowTop = 0, stripeY = 0;
-    // Drawing state. hw is the furthest the reader has taken the pen; it never goes back, so the
-    // ribbon stays drawn. shown eases toward hw. Once the closing stripe under Contact scrolls into
-    // view, the pen finishes on its own: runFrom is where it was then, over runDur ms.
-    let hw = 0, shown = 0, painted = -1, runT0 = 0, runFrom = 0, runDur = 0, done = false, raf = 0, lastT = 0, built = false;
-    const LEAD = 0.82;   // the pen works this far down the screen, a little ahead of the reader
-    const RATE = 3;      // at most this many px of ribbon per px of scrolling
-    const smooth = t => t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t);
-
-    function geometry() {
-      const fr = flow.getBoundingClientRect();
-      const rel = el => { const r = el.getBoundingClientRect(); return { top: r.top - fr.top, bottom: r.bottom - fr.top, left: r.left - fr.left, right: r.right - fr.left, width: r.width }; };
-      const rail = rel(document.getElementById('rail'));
-      const content = rel(document.getElementById('content'));
-      const landing = rel(document.getElementById('landing'));
-      const phone = innerWidth <= 760;
-      const k = phone ? 0.46 : rail.width < 240 ? 0.78 : 1;
-      const pin = 4.5 * k, gap = 3 * k, band = 15 * k;
-      const width = 2 * pin + 2 * gap + band;
-      const halo = phone ? 3 : 6 * k;
-      const xc = rail.left + rail.width / 2;
-      const Rl = Math.max(0, rail.width / 2 - width / 2 - halo - 4);
-      const heads = navIds.map(id => { const r = rel(document.querySelector('#' + id + ' h2')); return (r.top + r.bottom) / 2; });
-      return {
-        phone, pin, gap, band, width, halo, xc,
-        yS: landing.bottom - (phone ? 34 : 50),
-        xR: Math.max(content.right, rail.left + 200),
-        yF: rel(document.getElementById('contact')).bottom + (phone ? 44 : 70),
-        heads, Rl,
-        Rs: phone ? 5 : Rl * 0.58,
-        loops: !phone && Rl >= 40,
-        snakeLen: phone ? 460 : rail.width < 240 ? 560 : 700,
-        W: fr.width, H: fr.height
-      };
-    }
-
-    function plan(g) {
-      const loopLen = TAU * g.Rl / 1.75;          // wheel 1.75x its roll per turn: a clear loop
-      const cycles = [];
-      let y = g.yS + g.Rs;                         // wheel axle height at the start
-      const lastR = () => cycles.length ? cycles[cycles.length - 1].R : g.Rs;
-      const addSnakes = to => {
-        const gap = to - y;
-        if (gap <= 0) return;
-        const n = Math.max(1, Math.round(gap / g.snakeLen));
-        for (let i = 0; i < n; i++) cycles.push({ dy: gap / n, R: g.Rs });
-        y = to;
-      };
-      if (g.loops) {
-        [1, 3, 5].forEach(i => {                   // loops beside Education, Leadership, Contact
-          const start = g.heads[i] - 0.75 * loopLen;
-          if (start - y < g.snakeLen * 0.45) return;
-          addSnakes(start);
-          cycles.push({ dy: loopLen, R: g.Rl });
-          y = start + loopLen;
-        });
-      }
-      // the last half turn ends at the bottom of the wheel, heading right into the closing stripe
-      if (g.yF - g.Rs - y > g.snakeLen * 0.9 || !cycles.length) addSnakes(g.yF - g.Rs - g.snakeLen * 0.45);
-      if (!cycles.length) cycles.push({ dy: g.snakeLen * 0.5, R: g.Rs });
-      const half = Math.max(80, g.yF - lastR() - y);
-      return { cycles, half };
-    }
-
-    function trace(g, p) {
-      const { cycles, half } = p;
-      const N = cycles.length, sEnd = TAU * N + Math.PI;
-      const ramp = 1.4, w = 0.8;
-      const v = cycles.map((c, i) => c.dy / TAU * (i === 0 ? TAU / (TAU - ramp / 2) : 1));
-      const vHalf = half / (Math.PI - ramp / 2);
-      const vAt = s => {
-        const k = Math.min(N, Math.floor(s / TAU));
-        let val = k < N ? v[k] : vHalf;
-        const b = Math.round(s / TAU) * TAU, kb = Math.round(s / TAU);
-        if (kb >= 1 && kb <= N && Math.abs(s - b) < w) {
-          const before = v[kb - 1], after = kb < N ? v[kb] : vHalf;
-          val = before + (after - before) * smooth((s - b + w) / (2 * w));
-        }
-        if (s < ramp) val *= smooth(s / ramp);
-        if (sEnd - s < ramp) val *= smooth((sEnd - s) / ramp);
-        return val;
-      };
-      const RAt = s => {
-        const k = Math.min(N - 1, Math.floor(s / TAU));
-        let val = cycles[Math.max(0, k)].R;
-        const kb = Math.round(s / TAU), b = kb * TAU;
-        if (kb >= 1 && kb < N && Math.abs(s - b) < w * 1.4) {
-          const before = cycles[kb - 1].R, after = cycles[kb].R;
-          val = before + (after - before) * smooth((s - b + w * 1.4) / (2.8 * w));
-        }
-        return val;
-      };
-      // pts: the centreline. vc: the wheel's axle height at each point, which only ever moves
-      // down the page, unlike the ribbon itself, which doubles back in a loop.
-      const pts = [], vc = [];
-      // the landing stripe, right to left
-      for (let x = g.xR; x > g.xc; x -= 8) { pts.push([x, g.yS]); vc.push(-Infinity); }
-      const ds = g.phone ? 0.05 : 0.03;
-      let V = g.yS + cycles[0].R, sQuarter = 0;
-      for (let s = 0; s <= sEnd + 1e-9; s += ds) {
-        if (s > 0) V += vAt(s - ds / 2) * ds;
-        const R = RAt(s);
-        pts.push([g.xc - R * Math.sin(s), V - R * Math.cos(s)]);
-        vc.push(V);
-        if (!sQuarter && s >= Math.PI / 2) sQuarter = pts.length;
-      }
-      const iEnd = pts.length - 1;
-      // the closing stripe, left to right under Contact
-      const last = pts[iEnd];
-      for (let x = last[0] + 8; x <= g.xR; x += 8) { pts.push([x, last[1]]); vc.push(Infinity); }
-      return { pts, vc, quarter: sQuarter, iEnd };
-    }
-
-    // Where the centreline crosses itself (the neck of each loop), the later pass is redrawn on
-    // top with a ground-coloured halo so it reads as passing over the earlier one.
-    function crossings(pts, minSep) {
-      const cell = 48, buckets = new Map(), hits = [];
-      for (let i = 0; i < pts.length - 1; i++) {
-        const a = Math.floor(Math.min(pts[i][1], pts[i + 1][1]) / cell), b = Math.floor(Math.max(pts[i][1], pts[i + 1][1]) / cell);
-        for (let c = a; c <= b; c++) { if (!buckets.has(c)) buckets.set(c, []); buckets.get(c).push(i); }
-      }
-      const cross = (p, q, r, t) => {
-        const d = (q[0] - p[0]) * (t[1] - r[1]) - (q[1] - p[1]) * (t[0] - r[0]);
-        if (Math.abs(d) < 1e-9) return false;
-        const u = ((r[0] - p[0]) * (t[1] - r[1]) - (r[1] - p[1]) * (t[0] - r[0])) / d;
-        const v = ((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / d;
-        return u >= 0 && u <= 1 && v >= 0 && v <= 1;
-      };
-      const seen = new Set();
-      buckets.forEach(list => {
-        for (let x = 0; x < list.length; x++) for (let y = x + 1; y < list.length; y++) {
-          const i = Math.min(list[x], list[y]), j = Math.max(list[x], list[y]);
-          if (L[j] - L[i] < minSep) continue;
-          const key = i * 100000 + j;
-          if (seen.has(key)) continue;
-          seen.add(key);
-          if (cross(pts[i], pts[i + 1], pts[j], pts[j + 1])) hits.push(j);
-        }
-      });
-      hits.sort((a, b) => a - b);
-      return hits.filter((j, k) => k === 0 || L[j] - L[hits[k - 1]] > minSep);
-    }
-
-    function build() {
-      const g = geometry();
-      const { pts, vc, quarter, iEnd: ie } = trace(g, plan(g));
-      // keep the reader's progress through a rebuild (fonts arriving, a resize)
-      const frac = built && Lend > 0 ? Math.min(1, shown / Lend) : 0;
-      if (runT0 && !done) done = true;
-      L = [0];
-      for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
-      total = L[L.length - 1];
-      iEnd = ie; q = Math.min(quarter, iEnd - 1);
-      Lmin = L[q]; Lend = L[iEnd];
-      const pathD = (from, to) => { let d = ''; for (let i = from; i <= to; i++) d += (i === from ? 'M' : 'L') + pts[i][0].toFixed(2) + ' ' + pts[i][1].toFixed(2); return d; };
-      const layers = (href, halo) =>
-        (halo ? `<use href="${href}" class="rb-halo" stroke-width="${(g.width + 2 * g.halo).toFixed(1)}"/>` : '') +
-        `<use href="${href}" class="rb-red" stroke-width="${g.width.toFixed(1)}"/>` +
-        `<use href="${href}" class="rb-gap" stroke-width="${(g.width - 2 * g.pin).toFixed(1)}"/>` +
-        `<use href="${href}" class="rb-red" stroke-width="${g.band.toFixed(1)}"/>`;
-      const defs = [`<path id="rbMain" d="${pathD(0, pts.length - 1)}"/>`];
-      const groups = [`<g id="rbMainG">${layers('#rbMain', false)}</g>`];
-      overlays = [];
-      const span = g.width * 2.4 + 24;
-      crossings(pts, g.width * 4).forEach((j, k) => {
-        let a = j, b = j;
-        while (a > 0 && L[j] - L[a] < span) a--;
-        while (b < pts.length - 1 && L[b] - L[j] < span) b++;
-        const len = L[b] - L[a], m0 = len * 0.12, m1 = len * 0.76;
-        defs.push(`<path id="rbX${k}" d="${pathD(a, b)}"/>`);
-        // The overlay only shows through a mask over its middle. Outside the crossing it is
-        // identical to the ribbon beneath, so the mask's edges are invisible and the overlay's
-        // own cut ends stay hidden.
-        defs.push(`<mask id="rbM${k}" maskUnits="userSpaceOnUse" x="0" y="0" width="${g.W.toFixed(0)}" height="${g.H.toFixed(0)}"><use href="#rbX${k}" fill="none" stroke="#fff" stroke-width="${(g.width + 2 * g.halo + 6).toFixed(1)}" stroke-dasharray="0 ${m0.toFixed(1)} ${m1.toFixed(1)} ${(len + 40).toFixed(0)}"/></mask>`);
-        groups.push(`<g data-x="${k}" mask="url(#rbM${k})">${layers('#rbX' + k, true)}</g>`);
-        overlays.push({ start: L[a], len, haloFrom: len * 0.22, haloLen: len * 0.56, el: null, vis: -1 });
-      });
-      svg.setAttribute('viewBox', `0 0 ${g.W.toFixed(0)} ${g.H.toFixed(0)}`);
-      svg.innerHTML = `<defs>${defs.join('')}</defs>${groups.join('')}`;
-      mainG = document.getElementById('rbMainG');
-      [...svg.querySelectorAll('g[data-x]')].forEach((el, k) => { overlays[k].el = el; overlays[k].halo = el.querySelector('.rb-halo'); });
-      flowTop = flow.getBoundingClientRect().top + scrollY;
-      stripeY = flowTop + pts[iEnd][1];
-
-      // T[i]: the scroll position at which the pen reaches point i. It follows the wheel's axle,
-      // which only moves down, so a loop is drawn gradually as the reader passes it instead of
-      // appearing in one go. Then two passes: no stretch may draw faster than RATE px per px of
-      // scrolling, and everything up to the closing stripe must be drawn by the bottom of the page.
-      const H = innerHeight, Smax = Math.max(0, document.documentElement.scrollHeight - H);
-      T = new Float64Array(iEnd + 1);
-      for (let i = 0; i <= iEnd; i++) T[i] = i <= q ? -Infinity : vc[i] + flowTop - LEAD * H;
-      // the pen starts moving with the first bit of scrolling rather than after a pause
-      const T0 = T[q + 1], K = T0 + H * 0.5;
-      if (T0 > 0) for (let i = q + 1; i <= iEnd && T[i] < K; i++) T[i] = (T[i] - T0) * K / (K - T0);
-      for (let i = q + 2; i <= iEnd; i++) T[i] = Math.max(T[i], T[i - 1] + (L[i] - L[i - 1]) / RATE);
-      if (T[iEnd] > Smax) {
-        T[iEnd] = Smax;
-        for (let i = iEnd - 1; i > q; i--) T[i] = Math.min(T[i], T[i + 1] - (L[i + 1] - L[i]) / RATE);
-      }
-
-      hw = Math.max(Lmin, frac * Lend, lengthFor(scrollY));
-      shown = hw;
-      built = true;
-      painted = -1;
-      paint(reduce || done ? total : shown);
-      update();
-    }
-
-    function lengthFor(y) {
-      if (!T || !(y >= T[q + 1])) return Lmin;
-      if (y >= T[iEnd]) return Lend;
-      let lo = q + 1, hi = iEnd;   // T[lo] <= y < T[hi]
-      while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (T[mid] <= y) lo = mid; else hi = mid; }
-      return L[lo] + (L[hi] - L[lo]) * (y - T[lo]) / Math.max(1e-6, T[hi] - T[lo]);
-    }
-    function paint(len) {
-      if (Math.abs(len - painted) < 0.3) return;
-      painted = len;
-      mainG.style.strokeDasharray = len >= total - 0.5 ? 'none' : `${len.toFixed(1)} ${(total + 40).toFixed(0)}`;
-      overlays.forEach(o => {
-        const vis = Math.max(0, Math.min(o.len, len - o.start));
-        if (Math.abs(vis - o.vis) < 0.25) return;
-        o.vis = vis;
-        o.el.style.strokeDasharray = vis >= o.len ? 'none' : `${vis.toFixed(1)} ${(o.len + 40).toFixed(0)}`;
-        // the halo only covers the middle of the overlay, so its ends never cut the stripes
-        const h = Math.max(0, Math.min(o.haloLen, vis - o.haloFrom));
-        o.halo.style.strokeDasharray = `0 ${o.haloFrom.toFixed(1)} ${h.toFixed(1)} ${(o.len + 40).toFixed(0)}`;
-      });
-    }
-    const stripeOnScreen = () => stripeY - scrollY < innerHeight - 4;
-    function frame(now) {
-      raf = 0;
-      const dt = lastT ? Math.min(0.064, (now - lastT) / 1000) : 0.016;
-      lastT = now;
-      let more = false;
-      if (shown < hw) {
-        // ease toward the reader's position, so a quick flick of the wheel still draws smoothly
-        shown += (hw - shown) * (1 - Math.exp(-dt / 0.11));
-        if (hw - shown < 0.4) shown = hw; else more = true;
-      }
-      // As soon as the closing stripe peeks onto the screen, the pen sweeps on from wherever it
-      // is to the end of the ribbon by itself, so nobody has to push against the bottom of the page.
-      if (!done && !runT0 && stripeOnScreen()) {
-        runT0 = now; runFrom = shown;
-        runDur = Math.min(1500, Math.max(700, (total - shown) / 1.5));
-      }
-      let len = shown;
-      if (done) len = total;
-      else if (runT0) {
-        const k = Math.min(1, (now - runT0) / runDur);
-        len = Math.max(shown, runFrom + (total - runFrom) * (1 - (1 - k) * (1 - k)));
-        if (k >= 1) done = true; else more = true;
-      }
-      paint(len);
-      if (more) raf = requestAnimationFrame(frame); else lastT = 0;
-    }
-    function update() {
-      if (!mainG) return;
-      if (reduce) { done = true; paint(total); return; }
-      const atBottom = scrollY >= document.documentElement.scrollHeight - innerHeight - 2;
-      hw = Math.max(hw, atBottom ? Lend : lengthFor(scrollY));
-      if (!raf && (shown < hw || (!done && stripeOnScreen()))) raf = requestAnimationFrame(frame);
-    }
-    addEventListener('scroll', update, { passive: true });
-    let timer = 0;
-    const rebuild = () => { clearTimeout(timer); timer = setTimeout(build, 120); };
-    new ResizeObserver(rebuild).observe(flow);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
-    build();
-    return { build };
-  })();
-
-  // ---------- light / dark switch ----------
-  const sw = document.getElementById('theme-switch');
-  const root = document.documentElement;
-  const sysDark = matchMedia('(prefers-color-scheme: dark)');
-  const current = () => root.getAttribute('data-theme') || (sysDark.matches ? 'dark' : 'light');
-  const syncSwitch = () => {
-    const dark = current() === 'dark';
-    sw.setAttribute('aria-checked', dark ? 'true' : 'false');
-    sw.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
-    const bg = getComputedStyle(root).getPropertyValue('--ground').trim();
+  // ---------- phosphor switch ----------
+  const sw = document.getElementById('phos');
+  const syncPhos = () => {
+    const amber = root.getAttribute('data-phosphor') === 'amber';
+    sw.setAttribute('aria-pressed', amber ? 'true' : 'false');
+    sw.title = amber ? 'Switch to green phosphor' : 'Switch to amber phosphor';
+    const bg = getComputedStyle(root).getPropertyValue('--screen').trim();
     document.querySelectorAll('meta[name="theme-color"]').forEach(m => { m.setAttribute('content', bg); m.removeAttribute('media'); });
   };
-  const setTheme = next => {
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('dw-theme', next); } catch (e) {}
-    syncSwitch();
-  };
   sw.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
-    if (reduce || !document.startViewTransition) { setTheme(next); return; }
-    const r = sw.getBoundingClientRect();
-    const x = r.left + r.width / 2, y = r.top + r.height / 2;
-    const reach = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-    let vt;
-    try { vt = document.startViewTransition(() => setTheme(next)); } catch (e) { setTheme(next); return; }
-    vt.ready.then(() => {
-      root.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${reach}px at ${x}px ${y}px)`] },
-        { duration: 520, easing: 'cubic-bezier(.45, 0, .2, 1)', pseudoElement: '::view-transition-new(root)' }
-      );
-    }).catch(() => {});
+    const amber = root.getAttribute('data-phosphor') !== 'amber';
+    if (amber) root.setAttribute('data-phosphor', 'amber'); else root.removeAttribute('data-phosphor');
+    try { localStorage.setItem('dw-phosphor', amber ? 'amber' : 'green'); } catch (e) {}
+    syncPhos();
+    if (!reduce) { root.classList.remove('degauss'); void root.offsetWidth; root.classList.add('degauss'); setTimeout(() => root.classList.remove('degauss'), 600); }
   });
-  sysDark.addEventListener('change', syncSwitch);
-  new MutationObserver(syncSwitch).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
-  syncSwitch();
+  syncPhos();
+
+  // ---------- sections light up as they arrive ----------
+  const seen = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('live'); seen.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -12% 0px' });
+  document.querySelectorAll('.hero, .readout').forEach(s => seen.observe(s));
+
+  // ---------- the drive bank, drawn as a vector schematic ----------
+  // A small perspective projection; each face is filled with the screen colour and drawn back to
+  // front, so nearer cabinets hide the lines behind them, the way a hidden-line plot would.
+  const rig = (() => {
+    const fig = document.getElementById('rig');
+    const stage = document.getElementById('rig-stage');
+    const svg = document.getElementById('rig-svg');
+    const btns = [...fig.querySelectorAll('.drive')];
+    const cap = document.getElementById('rig-cap');
+    const NS = 'http://www.w3.org/2000/svg';
+    const TAU = Math.PI * 2;
+    const N = 5, GAP = 1.26, HW = 0.5, CH = 2, HD = 0.5;
+    const PL = { x0: -3.32, x1: 3.32, z0: -0.9, z1: 0.9, y0: -0.18 };
+    const YAW = -0.42, PITCH = 0.34, DIST = 12, LOOK = 0.85, INTRO = 1.9;
+    const touch = matchMedia('(hover: none)').matches;
+    const idleCap = touch ? 'Tap a drive' : 'Select a drive';
+    let cY = Math.cos(YAW), sY = Math.sin(YAW);
+    const cP = Math.cos(PITCH), sP = Math.sin(PITCH);
+    let S = 1, OX = 0, OY = 0, W = 0, bankBottom = 0, rowY = [0, 0], labelX = [], lastW = -1;
+    let hot = -1, tx = 0, px = 0, t0 = 0, last = 0, raf = 0, onScreen = true, introT = reduce ? 1 : 0, introDone = reduce;
+
+    const view = (x, y, z) => {
+      const x1 = x * cY + z * sY, z1 = -x * sY + z * cY, yy = y - LOOK;
+      return [x1, yy * cP - z1 * sP, yy * sP + z1 * cP];
+    };
+    const raw = (x, y, z) => { const v = view(x, y, z), k = DIST / (DIST - v[2]); return [v[0] * k, -v[1] * k]; };
+    const P = (x, y, z) => { const r = raw(x, y, z); return [OX + r[0] * S, OY + r[1] * S]; };
+    const line = pts => { let d = ''; for (let i = 0; i < pts.length; i++) { const p = P(pts[i][0], pts[i][1], pts[i][2]); d += (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1); } return d; };
+    const shape = pts => line(pts) + 'Z';
+    const facing = (nx, ny, nz, c) => {
+      const x1 = nx * cY + nz * sY, z1 = -nx * sY + nz * cY;
+      const n = [x1, ny * cP - z1 * sP, ny * sP + z1 * cP], v = view(c[0], c[1], c[2]);
+      return n[0] * -v[0] + n[1] * -v[1] + n[2] * (DIST - v[2]) > 0;
+    };
+    const fr = (cx, u, v) => [cx + u, v, HD];
+    const ring = (cx, uc, vc, r, n) => { const pts = []; for (let k = 0; k < n; k++) { const a = k / n * TAU; pts.push(fr(cx, uc + r * Math.cos(a), vc + r * Math.sin(a))); } return pts; };
+    const rounded = (cx, u0, v0, u1, v1, r) => {
+      const pts = [], corner = (cu, cv, a0) => { for (let k = 0; k <= 4; k++) { const a = a0 + k * Math.PI / 8; pts.push(fr(cx, cu + r * Math.cos(a), cv + r * Math.sin(a))); } };
+      corner(u1 - r, v1 - r, 0); corner(u0 + r, v1 - r, Math.PI / 2); corner(u0 + r, v0 + r, Math.PI); corner(u1 - r, v0 + r, Math.PI * 1.5);
+      return pts;
+    };
+
+    // ---- build the drawing once; every frame only rewrites path data ----
+    const all = [];   // every element, with its slot in the intro
+    const mk = (cls, parent, start, dur, trace = true) => {
+      const e = document.createElementNS(NS, 'path');
+      e.setAttribute('class', cls);
+      if (trace) e.setAttribute('pathLength', '1');   // so the intro can draw it on from 0 to 1
+      parent.appendChild(e);
+      all.push({ e, start, dur, trace, fill: /face|win|stripe|hub|lamp/.test(cls) });
+      return e;
+    };
+    const bankG = document.createElementNS(NS, 'g'); bankG.setAttribute('class', 'bank'); svg.appendChild(bankG);
+    const platG = document.createElementNS(NS, 'g'); bankG.appendChild(platG);
+    const plat = { top: mk('face', platG, 0, .3), front: mk('face', platG, .04, .3), right: mk('face', platG, .06, .3), left: mk('face', platG, .06, .3), bevel: mk('thin', platG, .14, .3) };
+    const SU = [[-0.16, -0.125], [-0.075, 0.075], [0.125, 0.16]];
+    const cabs = [...Array(N)].map((_, i) => {
+      const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'cab'); g.dataset.i = i; bankG.appendChild(g);
+      const s = 0.12 + i * 0.075, s2 = 0.3 + i * 0.075;
+      const c = { i, cx: (i - (N - 1) / 2) * GAP, g, ang: i * 0.9, speed: 0.5, z: 0 };
+      c.top = mk('face', g, s, .3); c.topStripes = SU.map(() => mk('stripe', g, s2, .25));
+      c.right = mk('face', g, s + .03, .3); c.left = mk('face', g, s + .03, .3);
+      c.front = mk('face', g, s + .05, .3); c.stripes = [...Array(6)].map(() => mk('stripe', g, s2, .25));
+      c.win = mk('win', g, s2 + .05, .25); c.reels = [0, 1].map(() => mk('reel', g, s2 + .08, .25)); c.hubs = [0, 1].map(() => mk('hub', g, s2 + .12, .2));
+      c.spokes = mk('spoke', g, s2 + .14, .2); c.lamp = mk('lamp', g, s2 + .1, .15); c.vents = mk('thin', g, s2 + .1, .2);
+      g.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { engage(); setHot(i); } });
+      g.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') setHot(-1); });
+      g.addEventListener('click', () => { engage(); setHot(-1); go(i); });
+      return c;
+    });
+    const callG = document.createElementNS(NS, 'g'); svg.appendChild(callG);
+    const leads = cabs.map(() => mk('lead', callG, .78, .18, false));
+    const pins = cabs.map(() => mk('ring', callG, .8, .15));
+    const dots = cabs.map(() => mk('dot', callG, .85, .1));
+
+    function drawPlat() {
+      const { x0, x1, z0, z1, y0 } = PL, b = 0.1;
+      plat.top.setAttribute('d', shape([[x0, 0, z1], [x1, 0, z1], [x1, 0, z0], [x0, 0, z0]]));
+      plat.front.setAttribute('d', shape([[x0, y0, z1], [x1, y0, z1], [x1, 0, z1], [x0, 0, z1]]));
+      plat.right.style.display = facing(1, 0, 0, [x1, y0 / 2, 0]) ? '' : 'none';
+      plat.right.setAttribute('d', shape([[x1, y0, z1], [x1, y0, z0], [x1, 0, z0], [x1, 0, z1]]));
+      plat.left.style.display = facing(-1, 0, 0, [x0, y0 / 2, 0]) ? '' : 'none';
+      plat.left.setAttribute('d', shape([[x0, y0, z0], [x0, y0, z1], [x0, 0, z1], [x0, 0, z0]]));
+      plat.bevel.setAttribute('d', shape([[x0 + b, 0, z1 - b], [x1 - b, 0, z1 - b], [x1 - b, 0, z0 + b], [x0 + b, 0, z0 + b]]));
+    }
+    function drawCab(c) {
+      const cx = c.cx;
+      c.front.setAttribute('d', shape([[cx - HW, 0, HD], [cx + HW, 0, HD], [cx + HW, CH, HD], [cx - HW, CH, HD]]));
+      c.top.setAttribute('d', shape([[cx - HW, CH, HD], [cx + HW, CH, HD], [cx + HW, CH, -HD], [cx - HW, CH, -HD]]));
+      c.right.style.display = facing(1, 0, 0, [cx + HW, CH / 2, 0]) ? '' : 'none';
+      c.right.setAttribute('d', shape([[cx + HW, 0, HD], [cx + HW, 0, -HD], [cx + HW, CH, -HD], [cx + HW, CH, HD]]));
+      c.left.style.display = facing(-1, 0, 0, [cx - HW, CH / 2, 0]) ? '' : 'none';
+      c.left.setAttribute('d', shape([[cx - HW, 0, -HD], [cx - HW, 0, HD], [cx - HW, CH, HD], [cx - HW, CH, -HD]]));
+      SU.forEach(([u0, u1], k) => {
+        c.topStripes[k].setAttribute('d', shape([[cx + u0, CH, HD], [cx + u1, CH, HD], [cx + u1, CH, -HD], [cx + u0, CH, -HD]]));
+        c.stripes[k * 2].setAttribute('d', shape([fr(cx, u0, 0), fr(cx, u1, 0), fr(cx, u1, 1.2), fr(cx, u0, 1.2)]));
+        c.stripes[k * 2 + 1].setAttribute('d', shape([fr(cx, u0, 1.62), fr(cx, u1, 1.62), fr(cx, u1, CH), fr(cx, u0, CH)]));
+      });
+      c.win.setAttribute('d', shape(rounded(cx, -0.36, 1.2, 0.36, 1.62, 0.07)));
+      let spokes = '';
+      [-0.17, 0.17].forEach((uc, k) => {
+        c.reels[k].setAttribute('d', shape(ring(cx, uc, 1.41, 0.145, 30)));
+        c.hubs[k].setAttribute('d', shape(ring(cx, uc, 1.41, 0.045, 14)));
+        for (let j = 0; j < 3; j++) {
+          const a = c.ang * (k ? 1.25 : 1) + j * TAU / 3;
+          spokes += line([fr(cx, uc + 0.045 * Math.cos(a), 1.41 + 0.045 * Math.sin(a)), fr(cx, uc + 0.13 * Math.cos(a), 1.41 + 0.13 * Math.sin(a))]);
+        }
+      });
+      c.spokes.setAttribute('d', spokes);
+      c.lamp.setAttribute('d', shape(ring(cx, -0.38, 1.85, 0.034, 12)));
+      c.vents.setAttribute('d', line([fr(cx, 0.22, 1.83), fr(cx, 0.4, 1.83)]) + line([fr(cx, 0.22, 1.88), fr(cx, 0.4, 1.88)]));
+    }
+    function circleD(x, y, r) { return `M${(x + r).toFixed(1)} ${y.toFixed(1)}A${r} ${r} 0 1 0 ${(x - r).toFixed(1)} ${y.toFixed(1)}A${r} ${r} 0 1 0 ${(x + r).toFixed(1)} ${y.toFixed(1)}`; }
+    function drawCalls() {
+      cabs.forEach((c, i) => {
+        const a = P(c.cx, 0, HD), lx = labelX[i], ly = rowY[btns[i]._row || 0];
+        leads[i].setAttribute('d', `M${a[0].toFixed(1)} ${(a[1] + 6).toFixed(1)}L${lx.toFixed(1)} ${(ly - 1).toFixed(1)}`);
+        pins[i].setAttribute('d', circleD(a[0], a[1], 5));
+        dots[i].setAttribute('d', circleD(a[0], a[1], 1.6));
+      });
+    }
+    function draw() {
+      if (!labelX.length) return;   // not laid out yet (the stage had no width)
+      drawPlat();
+      // back to front, so nearer cabinets cover the ones behind them
+      cabs.forEach(c => { c.z = view(c.cx, CH / 2, 0)[2]; drawCab(c); });
+      const order = cabs.slice().sort((a, b) => a.z - b.z);
+      if (order.some((c, k) => bankG.children[k + 1] !== c.g)) order.forEach(c => bankG.appendChild(c.g));
+      drawCalls();
+    }
+
+    // ---- fit the drawing to the stage; lay the labels out under it ----
+    function fit() {
+      W = stage.clientWidth;
+      if (!W) return;
+      cY = Math.cos(YAW); sY = Math.sin(YAW);
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      const add = (x, y, z) => { const r = raw(x, y, z); minX = Math.min(minX, r[0]); maxX = Math.max(maxX, r[0]); minY = Math.min(minY, r[1]); maxY = Math.max(maxY, r[1]); };
+      [PL.x0, PL.x1].forEach(x => [PL.y0, 0].forEach(y => [PL.z0, PL.z1].forEach(z => add(x, y, z))));
+      cabs.forEach(c => [c.cx - HW, c.cx + HW].forEach(x => [0, CH].forEach(y => [-HD, HD].forEach(z => add(x, y, z)))));
+      const padX = 10, padTop = 12, room = 96, maxH = 520;
+      S = Math.min((W - 2 * padX) / (maxX - minX), (maxH - padTop - room) / (maxY - minY));
+      OX = W / 2 - (minX + maxX) / 2 * S;
+      OY = padTop - minY * S;
+      bankBottom = OY + maxY * S;
+      const H = Math.round(bankBottom + room);
+      stage.style.height = H + 'px';
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      rowY = [bankBottom + 30, bankBottom + 64];
+      layoutLabels();
+      draw();
+    }
+    function layoutLabels() {
+      const xs = cabs.map(c => P(c.cx, 0, HD)[0]);
+      const tryMode = mode => {
+        btns.forEach(b => { b.querySelector('.nm').textContent = mode === 'num' ? '' : b.dataset[mode]; });
+        const w = btns.map(b => b.offsetWidth);
+        const fits = rows => {
+          for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++)
+            if (rows[i] === rows[j] && Math.abs(xs[j] - xs[i]) < (w[i] + w[j]) / 2 + 10) return false;
+          return true;
+        };
+        const one = Array(N).fill(0), two = cabs.map((c, i) => i % 2);
+        if (fits(one)) return { w, rows: one };
+        if (fits(two)) return { w, rows: two };
+        return null;
+      };
+      const pick = tryMode('full') || tryMode('short') || tryMode('num');
+      const w = pick.w;
+      labelX = xs.map((x, i) => Math.max(w[i] / 2, Math.min(W - w[i] / 2, x)));
+      btns.forEach((b, i) => {
+        b._row = pick.rows[i];
+        b.style.transform = `translate(${(labelX[i] - w[i] / 2).toFixed(1)}px, ${rowY[b._row].toFixed(1)}px)`;
+      });
+    }
+
+    // ---- motion: a slow sway, a little turn toward the pointer, reels that spin up on hover ----
+    function intro(tn) {
+      all.forEach(o => {
+        const p = Math.max(0, Math.min(1, (tn - o.start) / o.dur));
+        if (o.trace) { o.e.style.strokeDasharray = '1 1'; o.e.style.strokeDashoffset = (1 - p).toFixed(3); }
+        else o.e.style.opacity = p.toFixed(3);
+        if (o.fill) o.e.style.fillOpacity = Math.max(0, Math.min(1, (tn - 0.58) / 0.25)).toFixed(3);
+      });
+      if (tn > 0.82) fig.classList.add('ready');
+    }
+    function endIntro() {
+      all.forEach(o => { o.e.style.strokeDasharray = ''; o.e.style.strokeDashoffset = ''; o.e.style.fillOpacity = ''; o.e.style.opacity = ''; });
+      fig.classList.add('ready');
+      introDone = true;
+      if (!swept) { swept = true; setTimeout(sweep, 500); setTimeout(sweep, 9000); }
+    }
+    function frame(now) {
+      raf = 0;
+      if (!t0) t0 = now;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
+      last = now;
+      const t = (now - t0) / 1000;
+      if (!reduce) {
+        px += (tx - px) * Math.min(1, dt * 2.4);
+        const yaw = YAW + Math.sin(t * 0.3) * 0.06 + px * 0.07;
+        cY = Math.cos(yaw); sY = Math.sin(yaw);
+        cabs.forEach(c => { const want = c.i === hot ? 7 : 0.5; c.speed += (want - c.speed) * Math.min(1, dt * 4); c.ang -= c.speed * dt; });
+      }
+      draw();
+      if (!introDone) { introT = Math.min(1, t / INTRO); if (introT < 1) intro(introT); else endIntro(); }
+      if (!reduce && onScreen && !document.hidden) raf = requestAnimationFrame(frame);
+      else last = 0;
+    }
+    const kick = () => { if (!raf) raf = requestAnimationFrame(frame); };
+
+    function setHot(i) {
+      if (i === hot) return;
+      hot = i;
+      cabs.forEach(c => c.g.classList.toggle('hot', c.i === i));
+      bankG.classList.toggle('focus', i >= 0);
+      btns.forEach((b, k) => b.classList.toggle('hot', k === i));
+      leads.forEach((l, k) => l.classList.toggle('hot', k === i));
+      cap.textContent = i >= 0 ? `Load drive 0${i + 1} · ${btns[i].dataset.full}` : idleCap;
+      if (reduce) draw(); else kick();
+    }
+    // after the bank powers on, a lamp runs across the drives once (and once more later if nobody
+    // has touched them), so they read as something to press
+    let engaged = false, swept = false, timers = [];
+    const engage = () => { if (engaged) return; engaged = true; timers.forEach(clearTimeout); timers = []; };
+    const sweep = () => {
+      if (engaged || reduce || document.hidden || scrollY > innerHeight * 0.4) return;
+      cabs.forEach((c, i) => timers.push(setTimeout(() => { if (!engaged) setHot(i); }, i * 240)));
+      timers.push(setTimeout(() => { if (!engaged) setHot(-1); }, N * 240 + 100));
+    };
+
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => { engage(); setHot(-1); go(i); });
+      b.addEventListener('pointerenter', () => { engage(); setHot(i); });
+      b.addEventListener('pointerleave', () => setHot(-1));
+      b.addEventListener('focus', () => { try { if (b.matches(':focus-visible')) { engage(); setHot(i); } } catch (e) {} });
+      b.addEventListener('blur', () => setHot(-1));
+    });
+    addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      const r = svg.getBoundingClientRect();
+      tx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / Math.max(innerWidth / 2, 1)));
+    }, { passive: true });
+    root.addEventListener('mouseleave', () => { tx = 0; });
+    new IntersectionObserver(es => { onScreen = es[es.length - 1].isIntersecting; if (onScreen) kick(); }).observe(fig);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) kick(); });
+    new ResizeObserver(() => { const w = stage.clientWidth; if (w !== lastW) { lastW = w; fit(); } }).observe(fig);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lastW = -1; fit(); });
+    cap.textContent = idleCap;
+    fit();
+    if (reduce) { introDone = true; fig.classList.add('ready'); draw(); }
+    else { intro(0); kick(); }
+    return { setHot };
+  })();
+  function go(i) { pin(i); glide(document.getElementById(drives[i])); }
+
+  // ---------- experience timeline, drawn to scale from the dates ----------
+  (() => {
+    const svg = document.getElementById('timeline');
+    const Y0 = 2017, Y1 = 2028;
+    const now = new Date(), year0 = new Date(now.getFullYear(), 0, 1);
+    const nowY = now.getFullYear() + (now - year0) / (365.25 * 864e5);
+    const items = [
+      { a: 2017, b: 2024, label: 'Teen Court', row: 0, wide: true },
+      { a: 2025 + 5 / 12, b: 2025 + 8 / 12, label: 'VITA', row: 0 },
+      { a: 2026 + 4 / 12, b: 2026 + 7 / 12, label: 'CBCA', row: 1 },
+      { a: 2027 + 5 / 12, b: 2027 + 8 / 12, label: 'WSGR', row: 0, future: true },
+    ];
+    let lastW = -1;
+    function draw() {
+      const W = Math.round(svg.getBoundingClientRect().width);
+      if (!W || W === lastW) return;
+      lastW = W;
+      const m = 14, ax = 84, H = 116;
+      const x = y => m + (y - Y0) / (Y1 - Y0) * (W - 2 * m);
+      const rowsY = [ax - 32, ax - 56];
+      let s = `<path class="axis" d="M${m} ${ax}H${W - m}"/>`;
+      s += `<path class="beam" pathLength="1" d="M${m} ${ax}H${W - m}"/>`;
+      const every = W < 520 ? 2 : 1;
+      for (let y = Y0; y <= Y1; y++) {
+        const X = x(y).toFixed(1);
+        s += `<path class="tick" d="M${X} ${ax - 4}V${ax + 4}"/>`;
+        if ((y - Y0) % every === 0) s += `<text class="yr" x="${X}" y="${ax + 22}" text-anchor="middle">${y}</text>`;
+      }
+      items.forEach(it => {
+        const xa = x(it.a), xb = x(it.b), xm = (xa + xb) / 2, ly = rowsY[it.row];
+        s += `<path class="bar${it.future ? ' future' : ''}" d="M${xa.toFixed(1)} ${ax}H${xb.toFixed(1)}"/>`;
+        s += `<path class="lead" d="M${xm.toFixed(1)} ${ax - 5}V${ly + 6}"/>`;
+        s += `<text x="${xm.toFixed(1)}" y="${ly}" text-anchor="middle">${it.label}</text>`;
+      });
+      const xn = x(Math.min(Y1, nowY)).toFixed(1);
+      s += `<path class="now" d="M${xn} ${ax - 68}V${ax + 6}"/>`;
+      s += `<text class="now-t" x="${(+xn + 5).toFixed(1)}" y="${ax - 70}">Now</text>`;
+      svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+      svg.innerHTML = s;
+    }
+    new ResizeObserver(draw).observe(svg);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { lastW = -1; draw(); });
+    draw();
+  })();
 
   // ---------- copy email ----------
   const copyBtn = document.getElementById('copy');
-  copyBtn.addEventListener('click', () => {
-    const el = document.getElementById('email');
-    const done = () => { copyBtn.textContent = 'Copied'; setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 1600); };
-    const fallback = () => {
-      const r = document.createRange(); r.selectNodeContents(el);
-      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-      copyBtn.textContent = 'Press Ctrl+C';
-    };
-    try { navigator.clipboard.writeText(el.textContent).then(done, fallback); } catch (err) { fallback(); }
+  const email = document.getElementById('email');
+  const scope = document.getElementById('scope');
+  let copyTimer = 0;
+  copyBtn.addEventListener('click', async () => {
+    const text = email.textContent.trim();
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (e) {}
+    if (!ok) { const r = document.createRange(); r.selectNodeContents(email); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
+    copyBtn.textContent = ok ? 'Copied' : 'Selected · press copy';
+    scope.classList.remove('tx'); void scope.offsetWidth; scope.classList.add('tx');
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => { copyBtn.textContent = 'Copy email'; scope.classList.remove('tx'); }, 2400);
   });
 })();
 </script>
