@@ -65,7 +65,10 @@ img { max-width: 100%; }
 }
 
 * { box-sizing: border-box; }
-html { background: var(--screen); scroll-behavior: smooth; scroll-padding-top: calc(var(--bez) + var(--bar-h) + 24px); scrollbar-color: var(--phos-dim) var(--screen); }
+html { background: var(--screen); scroll-behavior: smooth; scroll-padding-top: calc(var(--bez) + var(--bar-h) + 24px); scrollbar-width: none; }
+/* The browser's own scroll bar sits outside the set and breaks the picture; it is hidden, and a
+   phosphor indicator inside the glass takes its place (see .scrollbar). Scrolling itself is unchanged. */
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body {
   margin: 0; background: var(--screen); color: var(--phos-text);
   font-family: var(--mono); font-size: 17px; line-height: 1.6; letter-spacing: .01em;
@@ -101,6 +104,27 @@ a { color: inherit; }
   opacity: .32; animation: roll 12s linear infinite;
 }
 @keyframes roll { from { transform: translateY(-30vh); } to { transform: translateY(105vh); } }
+
+/* In-screen scroll indicator: a dashed track, a glowing thumb, and a tick for each section */
+.scrollbar {
+  position: fixed; z-index: 55; width: 14px;
+  right: calc(var(--bez) + 6px + env(safe-area-inset-right, 0px));
+  top: calc(env(safe-area-inset-top, 0px) + var(--bez) + 18px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--bez) + 18px);
+  opacity: .5; transition: opacity .35s;
+}
+.scrollbar::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; border-left: 1px dashed var(--phos-dim); }
+.scrollbar.active, .scrollbar.drag, .scrollbar:hover { opacity: 1; }
+.sb-thumb { position: absolute; top: 0; left: calc(50% - 1.5px); width: 3px; height: 40px; border-radius: 2px; background: var(--phos); box-shadow: 0 0 6px var(--glow), 0 0 14px var(--glow-soft); }
+.sb-marks i { position: absolute; left: calc(50% - 8px); width: 6px; height: 1px; background: var(--phos-dim); }
+.sb-marks i.on { background: var(--phos); box-shadow: 0 0 4px var(--glow); }
+@media (pointer: fine) {
+  .scrollbar { cursor: pointer; }
+  .sb-thumb { cursor: grab; }
+  .sb-thumb::after { content: ""; position: absolute; inset: 0 -6px; }
+  .scrollbar.drag, .scrollbar.drag .sb-thumb { cursor: grabbing; }
+}
+@media (pointer: coarse) { .scrollbar { pointer-events: none; width: 6px; right: calc(var(--bez) + 3px + env(safe-area-inset-right, 0px)); } }
 
 .tube { margin-inline: var(--bez); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .wrap { max-width: 1160px; margin: 0 auto; padding-inline: clamp(4px, 2vw, 24px); }
@@ -317,6 +341,7 @@ a { color: inherit; }
   .nav .full { display: none; }
   .nav .short { display: inline; }
   .record { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .record.bracket { margin-inline: -8px; padding-inline: 8px; }
   .table li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .status { grid-template-columns: minmax(0, 1fr); }
   .nav ul { gap: 0; }
@@ -340,6 +365,7 @@ a { color: inherit; }
 <body>
 
 <div class="crt" aria-hidden="true"><div class="roll"></div></div>
+<div class="scrollbar" id="scrollbar" aria-hidden="true"><div class="sb-marks"></div><div class="sb-thumb"></div></div>
 
 <div class="tube">
   <header class="bar" id="bar">
@@ -399,7 +425,7 @@ a { color: inherit; }
         <svg class="rule" viewBox="0 0 1000 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 10Q500 1 1000 10"/><path class="beam" pathLength="1" d="M0 10Q500 1 1000 10"/></svg>
         <p class="rd-sub">Positions · 2017 – 2027</p>
         <div class="body">
-          <svg class="timeline" id="timeline" role="img" aria-label="Timeline: Nassau County Teen Court 2017 to 2023, Virginia Information Technologies Agency summer 2025, U.S. Civilian Board of Contract Appeals summer 2026, Wilson Sonsini summer 2027."></svg>
+          <svg class="timeline" id="timeline" role="img" aria-label="Timeline: Nassau County Teen Court August 2017 to May 2023, Virginia Information Technologies Agency summer 2025, U.S. Civilian Board of Contract Appeals summer 2026, Wilson Sonsini summer 2027."></svg>
           <div class="records">
             <article class="record bracket">
               <div class="when">Summer 2027</div>
@@ -436,7 +462,7 @@ a { color: inherit; }
               </div>
             </article>
             <article class="record">
-              <div class="when">2017 – 2023</div>
+              <div class="when">Aug 2017 – May 2023</div>
               <div>
                 <h3>Nassau County Teen Court</h3>
                 <p class="role">Lead Prosecutor · Yulee, Florida</p>
@@ -610,8 +636,11 @@ a { color: inherit; }
   }
   function glide(el) {
     const pad = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+    glideTo(el ? el.getBoundingClientRect().top + scrollY - pad : 0);
+  }
+  function glideTo(y) {
     const max = root.scrollHeight - innerHeight;
-    const target = Math.max(0, Math.min(max, el ? el.getBoundingClientRect().top + scrollY - pad : 0));
+    const target = Math.max(0, Math.min(max, y));
     const start = scrollY, dist = target - start;
     stopGlide();
     if (Math.abs(dist) < 2) return;
@@ -637,7 +666,11 @@ a { color: inherit; }
   onScroll();
   const sections = navIds.map(id => document.getElementById(id));
   let spyQueued = false, pinned = -1;
-  const setActive = idx => links.forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+  let sbTicks = [];
+  const setActive = idx => {
+    links.forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+    sbTicks.forEach((t, i) => t.classList.toggle('on', i === idx));
+  };
   const updateActive = () => {
     spyQueued = false;
     if (pinned >= 0) { setActive(pinned); return; }
@@ -662,6 +695,66 @@ a { color: inherit; }
   ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(type => addEventListener(type, unpin, { passive: true, capture: true }));
   addEventListener('scroll', queueActive, { passive: true });
   addEventListener('resize', queueActive);
+
+  // ---------- in-screen scroll indicator ----------
+  // Stands in for the hidden browser bar: the thumb tracks the page, each section has a tick (lit
+  // for the current one), and with a mouse the thumb can be dragged or the track clicked.
+  (() => {
+    const sb = document.getElementById('scrollbar');
+    const thumb = sb.querySelector('.sb-thumb');
+    const marks = sb.querySelector('.sb-marks');
+    sbTicks = sections.map(() => marks.appendChild(document.createElement('i')));
+    let trackH = 0, thumbH = 40, max = 1, idle = 0, queued = false;
+    const place = () => {
+      queued = false;
+      thumb.style.transform = `translateY(${(Math.min(1, Math.max(0, scrollY / max)) * (trackH - thumbH)).toFixed(1)}px)`;
+    };
+    const measure = () => {
+      trackH = sb.clientHeight;
+      max = Math.max(1, root.scrollHeight - innerHeight);
+      sb.hidden = root.scrollHeight <= innerHeight + 2;
+      thumbH = Math.max(36, Math.min(trackH, trackH * innerHeight / root.scrollHeight));
+      thumb.style.height = thumbH.toFixed(1) + 'px';
+      const pad = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+      sections.forEach((sec, i) => {
+        const y = Math.max(0, Math.min(max, sec.getBoundingClientRect().top + scrollY - pad));
+        sbTicks[i].style.top = (y / max * (trackH - thumbH) + thumbH / 2).toFixed(1) + 'px';
+      });
+      place();
+    };
+    addEventListener('scroll', () => {
+      if (!queued) { queued = true; requestAnimationFrame(place); }
+      sb.classList.add('active');
+      clearTimeout(idle); idle = setTimeout(() => sb.classList.remove('active'), 900);
+    }, { passive: true });
+    addEventListener('resize', measure);
+    new ResizeObserver(measure).observe(document.querySelector('.tube'));
+    if (matchMedia('(pointer: fine)').matches) {
+      let dragY = null, from = 0;
+      thumb.addEventListener('pointerdown', e => {
+        e.preventDefault(); e.stopPropagation();
+        stopGlide(); unpin();
+        dragY = e.clientY; from = scrollY;
+        thumb.setPointerCapture(e.pointerId);
+        sb.classList.add('drag');
+        root.style.scrollBehavior = 'auto';
+      });
+      thumb.addEventListener('pointermove', e => {
+        if (dragY === null) return;
+        scrollTo(0, from + (e.clientY - dragY) * max / Math.max(1, trackH - thumbH));
+      });
+      const end = () => { if (dragY === null) return; dragY = null; sb.classList.remove('drag'); root.style.scrollBehavior = ''; };
+      thumb.addEventListener('pointerup', end);
+      thumb.addEventListener('pointercancel', end);
+      sb.addEventListener('pointerdown', e => {
+        if (e.target === thumb || e.button !== 0) return;
+        const r = sb.getBoundingClientRect();
+        unpin();
+        glideTo((e.clientY - r.top - thumbH / 2) / Math.max(1, trackH - thumbH) * max);
+      });
+    }
+    measure();
+  })();
   updateActive();
 
   // ---------- phosphor switch ----------
@@ -947,11 +1040,13 @@ a { color: inherit; }
   // ---------- experience timeline, drawn to scale from the dates ----------
   (() => {
     const svg = document.getElementById('timeline');
-    const Y0 = 2017, Y1 = 2028;
-    const now = new Date(), year0 = new Date(now.getFullYear(), 0, 1);
-    const nowY = now.getFullYear() + (now - year0) / (365.25 * 864e5);
+    // "Now" is the viewer's own date: the year plus the fraction of it that has passed
+    const now = new Date(), year0 = new Date(now.getFullYear(), 0, 1), year1 = new Date(now.getFullYear() + 1, 0, 1);
+    const nowY = now.getFullYear() + (now - year0) / (year1 - year0);
+    const Y0 = 2017, Y1 = Math.max(2028, Math.ceil(nowY));
+    // spans run from the first day of the start month to the last day of the end month
     const items = [
-      { a: 2017, b: 2024, label: 'Teen Court', row: 0, wide: true },
+      { a: 2017 + 7 / 12, b: 2023 + 5 / 12, label: 'Teen Court', row: 0, wide: true },
       { a: 2025 + 5 / 12, b: 2025 + 8 / 12, label: 'VITA', row: 0 },
       { a: 2026 + 4 / 12, b: 2026 + 7 / 12, label: 'CBCA', row: 1 },
       { a: 2027 + 5 / 12, b: 2027 + 8 / 12, label: 'WSGR', row: 0, future: true },
